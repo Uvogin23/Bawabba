@@ -17,11 +17,13 @@ class SimpleLineChart extends StatelessWidget {
       "Feb",
       "Mar",
       "Apr",
+      "May",
+      "Apr",
       "May"
     ];
-    final touristsData = [50, 40, 60, 55, 70, 50, 40, 60, 55, 70];
-    final diplomatsData = [30, 25, 35, 40, 45, 30, 25, 35, 40, 45];
-    final algeriansData = [70, 60, 80, 75, 90, 70, 60, 80, 75, 90];
+    final touristsData = [50, 40, 60, 55, 70, 50, 40, 60, 55, 70, 70, 50];
+    final diplomatsData = [30, 25, 35, 40, 45, 30, 25, 35, 40, 45, 70, 20];
+    final algeriansData = [70, 60, 80, 75, 90, 70, 60, 80, 75, 90, 70, 0];
 
     return LineChart(
       LineChartData(
@@ -191,6 +193,106 @@ class MonthlyStatsLineChart extends StatelessWidget {
           end: Alignment.topCenter,
         ),
       ),
+    );
+  }
+}
+
+class CustomPieChartData {
+  final Map<String, int> data;
+
+  CustomPieChartData(this.data);
+}
+
+class PieChartWidget extends StatelessWidget {
+  final CustomPieChartData chartData;
+
+  const PieChartWidget({Key? key, required this.chartData}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final total = chartData.data.values.reduce((a, b) => a + b);
+
+    // Create pie chart sections
+    final pieSections =
+        chartData.data.entries.toList().asMap().entries.map((entry) {
+      final index = entry.key;
+      final label = entry.value.key;
+      final value = entry.value.value;
+
+      // Define colors for each category
+      final color = [
+        Colors.blue, // Diplomats
+        Colors.green, // Algerian Tourists
+        Colors.orange, // Tourists
+        Colors.purple, // Accompaniments
+      ][index];
+
+      return PieChartSectionData(
+        color: color,
+        value: value.toDouble(),
+        title: '${((value / total) * 100).toStringAsFixed(1)}%',
+        titleStyle: const TextStyle(
+            fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+        radius: 60,
+      );
+    }).toList();
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 300,
+          child: PieChart(
+            PieChartData(
+              sections: pieSections,
+              sectionsSpace: 4,
+              centerSpaceRadius: 50,
+              borderData: FlBorderData(show: false),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 20,
+          children: chartData.data.keys.map((label) {
+            final colorIndex = chartData.data.keys.toList().indexOf(label);
+            final color = [
+              Colors.blue,
+              Colors.green,
+              Colors.orange,
+              Colors.purple,
+            ][colorIndex];
+            return LegendItem(color: color, label: label);
+          }).toList(),
+        ),
+      ],
+    );
+  }
+}
+
+class LegendItem extends StatelessWidget {
+  final Color color;
+  final String label;
+
+  const LegendItem({Key? key, required this.color, required this.label})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 5),
+        Text(label, style: const TextStyle(fontSize: 12)),
+      ],
     );
   }
 }

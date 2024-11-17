@@ -97,58 +97,84 @@ Widget ChartDisplay2() {
         // Chart height
         margin: const EdgeInsets.fromLTRB(50, 0, 10, 0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
+              color: Colors.black.withOpacity(0.0),
+              blurRadius: 0,
+              offset: const Offset(0, 0),
             ),
           ],
         ),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(10, 90, 50, 50),
-          child: FutureBuilder<Map<String, List<int>>>(
-            future: fetchChartData(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text("Error: ${snapshot.error}");
-              } else if (snapshot.hasData) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: MonthlyStatsLineChart(
-                    data: snapshot.data!,
-                  ),
-                );
-              } else {
-                return const Text("No data available.");
-              }
-            },
-          ),
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 90, 50, 50),
+              child: futureStatsBuilder(),
+            )
+          ],
         )),
   );
 }
 
-Future<Map<String, List<int>>> fetchChartData() async {
-  // Simulate API response
-  await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
-  return {
-    "January": [50, 30, 70], // Tourists, Diplomats, Algerians
-    "February": [40, 25, 60],
-    "March": [60, 35, 80],
-    "April": [55, 40, 75],
-    "May": [55, 40, 75],
-    "June": [55, 40, 75],
-    "July": [60, 35, 80],
-    "August": [55, 40, 75],
-    "Septembre": [40, 25, 60],
-    "Octobre": [55, 40, 75],
-    "Novembre": [30, 70, 75],
-    "Decembre": [55, 40, 75],
-  };
+Widget ChartDisplayPie() {
+  return Expanded(
+    flex: 1,
+    child: Container(
+        height: 600,
+        // Chart height
+        margin: const EdgeInsets.fromLTRB(50, 0, 10, 0),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 250, 250, 250),
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.0),
+              blurRadius: 0,
+              offset: const Offset(0, 0),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 90, 50, 50),
+              child: futurePiechart(),
+            ),
+            const Positioned(
+              top: 10,
+              right: 30,
+              child: Text(
+                'نسبة السياح حسب النوع:',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color.fromRGBO(0, 0, 0, 1),
+                  fontFamily: 'Times New Roman',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                ),
+              ),
+            ),
+            const Positioned(
+              top: 40,
+              right: 30,
+              child: Text(
+                'خلال 12 شهر الماضية',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color.fromRGBO(110, 109, 109, 1),
+                  fontFamily: 'Times New Roman',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                ),
+              ),
+            ),
+          ],
+        )),
+  );
 }
 
 Widget legendKey(int r, int g, int b) {
@@ -174,4 +200,76 @@ Widget lineType(String type) {
       height: 1.5,
     ),
   );
+}
+
+Widget futureStatsBuilder() {
+  return FutureBuilder<Map<String, List<int>>>(
+    future: fetchChartData(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const CircularProgressIndicator();
+      } else if (snapshot.hasError) {
+        return Text("Error: ${snapshot.error}");
+      } else if (snapshot.hasData) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: MonthlyStatsLineChart(
+            data: snapshot.data!,
+          ),
+        );
+      } else {
+        return const Text("No data available.");
+      }
+    },
+  );
+}
+
+Widget futurePiechart() {
+  return FutureBuilder<CustomPieChartData>(
+    future: fetchChartDatapie(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return const Center(child: Text("Error loading data"));
+      } else if (snapshot.hasData) {
+        return Center(
+          child: PieChartWidget(
+              chartData: snapshot.data!), // Pass the data to PieChartWidget
+        );
+      } else {
+        return const Center(child: Text("No data available"));
+      }
+    },
+  );
+}
+
+Future<CustomPieChartData> fetchChartDatapie() async {
+  await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
+  final data = {
+    'الدبلوماسيون': 200,
+    'السياح الجزائريون': 500,
+    'السياح الأجانب': 800,
+    'مرافقي الدبلوماسيين': 150,
+  };
+  return CustomPieChartData(data); // Wrap the data in CustomPieChartData
+}
+
+Future<Map<String, List<int>>> fetchChartData() async {
+  // Simulate API response
+  await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
+  return {
+    "January": [50, 30, 70], // Tourists, Diplomats, Algerians
+    "February": [40, 25, 60],
+    "March": [60, 35, 80],
+    "April": [55, 40, 75],
+    "May": [55, 40, 75],
+    "June": [55, 40, 75],
+    "July": [60, 35, 80],
+    "August": [55, 40, 75],
+    "Septembre": [40, 25, 60],
+    "Octobre": [55, 40, 75],
+    "Novembre": [30, 70, 75],
+    "Decembre": [55, 40, 75],
+  };
 }

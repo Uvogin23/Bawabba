@@ -100,12 +100,12 @@ class MainContent extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ChartDisplay(),
-                                ChartDisplay2()
-                                //const Expanded(
-                                // flex: 2,
-                                // child: SizedBox(
-                                //   width: 200,
-                                // ))
+                                ChartDisplayPie(),
+                                const Expanded(
+                                    flex: 1,
+                                    child: SizedBox(
+                                      width: 200,
+                                    ))
                               ],
                             ),
                           ),
