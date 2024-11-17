@@ -45,35 +45,27 @@ class Diplomat {
     this.msgRef,
   });
 
-  factory Diplomat.fromJson(Map<String, dynamic> json) {
+  factory Diplomat.fromJson(List<dynamic> json) {
     return Diplomat(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      dateOfBirth: DateTime.parse(json['date_of_birth']),
-      placeOfBirth: json['place_of_birth'],
-      passportNumber: json['passport_number'],
-      passportExpiry: json['passport_expiry'] != null
-          ? DateTime.parse(json['passport_expiry'])
-          : null,
-      diplomaticCardNumber: json['diplomatic_card_number'],
-      fonction: json['fonction'],
-      nationality: json['nationality'],
-      receivingAgency: json['receiving_agency'],
-      circuit: json['circuit'],
-      arrivalDate: json['arrival_date'] != null
-          ? DateTime.parse(json['arrival_date'])
-          : null,
-      expectedDepartureDate: json['expected_departure_date'] != null
-          ? DateTime.parse(json['expected_departure_date'])
-          : null,
-      arrivalFlightInfo: json['arrival_flight_info'],
-      departureFlightInfo: json['departure_flight_info'],
-      touristicGuide: json['touristic_guide'],
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
-          : null,
-      msgRef: json['msg_ref'],
+      id: json[0],
+      firstName: json[1],
+      lastName: json[2],
+      dateOfBirth: DateTime.parse(json[3]),
+      placeOfBirth: json[4],
+      passportNumber: json[5],
+      passportExpiry: json[6] != null ? DateTime.parse(json[6]) : null,
+      diplomaticCardNumber: json[7],
+      fonction: json[8],
+      nationality: json[9],
+      receivingAgency: json[10],
+      circuit: json[11],
+      arrivalDate: json[12] != null ? DateTime.parse(json[12]) : null,
+      expectedDepartureDate: json[13] != null ? DateTime.parse(json[13]) : null,
+      arrivalFlightInfo: json[14],
+      departureFlightInfo: json[15],
+      touristicGuide: json[16],
+      createdAt: json[17] != null ? DateTime.parse(json[18]) : null,
+      msgRef: json[19],
     );
   }
 

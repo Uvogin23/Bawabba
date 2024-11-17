@@ -1,3 +1,4 @@
+import 'package:bawabba/ui/widgets/dashboard_card.dart';
 import 'package:bawabba/ui/widgets/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/line_chart.dart';
@@ -125,6 +126,7 @@ class MainContent extends StatelessWidget {
                               children: [ChartDisplay2()],
                             ),
                           ),
+                          FutureDiplomatCards()
                         ],
                       ),
                     ),

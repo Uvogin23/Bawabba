@@ -122,7 +122,7 @@ class MonthlyStatsLineChart extends StatelessWidget {
               getTitlesWidget: (value, meta) {
                 return Text(
                   value.toInt().toString(),
-                  style: TextStyle(fontSize: 10),
+                  style: const TextStyle(fontSize: 10),
                 );
               },
             ),
@@ -216,6 +216,7 @@ class PieChartWidget extends StatelessWidget {
     final pieSections =
         chartData.data.entries.toList().asMap().entries.map((entry) {
       final index = entry.key;
+      // ignore: unused_local_variable
       final label = entry.value.key;
       final value = entry.value.value;
 
