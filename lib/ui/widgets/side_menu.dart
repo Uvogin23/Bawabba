@@ -14,7 +14,7 @@ class SideMenu extends StatelessWidget {
       width: screenWidth * 0.185,
       height: screenHeight * 1,
       decoration: const BoxDecoration(
-        color: Color.fromRGBO(255, 255, 255, 1),
+        color: Color.fromRGBO(235, 235, 235, 1),
         boxShadow: [
           BoxShadow(
             color: Color.fromARGB(255, 0, 0, 0), // Shadow color
@@ -377,7 +377,7 @@ class SideMenu extends StatelessWidget {
           ),
 
           Positioned(
-            top: 670, // Adjust position as needed
+            top: 650, // Adjust position as needed
             right: 78, // Adjust position as needed
             child: GestureDetector(
               onTap: () {
@@ -409,7 +409,7 @@ class SideMenu extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 730, // Adjust position as needed
+            top: 710, // Adjust position as needed
             right: 78, // Adjust position as needed
             child: GestureDetector(
               onTap: () async {

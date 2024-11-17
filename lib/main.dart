@@ -1,3 +1,4 @@
+import 'package:bawabba/ui/screens/line-chart-screen.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,8 @@ void main() async {
   await windowManager.ensureInitialized();
 
   // Set the minimum window size here
-  //windowManager.setMinimumSize(const Size(1000, 850));
+  //windowManager.setMinimumSize(const Size(1600, 820));
+  //windowManager.setMaximumSize(const Size(1600, 820));
   // Fullscreen on startup
   // windowManager.waitUntilReadyToShow().then((_) async {
   // await windowManager.setFullScreen(true);
@@ -47,6 +49,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        //home: const LineChartScreen(),
       ),
     );
   }
