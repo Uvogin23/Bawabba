@@ -42,15 +42,6 @@ class SideMenu extends StatelessWidget {
               )),
 
           Positioned(
-              top: 224,
-              right: 59,
-              child: Container(
-                  width: 34.695945739746094,
-                  height: 39,
-                  decoration: const BoxDecoration(
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                  ))),
-          Positioned(
             top: 38,
             right: 24,
             child: Container(

@@ -29,7 +29,7 @@ class DashboardCardSortie extends StatelessWidget {
                 bottomLeft: Radius.circular(15),
                 bottomRight: Radius.circular(15),
               ),
-              color: Color.fromRGBO(255, 255, 255, 1),
+              color: Color.fromRGBO(232, 223, 245, 1),
             ),
             child: Stack(children: <Widget>[
               const Positioned(

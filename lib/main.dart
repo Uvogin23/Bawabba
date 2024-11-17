@@ -21,7 +21,7 @@ void main() async {
   // await windowManager.setFullScreen(true);
   //});
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -33,12 +33,12 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        locale: Locale('ar'), // Set default locale to Arabic
-        supportedLocales: [
-          const Locale('en'), // English
+        locale: const Locale('ar'), // Set default locale to Arabic
+        supportedLocales: const [
+          Locale('en'), // English
           Locale('ar'), // Arabic
         ],
-        localizationsDelegates: [
+        localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
