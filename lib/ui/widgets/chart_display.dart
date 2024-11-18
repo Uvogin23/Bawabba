@@ -91,13 +91,13 @@ Widget ChartDisplay() {
 
 Widget ChartDisplay2() {
   return Expanded(
-    flex: 2,
+    flex: 1,
     child: Container(
         height: 600,
         // Chart height
         margin: const EdgeInsets.fromLTRB(50, 0, 10, 0),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 250, 250, 250),
+          color: const Color.fromARGB(255, 192, 139, 139),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
@@ -124,9 +124,9 @@ Widget ChartDisplayPie() {
     child: Container(
         height: 600,
         // Chart height
-        margin: const EdgeInsets.fromLTRB(50, 0, 10, 0),
+        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 250, 250, 250),
+          color: const Color.fromARGB(255, 224, 55, 55),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(

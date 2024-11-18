@@ -1,4 +1,4 @@
-import 'package:bawabba/ui/widgets/dashboard_card.dart';
+import 'package:bawabba/ui/widgets/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/line_chart.dart';
@@ -89,6 +89,7 @@ class MainContent extends StatelessWidget {
                           const SizedBox(
                               height: 50), // Space between cards and charts
                           Container(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                             width: 1600,
                             height: 511,
                             decoration: const BoxDecoration(
@@ -102,20 +103,7 @@ class MainContent extends StatelessWidget {
                               children: [
                                 ChartDisplay(),
                                 ChartDisplayPie(),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    width: 100,
-                                    height: 300,
-                                    decoration: const BoxDecoration(
-                                      color: Color.fromARGB(255, 253, 253, 253),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: tableBuilder(),
-                                  ),
-                                )
+                                dataTablesDisplay()
                               ],
                             ),
                           ),

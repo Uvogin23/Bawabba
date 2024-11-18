@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
         ],
         title: 'Flutter Demo',
         theme: ThemeData(
+          fontFamily: 'Times New Roman',
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
@@ -80,8 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Row(
+    return const Scaffold(
+      body: Row(
         children: <Widget>[
           SideMenu(),
           MainContent(),
@@ -89,11 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

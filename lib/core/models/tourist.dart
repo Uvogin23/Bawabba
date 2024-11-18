@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Tourist {
   final int id;
@@ -42,32 +43,26 @@ class Tourist {
   });
 
   factory Tourist.fromJson(Map<String, dynamic> json) {
+    final rfc1123Format = DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
     return Tourist(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      dateOfBirth: DateTime.parse(json['date_of_birth']),
-      placeOfBirth: json['place_of_birth'],
-      passportNumber: json['passport_number'],
-      passportExpiry: json['passport_expiry'] != null
-          ? DateTime.parse(json['passport_expiry'])
-          : null,
-      nationality: json['nationality'],
-      receivingAgency: json['receiving_agency'],
-      circuit: json['circuit'],
-      arrivalDate: json['arrival_date'] != null
-          ? DateTime.parse(json['arrival_date'])
-          : null,
-      expectedDepartureDate: json['expected_departure_date'] != null
-          ? DateTime.parse(json['expected_departure_date'])
-          : null,
-      arrivalFlightInfo: json['arrival_flight_info'],
-      departureFlightInfo: json['departure_flight_info'],
-      touristicGuide: json['touristic_guide'],
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
-          : null,
-      msgRef: json['msg_ref'],
+      id: json[0],
+      firstName: json[1],
+      lastName: json[2],
+      dateOfBirth: rfc1123Format.parse(json[3]),
+      placeOfBirth: json[4],
+      passportNumber: json[5],
+      passportExpiry: json[6] != null ? rfc1123Format.parse(json[6]) : null,
+      nationality: json[7],
+      receivingAgency: json[8],
+      circuit: json[9],
+      arrivalDate: json[10] != null ? rfc1123Format.parse(json[10]) : null,
+      expectedDepartureDate:
+          json[11] != null ? rfc1123Format.parse(json[11]) : null,
+      arrivalFlightInfo: json[12],
+      departureFlightInfo: json[13],
+      touristicGuide: json[14],
+      createdAt: json[15] != null ? rfc1123Format.parse(json[15]) : null,
+      msgRef: json[16],
     );
   }
 

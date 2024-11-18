@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AlgerianTourist {
   final int id;
@@ -32,23 +33,20 @@ class AlgerianTourist {
   });
 
   factory AlgerianTourist.fromJson(Map<String, dynamic> json) {
+    final rfc1123Format = DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
     return AlgerianTourist(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      dateOfBirth: DateTime.parse(json['date_of_birth']),
-      placeOfBirth: json['place_of_birth'],
-      idNumber: json['id_number'],
-      receivingAgency: json['receiving_agency'],
-      circuit: json['circuit'],
-      arrivalDate: json['arrival_date'] != null
-          ? DateTime.parse(json['arrival_date'])
-          : null,
-      touristicGuide: json['touristic_guide'],
-      msgRef: json['msg_ref'],
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
-          : null,
+      id: json[0],
+      firstName: json[1],
+      lastName: json[2],
+      dateOfBirth: rfc1123Format.parse(json[3]),
+      placeOfBirth: json[4],
+      idNumber: json[5],
+      receivingAgency: json[6],
+      circuit: json[7],
+      arrivalDate: json[8] != null ? rfc1123Format.parse(json[8]) : null,
+      touristicGuide: json[9],
+      msgRef: json[10],
+      createdAt: json[11] != null ? rfc1123Format.parse(json[11]) : null,
     );
   }
 
