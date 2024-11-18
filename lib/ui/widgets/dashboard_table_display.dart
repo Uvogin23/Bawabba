@@ -12,7 +12,7 @@ Future<List<Diplomat>> fetchDiplomats() async {
   if (response.statusCode == 200) {
     try {
       List<dynamic> data = json.decode(response.body);
-      //print('Fetched Data: $data');
+      print('Fetched Data: $data');
 
       /*print('Decoded Data Type: ${data.runtimeType}');
       for (var item in data) {
@@ -43,9 +43,9 @@ Future<List<Tourist>> fetchTourists() async {
   print('accessed');
   if (response.statusCode == 200) {
     try {
-      print(response.body);
+      //print(response.body);
       List<dynamic> data = json.decode(response.body);
-
+      print(data);
       /*print('Decoded Data Type: ${data.runtimeType}');
       for (var item in data) {
         print('Item: $item');
@@ -61,7 +61,7 @@ Future<List<Tourist>> fetchTourists() async {
 
       return list;
     } catch (e) {
-      print('Error parsing diplomats: $e');
+      print('Error parsing tourists: $e');
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {
@@ -155,6 +155,92 @@ Widget dataTableDiplomats() {
   );
 }
 
+Widget dataTableTourists() {
+  return FutureBuilder<List<Tourist>>(
+    future: fetchTourists(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return Center(child: Text("Error: ${snapshot.error}"));
+      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        return const Center(child: Text("No diplomats available"));
+      } else {
+        // Data is ready, create the DataTable
+        return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              headingRowColor: WidgetStateProperty.resolveWith(
+                  (states) => const Color.fromARGB(255, 160, 197, 214)),
+              columns: const [
+                DataColumn(
+                  label: Text(
+                    "الإسم",
+                    style: TextStyle(
+                      //fontSize: 12,
+                      fontFamily: 'Times New Roman',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    "اللقب",
+                    style: TextStyle(
+                      fontFamily: 'Times New Roman',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    "الوظيفة",
+                    style: TextStyle(
+                      fontFamily: 'Times New Roman',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    "الجنسية",
+                    style: TextStyle(
+                      fontFamily: 'Times New Roman',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+              rows: snapshot.data!.map((tourist) {
+                return DataRow(cells: [
+                  DataCell(Text(
+                    tourist.firstName,
+                    style: const TextStyle(fontFamily: 'Times New Roman'),
+                  )),
+                  DataCell(Text(
+                    tourist.lastName,
+                    style: const TextStyle(fontFamily: 'Times New Roman'),
+                  )),
+                  DataCell(Text(
+                    tourist.passportNumber ?? "N/A",
+                    style: const TextStyle(fontFamily: 'Times New Roman'),
+                  )),
+                  DataCell(Text(
+                    tourist.nationality ?? "N/A",
+                    style: const TextStyle(fontFamily: 'Times New Roman'),
+                  )),
+                ]);
+              }).toList(),
+            ),
+          ),
+        );
+      }
+    },
+  );
+}
+
 Widget dataTablesDisplay() {
   return Expanded(
     flex: 1,
@@ -187,6 +273,7 @@ Widget dataTablesDisplay() {
             ),
           ),
           dataTableDiplomats(),
+          dataTableTourists()
         ],
       ),
     ),

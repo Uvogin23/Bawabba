@@ -42,7 +42,7 @@ class Tourist {
     this.msgRef,
   });
 
-  factory Tourist.fromJson(Map<String, dynamic> json) {
+  factory Tourist.fromJson(List<dynamic> json) {
     final rfc1123Format = DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
     return Tourist(
       id: json[0],

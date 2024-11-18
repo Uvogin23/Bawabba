@@ -32,7 +32,7 @@ class AlgerianTourist {
     this.createdAt,
   });
 
-  factory AlgerianTourist.fromJson(Map<String, dynamic> json) {
+  factory AlgerianTourist.fromJson(List<dynamic> json) {
     final rfc1123Format = DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
     return AlgerianTourist(
       id: json[0],
