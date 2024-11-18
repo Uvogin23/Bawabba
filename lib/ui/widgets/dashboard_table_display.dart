@@ -1,29 +1,63 @@
+import 'package:bawabba/core/models/tourist.dart';
 import 'package:flutter/material.dart';
 import 'package:bawabba/core/models/diplomat.dart';
+import 'package:bawabba/core/models/tourist.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future<List<Diplomat>> fetchDiplomats() async {
   final response =
       await http.get(Uri.parse('http://127.0.0.1:5000/api/diplomats/last-two'));
-
+  print('accessed');
   if (response.statusCode == 200) {
     try {
       List<dynamic> data = json.decode(response.body);
-      print('Fetched Data: $data');
+      //print('Fetched Data: $data');
 
-      print('Decoded Data Type: ${data.runtimeType}');
+      /*print('Decoded Data Type: ${data.runtimeType}');
       for (var item in data) {
         print('Item: $item');
-      }
+      }*/
 
       List<Diplomat> list =
           data.map<Diplomat>((item) => Diplomat.fromJson(item)).toList();
 
-      print('Constructed List: $list');
+      /*print('Constructed List: $list');
       for (var diplomat in list) {
         print('Diplomat: ${diplomat.firstName} ${diplomat.lastName}');
-      }
+      }*/
+
+      return list;
+    } catch (e) {
+      print('Error parsing diplomats: $e');
+      rethrow; // Re-throw the exception for handling elsewhere
+    }
+  } else {
+    throw Exception('Failed to load diplomats: ${response.statusCode}');
+  }
+}
+
+Future<List<Tourist>> fetchTourists() async {
+  final response =
+      await http.get(Uri.parse('http://127.0.0.1:5000/api/tourists/last-two'));
+  print('accessed');
+  if (response.statusCode == 200) {
+    try {
+      print(response.body);
+      List<dynamic> data = json.decode(response.body);
+
+      /*print('Decoded Data Type: ${data.runtimeType}');
+      for (var item in data) {
+        print('Item: $item');
+      }*/
+
+      List<Tourist> list =
+          data.map<Tourist>((item) => Tourist.fromJson(item)).toList();
+
+      /*print('Constructed List: $list');
+      for (var tourist in list) {
+        print('tourist: ${tourist.firstName} ${tourist.lastName}');
+      }*/
 
       return list;
     } catch (e) {
@@ -139,7 +173,7 @@ Widget dataTablesDisplay() {
         children: [
           // ignore: avoid_unnecessary_containers
           Container(
-            padding: EdgeInsets.fromLTRB(0, 10, 20, 0),
+            padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
             child: const Text(
               'آخر السياح المسجلين بالتطبيقة',
               textAlign: TextAlign.right,
