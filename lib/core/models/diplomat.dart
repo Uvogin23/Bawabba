@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Diplomat {
   final int id;
@@ -45,27 +46,30 @@ class Diplomat {
     this.msgRef,
   });
 
+  /// Factory constructor to create a Diplomat from a single list
   factory Diplomat.fromJson(List<dynamic> json) {
+    final rfc1123Format = DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
     return Diplomat(
       id: json[0],
       firstName: json[1],
       lastName: json[2],
-      dateOfBirth: DateTime.parse(json[3]),
+      dateOfBirth: rfc1123Format.parse(json[3]),
       placeOfBirth: json[4],
       passportNumber: json[5],
-      passportExpiry: json[6] != null ? DateTime.parse(json[6]) : null,
+      passportExpiry: json[6] != null ? rfc1123Format.parse(json[6]) : null,
       diplomaticCardNumber: json[7],
       fonction: json[8],
       nationality: json[9],
       receivingAgency: json[10],
       circuit: json[11],
-      arrivalDate: json[12] != null ? DateTime.parse(json[12]) : null,
-      expectedDepartureDate: json[13] != null ? DateTime.parse(json[13]) : null,
+      arrivalDate: json[12] != null ? rfc1123Format.parse(json[12]) : null,
+      expectedDepartureDate:
+          json[13] != null ? rfc1123Format.parse(json[13]) : null,
       arrivalFlightInfo: json[14],
       departureFlightInfo: json[15],
       touristicGuide: json[16],
-      createdAt: json[17] != null ? DateTime.parse(json[18]) : null,
-      msgRef: json[19],
+      createdAt: json[17] != null ? rfc1123Format.parse(json[17]) : null,
+      msgRef: json[18],
     );
   }
 
@@ -91,5 +95,9 @@ class Diplomat {
       'created_at': createdAt?.toIso8601String(),
       'msg_ref': msgRef,
     };
+  }
+
+  static List<Diplomat> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map<Diplomat>((item) => Diplomat.fromJson(item)).toList();
   }
 }

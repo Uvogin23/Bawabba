@@ -90,7 +90,7 @@ class MainContent extends StatelessWidget {
                               height: 50), // Space between cards and charts
                           Container(
                             width: 1600,
-                            height: 500,
+                            height: 511,
                             decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 253, 253, 253),
                               borderRadius: BorderRadius.all(
@@ -102,11 +102,20 @@ class MainContent extends StatelessWidget {
                               children: [
                                 ChartDisplay(),
                                 ChartDisplayPie(),
-                                const Expanded(
-                                    flex: 1,
-                                    child: SizedBox(
-                                      width: 200,
-                                    ))
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    width: 100,
+                                    height: 300,
+                                    decoration: const BoxDecoration(
+                                      color: Color.fromARGB(255, 253, 253, 253),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: tableBuilder(),
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -126,7 +135,6 @@ class MainContent extends StatelessWidget {
                               children: [ChartDisplay2()],
                             ),
                           ),
-                          FutureDiplomatCards()
                         ],
                       ),
                     ),
