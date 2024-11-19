@@ -91,9 +91,9 @@ class MainContent extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                             width: 1600,
-                            height: 511,
+                            height: 500,
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 253, 253, 253),
+                              color: Color.fromARGB(255, 255, 255, 255),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(15),
                               ),
@@ -103,12 +103,30 @@ class MainContent extends StatelessWidget {
                               children: [
                                 ChartDisplay(),
                                 ChartDisplayPie(),
-                                dataTablesDisplay()
                               ],
                             ),
                           ),
-                          const SizedBox(
-                              height: 50), // Space between cards and charts
+                          const SizedBox(height: 50),
+                          Container(
+                            width: 1100,
+                            height: 470,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                dataTablesDisplay(),
+                              ],
+                            ),
+                          ),
+
+                          const SizedBox(height: 50),
+
+                          // Space between cards and charts
                           Container(
                             width: 1600,
                             height: 500,
@@ -120,7 +138,10 @@ class MainContent extends StatelessWidget {
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [ChartDisplay2()],
+                              children: [
+                                ChartDisplayPie(),
+                                ChartDisplay2(),
+                              ],
                             ),
                           ),
                         ],

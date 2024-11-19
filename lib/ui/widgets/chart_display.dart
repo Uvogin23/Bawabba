@@ -97,7 +97,7 @@ Widget ChartDisplay2() {
         // Chart height
         margin: const EdgeInsets.fromLTRB(50, 0, 10, 0),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 192, 139, 139),
+          color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
@@ -126,7 +126,7 @@ Widget ChartDisplayPie() {
         // Chart height
         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 224, 55, 55),
+          color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
