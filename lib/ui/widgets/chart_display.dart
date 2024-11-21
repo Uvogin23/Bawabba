@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:bawabba/core/services/card_stats.dart';
 import 'package:bawabba/ui/widgets/line_chart.dart';
 
 Widget ChartDisplay() {
@@ -177,6 +180,43 @@ Widget ChartDisplayPie() {
   );
 }
 
+Widget futurePiechart() {
+  return FutureBuilder<CustomPieChartData>(
+    future: fetchPieChartStatistics(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return const Center(child: Text("Error loading data"));
+      } else if (snapshot.hasData) {
+        return Center(
+          child: PieChartWidget(
+              chartData: snapshot.data!), // Pass the data to PieChartWidget
+        );
+      } else {
+        return const Center(child: Text("No data available"));
+      }
+    },
+  );
+}
+
+Future<CustomPieChartData> fetchPieChartStatistics() async {
+  final response = await http
+      .get(Uri.parse('http://127.0.0.1:5000/api/stats/overall_counts'));
+  print(response.body);
+  if (response.statusCode == 200) {
+    try {
+      final data = json.decode(response.body) as Map<String, dynamic>;
+      return CustomPieChartData(
+          data.map((key, value) => MapEntry(key, value as int)));
+    } catch (e) {
+      throw Exception('Error parsing chart data: $e');
+    }
+  } else {
+    throw Exception('Failed to fetch chart data: ${response.statusCode}');
+  }
+}
+
 Widget legendKey(int r, int g, int b) {
   return Container(
     height: 12,
@@ -222,37 +262,6 @@ Widget futureStatsBuilder() {
       }
     },
   );
-}
-
-Widget futurePiechart() {
-  return FutureBuilder<CustomPieChartData>(
-    future: fetchChartDatapie(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (snapshot.hasError) {
-        return const Center(child: Text("Error loading data"));
-      } else if (snapshot.hasData) {
-        return Center(
-          child: PieChartWidget(
-              chartData: snapshot.data!), // Pass the data to PieChartWidget
-        );
-      } else {
-        return const Center(child: Text("No data available"));
-      }
-    },
-  );
-}
-
-Future<CustomPieChartData> fetchChartDatapie() async {
-  await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
-  final data = {
-    'الدبلوماسيون': 200,
-    'السياح الجزائريون': 500,
-    'السياح الأجانب': 800,
-    'مرافقي الدبلوماسيين': 150,
-  };
-  return CustomPieChartData(data); // Wrap the data in CustomPieChartData
 }
 
 Future<Map<String, List<int>>> fetchChartData() async {

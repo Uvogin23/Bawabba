@@ -231,10 +231,11 @@ class PieChartWidget extends StatelessWidget {
       return PieChartSectionData(
         color: color,
         value: value.toDouble(),
+        showTitle: false,
         title: '${((value / total) * 100).toStringAsFixed(1)}%',
         titleStyle: const TextStyle(
             fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
-        radius: 60,
+        radius: 50,
       );
     }).toList();
 
@@ -255,7 +256,11 @@ class PieChartWidget extends StatelessWidget {
         Wrap(
           alignment: WrapAlignment.center,
           spacing: 20,
-          children: chartData.data.keys.map((label) {
+          children: chartData.data.entries.map((entry) {
+            final label = entry.key;
+            final value = entry.value;
+            final percentage = ((value / total) * 100).toStringAsFixed(1);
+
             final colorIndex = chartData.data.keys.toList().indexOf(label);
             final color = [
               Colors.blue,
@@ -263,7 +268,11 @@ class PieChartWidget extends StatelessWidget {
               Colors.orange,
               Colors.purple,
             ][colorIndex];
-            return LegendItem(color: color, label: label);
+
+            return LegendItem(
+              color: color,
+              label: '$label: $percentage%', // Combine label with percentage
+            );
           }).toList(),
         ),
       ],
