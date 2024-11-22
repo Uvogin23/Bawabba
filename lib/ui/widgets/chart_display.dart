@@ -1,12 +1,14 @@
+import 'package:bawabba/ui/widgets/pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:bawabba/core/services/card_stats.dart';
 import 'package:bawabba/ui/widgets/line_chart.dart';
+import 'package:bawabba/ui/widgets/line_chartT.dart';
 
 Widget ChartDisplay() {
   return Expanded(
-    flex: 1, // Adjust width proportions for the charts
+    flex: 2, // Adjust width proportions for the charts
     child: Container(
         height: 600, // Chart height
         margin: const EdgeInsets.fromLTRB(10, 0, 50, 0),
@@ -25,7 +27,7 @@ Widget ChartDisplay() {
           children: [
             const Padding(
               padding: EdgeInsets.fromLTRB(10, 90, 20, 50),
-              child: SimpleLineChart(), // First Chart
+              child: LineChartScreen2(), // First Chart
             ),
             const Positioned(
               top: 10,
@@ -65,7 +67,7 @@ Widget ChartDisplay() {
             Positioned(
               bottom: 20,
               right: 35,
-              child: legendKey(5, 78, 8),
+              child: legendKey(14, 114, 17),
             ),
             Positioned(
               bottom: 15,
@@ -85,7 +87,7 @@ Widget ChartDisplay() {
             Positioned(
               bottom: 20,
               right: 291,
-              child: legendKey(145, 17, 17),
+              child: legendKey(45, 17, 17),
             ),
           ],
         )),
@@ -112,10 +114,70 @@ Widget ChartDisplay2() {
         ),
         child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(10, 90, 50, 50),
-              child: futureStatsBuilder(),
-            )
+            const Padding(
+              padding: EdgeInsets.fromLTRB(10, 90, 20, 50),
+              child: LineChartScreen3(), // First Chart
+            ),
+            const Positioned(
+              top: 10,
+              right: 30,
+              child: Text(
+                'تطور عدد السياح بإقليم الولاية :',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color.fromRGBO(0, 0, 0, 1),
+                  fontFamily: 'Times New Roman',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                ),
+              ),
+            ),
+            const Positioned(
+              top: 40,
+              right: 30,
+              child: Text(
+                'خلال 12 شهر الماضية',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color.fromRGBO(110, 109, 109, 1),
+                  fontFamily: 'Times New Roman',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 15,
+              right: 52,
+              child: lineType('الدبلوماسيون'),
+            ),
+            Positioned(
+              bottom: 20,
+              right: 35,
+              child: legendKey(14, 114, 17),
+            ),
+            Positioned(
+              bottom: 15,
+              right: 180,
+              child: lineType('السياح الأجانب'),
+            ),
+            Positioned(
+              bottom: 20,
+              right: 163,
+              child: legendKey(210, 145, 7),
+            ),
+            Positioned(
+              bottom: 15,
+              right: 308,
+              child: lineType('السواح الجزائريون'),
+            ),
+            Positioned(
+              bottom: 20,
+              right: 291,
+              child: legendKey(45, 17, 17),
+            ),
           ],
         )),
   );
@@ -180,43 +242,6 @@ Widget ChartDisplayPie() {
   );
 }
 
-Widget futurePiechart() {
-  return FutureBuilder<CustomPieChartData>(
-    future: fetchPieChartStatistics(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (snapshot.hasError) {
-        return const Center(child: Text("Error loading data"));
-      } else if (snapshot.hasData) {
-        return Center(
-          child: PieChartWidget(
-              chartData: snapshot.data!), // Pass the data to PieChartWidget
-        );
-      } else {
-        return const Center(child: Text("No data available"));
-      }
-    },
-  );
-}
-
-Future<CustomPieChartData> fetchPieChartStatistics() async {
-  final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/api/stats/overall_counts'));
-  print(response.body);
-  if (response.statusCode == 200) {
-    try {
-      final data = json.decode(response.body) as Map<String, dynamic>;
-      return CustomPieChartData(
-          data.map((key, value) => MapEntry(key, value as int)));
-    } catch (e) {
-      throw Exception('Error parsing chart data: $e');
-    }
-  } else {
-    throw Exception('Failed to fetch chart data: ${response.statusCode}');
-  }
-}
-
 Widget legendKey(int r, int g, int b) {
   return Container(
     height: 12,
@@ -239,28 +264,6 @@ Widget lineType(String type) {
       fontWeight: FontWeight.bold,
       height: 1.5,
     ),
-  );
-}
-
-Widget futureStatsBuilder() {
-  return FutureBuilder<Map<String, List<int>>>(
-    future: fetchChartData(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return const CircularProgressIndicator();
-      } else if (snapshot.hasError) {
-        return Text("Error: ${snapshot.error}");
-      } else if (snapshot.hasData) {
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: MonthlyStatsLineChart(
-            data: snapshot.data!,
-          ),
-        );
-      } else {
-        return const Text("No data available.");
-      }
-    },
   );
 }
 

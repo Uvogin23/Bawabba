@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'package:bawabba/core/models/citizen.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 
-class LineChartScreen3 extends StatelessWidget {
-  const LineChartScreen3({Key? key}) : super(key: key);
+class LineChartScreen2 extends StatelessWidget {
+  const LineChartScreen2({Key? key}) : super(key: key);
 
   // Fetch months data
   Future<List<String>> fetchMonthsData() async {
@@ -20,20 +19,20 @@ class LineChartScreen3 extends StatelessWidget {
   }
 
   // Fetch Algerians data
-  Future<List<int>> fetchCitizensData() async {
+  Future<List<int>> fetchAlgeriansData() async {
     final url =
-        Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-citizens');
+        Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-algerian');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
       return List<int>.from(data);
     } else {
-      throw Exception('Failed to load citizens data');
+      throw Exception('Failed to load Algerians data');
     }
   }
 
   // Fetch Tourists data
-  Future<List<int>> fetchNonResidentsData() async {
+  Future<List<int>> fetchTouristsData() async {
     final url =
         Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-tourists');
     final response = await http.get(url);
@@ -46,17 +45,29 @@ class LineChartScreen3 extends StatelessWidget {
   }
 
   // Fetch Diplomats data
+  Future<List<int>> fetchDiplomatsData() async {
+    final url =
+        Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-diplomats');
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      return List<int>.from(data);
+    } else {
+      throw Exception('Failed to load Diplomats data');
+    }
+  }
 
   // Combine all data into one future
   Future<Map<String, dynamic>> fetchAllData() async {
     final months = await fetchMonthsData();
-    final citizens = await fetchCitizensData();
-    final nonResidents = await fetchNonResidentsData();
-
+    final algerians = await fetchAlgeriansData();
+    final tourists = await fetchTouristsData();
+    final diplomats = await fetchDiplomatsData();
     return {
       "months": months,
-      "citizens": citizens,
-      "nonResidents": nonResidents,
+      "algerians": algerians,
+      "tourists": tourists,
+      "diplomats": diplomats,
     };
   }
 
@@ -72,8 +83,9 @@ class LineChartScreen3 extends StatelessWidget {
         } else {
           final data = snapshot.data!;
           final months = data['months'] as List<String>;
-          final citizens = data['citizens'] as List<int>;
-          final nonResidents = data['nonResidents'] as List<int>;
+          final algerians = data['algerians'] as List<int>;
+          final tourists = data['tourists'] as List<int>;
+          final diplomats = data['diplomats'] as List<int>;
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -118,7 +130,7 @@ class LineChartScreen3 extends StatelessWidget {
                 lineBarsData: [
                   // Line for Algerians
                   LineChartBarData(
-                    spots: citizens
+                    spots: algerians
                         .asMap()
                         .entries
                         .map((entry) => FlSpot(
@@ -136,7 +148,7 @@ class LineChartScreen3 extends StatelessWidget {
                   ),
                   // Line for Tourists
                   LineChartBarData(
-                    spots: nonResidents
+                    spots: tourists
                         .asMap()
                         .entries
                         .map((entry) => FlSpot(
@@ -153,39 +165,29 @@ class LineChartScreen3 extends StatelessWidget {
                     belowBarData: BarAreaData(show: false),
                   ),
                   // Line for Diplomats
+                  LineChartBarData(
+                    spots: diplomats
+                        .asMap()
+                        .entries
+                        .map((entry) => FlSpot(
+                            entry.key.toDouble(), entry.value.toDouble()))
+                        .toList(),
+                    isCurved: false,
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 14, 114, 17),
+                        Color.fromARGB(255, 14, 114, 17)
+                      ],
+                    ),
+                    barWidth: 4,
+                    belowBarData: BarAreaData(show: false),
+                  ),
                 ],
               ),
             ),
           );
         }
       },
-    );
-  }
-}
-
-class LegendItem extends StatelessWidget {
-  final Color color;
-  final String label;
-
-  const LegendItem({Key? key, required this.color, required this.label})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
-        ),
-        const SizedBox(width: 5),
-        Text(label, style: const TextStyle(fontSize: 12)),
-      ],
     );
   }
 }
