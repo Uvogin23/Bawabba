@@ -1,3 +1,4 @@
+import 'package:bawabba/ui/widgets/bar_chart.dart';
 import 'package:bawabba/ui/widgets/pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -11,7 +12,7 @@ Widget ChartDisplay() {
     flex: 2, // Adjust width proportions for the charts
     child: Container(
         height: 600, // Chart height
-        margin: const EdgeInsets.fromLTRB(10, 0, 50, 0),
+        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),
@@ -122,7 +123,7 @@ Widget ChartDisplay2() {
               top: 10,
               right: 30,
               child: Text(
-                'تطور عدد السياح بإقليم الولاية :',
+                'الدخول و الخروج عبر الحدود البرية:',
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   color: Color.fromRGBO(0, 0, 0, 1),
@@ -150,33 +151,23 @@ Widget ChartDisplay2() {
             ),
             Positioned(
               bottom: 15,
-              right: 52,
-              child: lineType('الدبلوماسيون'),
+              right: 100,
+              child: lineType('خروج المواطنين عبر الحدود البرية'),
             ),
             Positioned(
               bottom: 20,
-              right: 35,
-              child: legendKey(14, 114, 17),
+              right: 83,
+              child: legendKey(145, 17, 17),
             ),
             Positioned(
               bottom: 15,
-              right: 180,
-              child: lineType('السياح الأجانب'),
+              right: 330,
+              child: lineType('دخول الأجانب عبر الحدود البرية '),
             ),
             Positioned(
               bottom: 20,
-              right: 163,
+              right: 313,
               child: legendKey(210, 145, 7),
-            ),
-            Positioned(
-              bottom: 15,
-              right: 308,
-              child: lineType('السواح الجزائريون'),
-            ),
-            Positioned(
-              bottom: 20,
-              right: 291,
-              child: legendKey(45, 17, 17),
             ),
           ],
         )),
@@ -284,4 +275,62 @@ Future<Map<String, List<int>>> fetchChartData() async {
     "Novembre": [30, 70, 75],
     "Decembre": [55, 40, 75],
   };
+}
+
+Widget BarChartDisplay() {
+  return Expanded(
+    flex: 1, // Adjust width proportions for the charts
+    child: Container(
+        height: 600, // Chart height
+        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 250, 250, 250),
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 0,
+              offset: const Offset(1, 1),
+            ),
+          ],
+        ),
+        child: const Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 90, 20, 50),
+              child: BarChartScreen(), // First Chart
+            ),
+            Positioned(
+              top: 10,
+              right: 30,
+              child: Text(
+                'التحركات عبر حدود الولاية :',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color.fromRGBO(0, 0, 0, 1),
+                  fontFamily: 'Times New Roman',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 40,
+              right: 30,
+              child: Text(
+                'خلال االسنة الحالية',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color.fromRGBO(110, 109, 109, 1),
+                  fontFamily: 'Times New Roman',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                ),
+              ),
+            ),
+          ],
+        )),
+  );
 }

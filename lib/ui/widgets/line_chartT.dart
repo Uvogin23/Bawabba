@@ -88,7 +88,7 @@ class LineChartScreen2 extends StatelessWidget {
           final diplomats = data['diplomats'] as List<int>;
 
           return Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(3.0),
             child: LineChart(
               LineChartData(
                 titlesData: FlTitlesData(

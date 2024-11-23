@@ -27,7 +27,7 @@ class MainContent extends StatelessWidget {
             Container(
               width: screenWidth * 0.815,
               height: screenHeight,
-              color: const Color.fromARGB(255, 253, 253, 253),
+              color: const Color.fromARGB(255, 239, 242, 243),
               child: Stack(
                 children: <Widget>[
                   const Positioned(
@@ -66,6 +66,7 @@ class MainContent extends StatelessWidget {
                     bottom: 30,
                     child: SingleChildScrollView(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             width: 1200,
@@ -90,10 +91,10 @@ class MainContent extends StatelessWidget {
                               height: 50), // Space between cards and charts
                           Container(
                             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            width: 1600,
+                            width: 1230,
                             height: 500,
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: Color.fromARGB(255, 239, 242, 243),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(15),
                               ),
@@ -108,7 +109,27 @@ class MainContent extends StatelessWidget {
                           ),
                           const SizedBox(height: 50),
                           Container(
-                            width: 1100,
+                            width: 1230,
+                            height: 500,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 239, 242, 243),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                BarChartDisplay(),
+                                ChartDisplay2(),
+                              ],
+                            ),
+                          ),
+
+                          const SizedBox(height: 50),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            width: 1150,
                             height: 470,
                             decoration: const BoxDecoration(
                               color: Colors.white,
@@ -123,27 +144,7 @@ class MainContent extends StatelessWidget {
                               ],
                             ),
                           ),
-
-                          const SizedBox(height: 50),
-
                           // Space between cards and charts
-                          Container(
-                            width: 1600,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ChartDisplayPie(),
-                                ChartDisplay2(),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),

@@ -41,13 +41,13 @@ class DashboardCardAcc extends StatelessWidget {
               decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Color.fromARGB(255, 207, 204, 204),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     blurRadius: 10,
                     offset: Offset(0, 1),
                   ),
                 ],
                 borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Color.fromRGBO(149, 184, 209, 1),
+                color: Color.fromRGBO(255, 255, 255, 1),
               ),
               child: Stack(
                 children: <Widget>[

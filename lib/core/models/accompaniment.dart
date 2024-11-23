@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DiplomatAccompaniment {
   final int id;
@@ -33,31 +34,23 @@ class DiplomatAccompaniment {
     this.createdAt,
   });
 
-  factory DiplomatAccompaniment.fromJson(Map<String, dynamic> json) {
+  factory DiplomatAccompaniment.fromJson(List<dynamic> json) {
+    final rfc1123Format = DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
     return DiplomatAccompaniment(
-      id: json['id'],
-      diplomatId: json['diplomat_id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      relationship: json['relationship'],
-      dateOfBirth: json['date_of_birth'] != null
-          ? DateTime.parse(json['date_of_birth'])
-          : null,
-      passportNumber: json['passport_number'],
-      passportExpiry: json['passport_expiry'] != null
-          ? DateTime.parse(json['passport_expiry'])
-          : null,
-      nationality: json['nationality'],
-      arrivalDate: json['arrival_date'] != null
-          ? DateTime.parse(json['arrival_date'])
-          : null,
-      expectedDepartureDate: json['expected_departure_date'] != null
-          ? DateTime.parse(json['expected_departure_date'])
-          : null,
-      touristicGuide: json['touristic_guide'],
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
-          : null,
+      id: json[0],
+      diplomatId: json[1],
+      firstName: json[2],
+      lastName: json[3],
+      relationship: json[4],
+      dateOfBirth: json[5] != null ? rfc1123Format.parse(json[5]) : null,
+      passportNumber: json[6],
+      passportExpiry: json[7] != null ? rfc1123Format.parse(json[7]) : null,
+      nationality: json[8],
+      arrivalDate: json[9] != null ? rfc1123Format.parse(json[9]) : null,
+      expectedDepartureDate:
+          json[10] != null ? rfc1123Format.parse(json[10]) : null,
+      touristicGuide: json[11],
+      createdAt: json[12] != null ? rfc1123Format.parse(json[12]) : null,
     );
   }
 

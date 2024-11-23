@@ -14,14 +14,7 @@ class SideMenu extends StatelessWidget {
       width: screenWidth * 0.185,
       height: screenHeight * 1,
       decoration: const BoxDecoration(
-        color: Color.fromRGBO(235, 235, 235, 1),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 0, 0, 0), // Shadow color
-            blurRadius: 3, // Blur radius
-            offset: Offset(0, 4), // Offset in x and y directions
-          ),
-        ],
+        color: Color.fromRGBO(255, 255, 255, 1),
       ),
       child: Stack(
         children: <Widget>[

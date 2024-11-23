@@ -42,7 +42,7 @@ class DashboardCardDiplomat extends StatelessWidget {
                     boxShadow: const [
                       BoxShadow(
                         color:
-                            Color.fromARGB(255, 207, 204, 204), // Shadow color
+                            Color.fromARGB(255, 255, 255, 255), // Shadow color
                         blurRadius: 10, // Blur radius
                         offset: Offset(0, 1), // Offset in x and y directions
                       ),
@@ -53,7 +53,7 @@ class DashboardCardDiplomat extends StatelessWidget {
                       bottomLeft: Radius.circular(15),
                       bottomRight: Radius.circular(15),
                     ),
-                    color: Color.fromRGBO(218, 234, 246, 1),
+                    color: Color.fromRGBO(255, 255, 255, 1),
                   ),
                   child: Stack(children: <Widget>[
                     const Positioned(

@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Citizen {
   final int id;
@@ -41,31 +42,28 @@ class Citizen {
   });
 
   // Factory constructor for creating a new Citizen instance from a map
-  factory Citizen.fromJson(Map<String, dynamic> json) => Citizen(
-        id: json['id'],
-        firstName: json['first_name'],
-        lastName: json['last_name'],
-        dateOfBirth: DateTime.parse(json['date_of_birth']),
-        placeOfBirth: json['place_of_birth'],
-        passportNumber: json['passport_number'],
-        passportExpiry: json['passport_expiry'] != null
-            ? DateTime.parse(json['passport_expiry'])
-            : null,
-        fonction: json['fonction'],
-        exitDate: DateTime.parse(json['exit_date']),
-        entryDate: json['entry_date'] != null
-            ? DateTime.parse(json['entry_date'])
-            : null,
-        messageReference: json['message_reference'],
-        address: json['address'],
-        vehicleType: json['vehicle_type'],
-        plateNumber: json['plate_number'],
-        observations: json['observations'],
-        createdAt: json['created_at'] != null
-            ? DateTime.parse(json['created_at'])
-            : null,
-        msgRef: json['msg_ref'],
-      );
+  factory Citizen.fromJson(List<dynamic> json) {
+    final rfc1123Format = DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
+    return Citizen(
+      id: json[0],
+      firstName: json[1],
+      lastName: json[2],
+      dateOfBirth: rfc1123Format.parse(json[3]),
+      placeOfBirth: json[4],
+      passportNumber: json[5],
+      passportExpiry: json[6] != null ? rfc1123Format.parse(json[6]) : null,
+      fonction: json[7],
+      exitDate: rfc1123Format.parse(json[8]),
+      entryDate: json[9] != null ? rfc1123Format.parse(json[9]) : null,
+      messageReference: json[10],
+      address: json[11],
+      vehicleType: json[12],
+      plateNumber: json[13],
+      observations: json[14],
+      createdAt: json[15] != null ? rfc1123Format.parse(json[15]) : null,
+      msgRef: json[16],
+    );
+  }
 
   // Method for converting a Citizen instance to a map
   Map<String, dynamic> toJson() => {
