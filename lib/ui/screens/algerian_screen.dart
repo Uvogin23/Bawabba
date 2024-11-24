@@ -2,6 +2,7 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -12,8 +13,36 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_card_alg.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_acc.dart';
 import 'package:bawabba/ui/widgets/dashboard/chart_display.dart';
 
-class MainContent extends StatelessWidget {
-  const MainContent({Key? key}) : super(key: key);
+class AlgerianTouristsHome extends StatefulWidget {
+  const AlgerianTouristsHome({
+    super.key,
+  });
+
+  @override
+  State<AlgerianTouristsHome> createState() => _AlgerianTouristsHome();
+}
+
+class _AlgerianTouristsHome extends State<AlgerianTouristsHome> {
+  // ignore: unused_field
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Row(
+        children: <Widget>[
+          SideMenu(),
+          AlgerianTouristsScreen(),
+          //LoginPage()
+        ],
+      ),
+
+      // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class AlgerianTouristsScreen extends StatelessWidget {
+  const AlgerianTouristsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +57,13 @@ class MainContent extends StatelessWidget {
               width: screenWidth * 0.815,
               height: screenHeight,
               color: const Color.fromARGB(255, 239, 242, 243),
-              child: Stack(
+              child: const Stack(
                 children: <Widget>[
-                  const Positioned(
+                  Positioned(
                     top: 11,
                     right: 20,
                     child: Text(
-                      'الصفحات / لوحة القيادة',
+                      'الصفحات / السياح الجزائريون ',
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: Color.fromARGB(255, 106, 106, 106),
@@ -45,11 +74,11 @@ class MainContent extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Positioned(
+                  Positioned(
                     top: 36,
                     right: 30,
                     child: Text(
-                      'لـــوحة القيــــادة',
+                      ' تسيير وصول و مغادرة السياح الجزائريين',
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: Color.fromRGBO(0, 0, 0, 1),
@@ -60,6 +89,18 @@ class MainContent extends StatelessWidget {
                       ),
                     ),
                   ),
+                  /*Positioned(
+                    top: 30,
+                    left: 30,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Go back to the previous screen
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(Icons.arrow_circle_right_outlined),
+                    ),
+                  ),
+
                   Positioned.fill(
                     right: 0,
                     top: 100,
@@ -149,8 +190,8 @@ class MainContent extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                  const Positioned(
+                  ),*/
+                  Positioned(
                     bottom: 5,
                     left: 15,
                     child: Text(
@@ -165,7 +206,7 @@ class MainContent extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Positioned(
+                  Positioned(
                     bottom: 5,
                     right: 15,
                     child: Text(

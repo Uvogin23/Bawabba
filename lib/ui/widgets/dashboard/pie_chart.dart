@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:bawabba/core/services/card_stats.dart';
-import 'package:bawabba/ui/widgets/line_chart.dart';
-import 'package:bawabba/ui/widgets/line_chartT.dart';
+import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/dashboard/line_chartT.dart';
 
 class CustomPieChartData {
   final Map<String, int> data;
@@ -112,7 +112,7 @@ Widget futurePiechart() {
 Future<CustomPieChartData> fetchPieChartStatistics() async {
   final response = await http
       .get(Uri.parse('http://127.0.0.1:5000/api/stats/overall_counts'));
-  print(response.body);
+
   if (response.statusCode == 200) {
     try {
       final data = json.decode(response.body) as Map<String, dynamic>;

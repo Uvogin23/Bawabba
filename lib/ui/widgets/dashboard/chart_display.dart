@@ -1,11 +1,11 @@
-import 'package:bawabba/ui/widgets/bar_chart.dart';
-import 'package:bawabba/ui/widgets/pie_chart.dart';
+import 'package:bawabba/ui/widgets/dashboard/bar_chart.dart';
+import 'package:bawabba/ui/widgets/dashboard/pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:bawabba/core/services/card_stats.dart';
-import 'package:bawabba/ui/widgets/line_chart.dart';
-import 'package:bawabba/ui/widgets/line_chartT.dart';
+import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/dashboard/line_chartT.dart';
 
 Widget ChartDisplay() {
   return Expanded(

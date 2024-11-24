@@ -1,3 +1,11 @@
+import 'package:bawabba/main.dart';
+import 'package:bawabba/ui/screens/algerian_screen.dart';
+import 'package:bawabba/ui/screens/citizen_screen.dart';
+import 'package:bawabba/ui/screens/diplomats_screen.dart';
+import 'package:bawabba/ui/screens/gestion_comptes.dart';
+import 'package:bawabba/ui/screens/home_page.dart';
+import 'package:bawabba/ui/screens/non_residents_screen.dart';
+import 'package:bawabba/ui/screens/tourists_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:window_manager/window_manager.dart';
@@ -48,12 +56,13 @@ class SideMenu extends StatelessWidget {
               ),
             ),
           ),
+
           GestureDetector(
             onTap: () {
-              // Handle tap on "Dashboard"
-              // ignore: avoid_print
-              print("Dashboard clicked");
-              // Navigate to Dashboard or perform any action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyHomePage()),
+              );
             },
             child: Stack(
               children: [
@@ -105,10 +114,10 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              // Handle tap on "Dashboard"
-              // ignore: avoid_print
-              print("Diplomates clicked");
-              // Navigate to Dashboard or perform any action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DiplomatsHome()),
+              );
             },
             child: Stack(
               children: [
@@ -156,10 +165,10 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              // Handle tap on "Dashboard"
-              // ignore: avoid_print
-              print("Touriste étrangers clicked");
-              // Navigate to Dashboard or perform any action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TouristsHome()),
+              );
             },
             child: Stack(
               children: [
@@ -207,10 +216,11 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              // Handle tap on "Dashboard"
-              // ignore: avoid_print
-              print("Touriste algerien clicked");
-              // Navigate to Dashboard or perform any action
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AlgerianTouristsHome()),
+              );
             },
             child: Stack(
               children: [
@@ -258,10 +268,11 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              // Handle tap on "Dashboard"
-              // ignore: avoid_print
-              print("Entrée Tinalkom clicked");
-              // Navigate to Dashboard or perform any action
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NonResidentsHome()),
+              );
             },
             child: Stack(
               children: [
@@ -311,10 +322,10 @@ class SideMenu extends StatelessWidget {
           // More menu items here, e.g., Diplomates, Touriste étrangers, etc.
           GestureDetector(
             onTap: () {
-              // Handle tap on "Dashboard"
-              // ignore: avoid_print
-              print("Sortie Tinalkom");
-              // Navigate to Dashboard or perform any action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CitizenHome()),
+              );
             },
             child: Stack(
               children: [
@@ -361,11 +372,39 @@ class SideMenu extends StatelessWidget {
           ),
 
           Positioned(
-            top: 650, // Adjust position as needed
+            top: 610, // Adjust position as needed
             right: 78, // Adjust position as needed
             child: GestureDetector(
               onTap: () {
-                print("clicked");
+                /*showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("Alert"),
+                      content: const Text("This is a popup alert dialog."),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: const Text("Cancel"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Add action if needed
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    );
+                  },
+                );*/
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const GestionComptesHome()),
+                );
               },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 27),
@@ -393,7 +432,7 @@ class SideMenu extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 710, // Adjust position as needed
+            top: 670, // Adjust position as needed
             right: 78, // Adjust position as needed
             child: GestureDetector(
               onTap: () async {
