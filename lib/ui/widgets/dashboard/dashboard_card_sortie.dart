@@ -39,8 +39,8 @@ class DashboardCardSortie extends StatelessWidget {
                   width: 370,
                   height: 127,
                   decoration: const BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
+                    boxShadow: [
+                      const BoxShadow(
                         color:
                             Color.fromARGB(255, 255, 255, 255), // Shadow color
                         blurRadius: 10, // Blur radius

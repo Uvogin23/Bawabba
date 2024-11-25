@@ -2,31 +2,39 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 
 class BarChartScreen extends StatelessWidget {
   const BarChartScreen({Key? key}) : super(key: key);
 
   // Fetch months data
-  Future<Map<String, int>> fetchChartData() async {
+  Future<Map<String, int>> fetchChartData(BuildContext context) async {
+    final token = Provider.of<AuthProvider>(context, listen: false).token;
     final url =
         Uri.parse('http://127.0.0.1:5000/api/stats/bardata'); // Update URL
-    final response = await http.get(url);
+    if (token != null) {
+      final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      try {
-        return Map<String, int>.from(json.decode(response.body));
-      } catch (e) {
-        throw Exception('Failed to parse chart data: $e');
+      if (response.statusCode == 200) {
+        try {
+          return Map<String, int>.from(json.decode(response.body));
+        } catch (e) {
+          throw Exception('Failed to parse chart data: $e');
+        }
+      } else {
+        throw Exception('Failed to load chart data: ${response.statusCode}');
       }
     } else {
-      throw Exception('Failed to load chart data: ${response.statusCode}');
+      print('No token found');
+      throw Exception('token==null');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, int>>(
-      future: fetchChartData(),
+      future: fetchChartData(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -87,11 +95,11 @@ class BarChartScreen extends StatelessWidget {
                   ),
                 ),
                 rightTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                 topTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
               ),
-              gridData: FlGridData(show: false),
+              gridData: const FlGridData(show: false),
               borderData: FlBorderData(show: false),
             ),
           ),

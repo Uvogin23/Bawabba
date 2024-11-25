@@ -7,14 +7,14 @@ import 'dart:convert';
 
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreenPolice extends StatefulWidget {
+  const LoginScreenPolice({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginScreenPolice> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreenPolice> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(20),
                                   topLeft: Radius.circular(20)),
-                              color: Color.fromARGB(255, 91, 141, 26)),
+                              color: Color.fromARGB(255, 13, 63, 89)),
                           child: Column(
                             children: [
                               Row(
@@ -173,23 +173,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.only(top: 5),
-                                    width: 55,
-                                    height: 79.0,
+                                    width: 70,
+                                    height: 89.0,
                                     decoration: const BoxDecoration(
                                       image: DecorationImage(
-                                        image:
-                                            AssetImage('assets/images/ANP.png'),
+                                        image: AssetImage(
+                                            'assets/images/logodgsn.png'),
                                         fit: BoxFit.fitWidth,
                                       ),
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 5,
+                                    width: 30,
                                   ),
                                   Container(
                                     margin: const EdgeInsets.only(top: 5),
-                                    width: 75,
-                                    height: 89.0,
+                                    width: 100,
+                                    height: 109.0,
                                     decoration: const BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
@@ -201,10 +201,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 25,
                               ),
                               const Text(
-                                ' الجمهورية الجزائرية الديمقراطية الشعبية\n وزارة الدفـــــــاع الوطنــــــي \n الناحية العسكرية الرابعة \n القطاع العسكري جانت',
+                                ' الجمهورية الجزائرية الديمقراطية الشعبية\n وزارة الداخلية و الجماعات المحلية \n المديرية العامة للأمن الوطني ',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),

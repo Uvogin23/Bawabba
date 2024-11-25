@@ -78,7 +78,7 @@ class DiplomatsScreen extends StatelessWidget {
                     top: 36,
                     right: 30,
                     child: Text(
-                      ' تسيير دخول و خروج الدبلومسيين',
+                      ' حركة الدبلوماسيين',
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: Color.fromRGBO(0, 0, 0, 1),

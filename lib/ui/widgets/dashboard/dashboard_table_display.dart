@@ -395,15 +395,14 @@ Widget dataTableCitizens() {
                   )),
                   DataCell(Center(
                     child: Text(
-                      citizen.passportNumber ?? "N/A",
+                      citizen.passportNumber,
                       style: const TextStyle(
                           fontSize: 10, fontFamily: 'Times New Roman'),
                     ),
                   )),
                   DataCell(Center(
                     child: Text(
-                      citizen.exitDate.toLocal().toString().split(' ')[0] ??
-                          "N/A",
+                      citizen.exitDate.toLocal().toString().split(' ')[0],
                       style: const TextStyle(
                           fontSize: 10, fontFamily: 'Times New Roman'),
                     ),
@@ -504,7 +503,7 @@ Widget dataTableNonResident() {
                   )),
                   DataCell(Center(
                     child: Text(
-                      nonResident.passportNumber ?? "N/A",
+                      nonResident.passportNumber,
                       style: const TextStyle(
                           fontSize: 10, fontFamily: 'Times New Roman'),
                     ),
@@ -512,10 +511,9 @@ Widget dataTableNonResident() {
                   DataCell(Center(
                     child: Text(
                       nonResident.arrivalDate
-                              .toLocal()
-                              .toString()
-                              .split(' ')[0] ??
-                          "N/A",
+                          .toLocal()
+                          .toString()
+                          .split(' ')[0],
                       style: const TextStyle(
                           fontSize: 10, fontFamily: 'Times New Roman'),
                     ),

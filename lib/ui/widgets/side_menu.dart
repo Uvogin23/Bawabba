@@ -1,3 +1,4 @@
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/main.dart';
 import 'package:bawabba/ui/screens/algerian_screen.dart';
 import 'package:bawabba/ui/screens/citizen_screen.dart';
@@ -8,6 +9,7 @@ import 'package:bawabba/ui/screens/non_residents_screen.dart';
 import 'package:bawabba/ui/screens/tourists_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
 class SideMenu extends StatelessWidget {
@@ -407,9 +409,11 @@ class SideMenu extends StatelessWidget {
                 );
               },
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 27),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 27),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 0, 75, 132), // Azure blue color
+                  color:
+                      const Color.fromARGB(255, 0, 75, 132), // Azure blue color
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: const [
                     BoxShadow(
@@ -436,6 +440,7 @@ class SideMenu extends StatelessWidget {
             right: 78, // Adjust position as needed
             child: GestureDetector(
               onTap: () async {
+                Provider.of<AuthProvider>(context, listen: false).logout();
                 await windowManager.close();
               },
               child: Container(

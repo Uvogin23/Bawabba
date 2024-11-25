@@ -128,7 +128,7 @@ class MainContent extends StatelessWidget {
 
                           const SizedBox(height: 50),
                           Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                             width: 1150,
                             height: 470,
                             decoration: const BoxDecoration(

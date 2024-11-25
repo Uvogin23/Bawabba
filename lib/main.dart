@@ -1,10 +1,13 @@
+import 'package:bawabba/ui/screens/police_login_screen.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'dart:convert';
 import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:bawabba/ui/screens/home_page.dart';
 import 'package:bawabba/ui/screens/login_page.dart';
+
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -20,7 +23,12 @@ void main() async {
   // await windowManager.setFullScreen(true);
   //});
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => AuthProvider(), // Create the AuthProvider
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -48,8 +56,13 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const MyHomePage(),
-        //home: const LineChartScreen(),
+        home: Consumer<AuthProvider>(
+          builder: (context, authProvider, child) {
+            return authProvider.token == null
+                ? const LoginScreenPolice()
+                : const MyHomePage(); // Show login or home based on token
+          },
+        ),
       ),
     );
   }
@@ -76,7 +89,6 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           SideMenu(),
           MainContent(),
-          //LoginPage()
         ],
       ),
 

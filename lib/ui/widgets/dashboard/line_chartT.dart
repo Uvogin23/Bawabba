@@ -92,7 +92,7 @@ class LineChartScreen2 extends StatelessWidget {
             child: LineChart(
               LineChartData(
                 titlesData: FlTitlesData(
-                  leftTitles: AxisTitles(
+                  leftTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: true),
                   ),
                   bottomTitles: AxisTitles(
@@ -120,7 +120,7 @@ class LineChartScreen2 extends StatelessWidget {
                     ),
                   ),
                 ),
-                gridData: FlGridData(show: true),
+                gridData: const FlGridData(show: true),
                 borderData: FlBorderData(
                   border: const Border.symmetric(
                     horizontal: BorderSide(color: Colors.black, width: 1),
