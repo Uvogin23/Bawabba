@@ -16,7 +16,7 @@ void main() async {
   await windowManager.ensureInitialized();
 
   // Set the minimum window size here
-  //windowManager.setMinimumSize(const Size(1600, 820));
+  windowManager.setMinimumSize(const Size(1500, 720));
   //windowManager.setMaximumSize(const Size(1600, 820));
   // Fullscreen on startup
   // windowManager.waitUntilReadyToShow().then((_) async {

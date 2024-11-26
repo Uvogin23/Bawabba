@@ -1,3 +1,4 @@
+import 'package:bawabba/core/models/user.dart';
 import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/main.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class LoginScreenPolice extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreenPolice> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -41,14 +43,17 @@ class _LoginScreenState extends State<LoginScreenPolice> {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final token = data['access_token'];
+        final user = User.fromJson(data['user']);
+        print(user);
         Provider.of<AuthProvider>(context, listen: false).token = token;
+        Provider.of<AuthProvider>(context, listen: false).user = user;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const MyHomePage()),
         );
       } else {
         setState(() {
-          _errorMessage = 'Invalid credentials';
+          _errorMessage = 'خطأ بإسم المستخدم أو كلمة المرور';
         });
       }
     } catch (e) {
@@ -69,37 +74,12 @@ class _LoginScreenState extends State<LoginScreenPolice> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            /*TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(labelText: 'Username'),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 20),
-            if (_errorMessage != null) ...[
-              Text(
-                _errorMessage!,
-                style: const TextStyle(color: Colors.red),
-              ),
-              const SizedBox(height: 20),
-            ],
-            ElevatedButton(
-              onPressed: _isLoading ? null : _login,
-              child: _isLoading
-                  ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text('Login'),
-            ),
-            const SizedBox(
-              height: 30,
-            ),*/
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(70, 50, 50, 40),
+                padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -120,18 +100,74 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                               topRight: Radius.circular(20)),
                           color: Color.fromARGB(255, 255, 255, 255)),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextField(
-                            controller: _usernameController,
-                            decoration:
-                                const InputDecoration(labelText: 'Username'),
+                          const Icon(
+                            Icons.account_circle_rounded,
+                            size: 100,
+                            color: Color.fromARGB(255, 13, 63, 89),
                           ),
-                          TextField(
-                            controller: _passwordController,
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
-                            obscureText: true,
+                          const SizedBox(
+                            height: 20,
                           ),
+                          const Text(
+                            'تسجيــــــل الدخــــول',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 13, 63, 89),
+                                fontFamily: 'Times New Roman',
+                                fontSize: 24,
+                                letterSpacing:
+                                    0 /*percentages not used in flutter. defaulting to zero*/,
+                                fontWeight: FontWeight.bold,
+                                height: 1),
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    maxLines: 1,
+                                    maxLength: 12,
+                                    controller: _usernameController,
+                                    decoration: const InputDecoration(
+                                        hintText: 'إسم المستخدم',
+                                        prefixIcon: Icon(Icons.person),
+                                        fillColor:
+                                            Color.fromARGB(255, 231, 231, 231),
+                                        filled: true),
+                                    // The validator receives the text that the user has entered.
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'يرجى إدخال إسم المستخدم';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  TextFormField(
+                                    maxLines: 1,
+                                    maxLength: 20,
+                                    controller: _passwordController,
+                                    obscureText: true,
+                                    decoration: const InputDecoration(
+                                        hintText: ' كلمة المرور',
+                                        prefixIcon: Icon(Icons.lock),
+                                        fillColor:
+                                            Color.fromARGB(255, 220, 242, 254),
+                                        filled: true),
+                                    // The validator receives the text that the user has entered.
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'يرجى إدخال كلمة المرور';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              )),
                           const SizedBox(height: 20),
                           if (_errorMessage != null) ...[
                             Text(
@@ -141,11 +177,16 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                             const SizedBox(height: 20),
                           ],
                           ElevatedButton(
-                            onPressed: _isLoading ? null : _login,
+                            onPressed: () {
+                              // Validate returns true if the form is valid, or false otherwise.
+                              if (_formKey.currentState!.validate()) {
+                                _isLoading ? null : _login();
+                              }
+                            },
                             child: _isLoading
                                 ? const CircularProgressIndicator(
                                     color: Colors.white)
-                                : const Text('Login'),
+                                : const Text('تسجيل الدخول'),
                           ),
                         ],
                       ),
@@ -167,14 +208,16 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                   topLeft: Radius.circular(20)),
                               color: Color.fromARGB(255, 13, 63, 89)),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                    margin: const EdgeInsets.only(top: 5),
-                                    width: 70,
-                                    height: 89.0,
+                                    margin: const EdgeInsets.only(top: 10),
+                                    width: 60,
+                                    height: 80.0,
                                     decoration: const BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
@@ -184,12 +227,12 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 30,
+                                    width: 20,
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.only(top: 5),
-                                    width: 100,
-                                    height: 109.0,
+                                    margin: const EdgeInsets.only(top: 10),
+                                    width: 90,
+                                    height: 95.0,
                                     decoration: const BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
@@ -201,7 +244,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                 ],
                               ),
                               const SizedBox(
-                                height: 25,
+                                height: 20,
                               ),
                               const Text(
                                 ' الجمهورية الجزائرية الديمقراطية الشعبية\n وزارة الداخلية و الجماعات المحلية \n المديرية العامة للأمن الوطني ',
@@ -220,8 +263,8 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                               ),
                               Container(
                                 margin: const EdgeInsets.only(top: 5),
-                                width: 150,
-                                height: 150.0,
+                                width: 100,
+                                height: 100.0,
                                 decoration: const BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage('assets/images/logo.png'),
@@ -230,7 +273,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                 ),
                               ),
                               SizedBox(
-                                height: 40,
+                                height: 30,
                               ),
                               const Text(
                                 'تطبيقة متابعة الدخول و الخروج\nعبر حدود ولاية جانت',

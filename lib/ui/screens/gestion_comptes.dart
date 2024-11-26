@@ -1,3 +1,4 @@
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
@@ -6,6 +7,7 @@ import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_tourist.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_diplomat.dart';
@@ -48,6 +50,7 @@ class GestionComptesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final user = Provider.of<AuthProvider>(context, listen: false).user;
 
     return Expanded(
         flex: 1,
@@ -57,9 +60,9 @@ class GestionComptesScreen extends StatelessWidget {
               width: screenWidth * 0.815,
               height: screenHeight,
               color: const Color.fromARGB(255, 239, 242, 243),
-              child: const Stack(
+              child: Stack(
                 children: <Widget>[
-                  Positioned(
+                  const Positioned(
                     top: 11,
                     right: 20,
                     child: Text(
@@ -78,7 +81,7 @@ class GestionComptesScreen extends StatelessWidget {
                     top: 36,
                     right: 30,
                     child: Text(
-                      ' تسيير الحساب',
+                      '${user?.username} تسيير الحساب',
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: Color.fromRGBO(0, 0, 0, 1),
@@ -89,7 +92,7 @@ class GestionComptesScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  /*Positioned.fill(
+                  Positioned.fill(
                     right: 0,
                     top: 100,
                     bottom: 30,
@@ -101,85 +104,70 @@ class GestionComptesScreen extends StatelessWidget {
                             width: 1200,
                             height: 300,
                             decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: const Stack(
-                              children: <Widget>[
-                                DashboardCardDiplomat(),
-                                DashboardCardTourist(),
-                                DashboardCardAlg(),
-                                DashboardCardAcc(),
-                                DashboardCardEntre(),
-                                DashboardCardSortie(),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                              height: 50), // Space between cards and charts
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            width: 1230,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 239, 242, 243),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ChartDisplay(),
-                                ChartDisplayPie(),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 50),
-                          Container(
-                            width: 1230,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 239, 242, 243),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                BarChartDisplay(),
-                                ChartDisplay2(),
-                              ],
-                            ),
-                          ),
-
-                          const SizedBox(height: 50),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            width: 1150,
-                            height: 470,
-                            decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(15),
                               ),
                             ),
-                            child: Row(
+                            child: const Stack(
+                              children: <Widget>[],
+                            ),
+                          ),
+                          const SizedBox(
+                              height: 10), // Space between cards and charts
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                            width: 1230,
+                            height: 500,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 78, 114, 126),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                dataTablesDisplay(),
-                                dataTablesDisplay2(),
-                              ],
+                              children: [],
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Container(
+                            width: 1230,
+                            height: 500,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 58, 118, 138),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [],
+                            ),
+                          ),
+
+                          const SizedBox(height: 10),
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            width: 1150,
+                            height: 470,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 131, 68, 68),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [],
                             ),
                           ),
                           // Space between cards and charts
                         ],
                       ),
                     ),
-                  ),*/
-                  Positioned(
+                  ),
+                  const Positioned(
                     bottom: 5,
                     left: 15,
                     child: Text(
@@ -194,7 +182,7 @@ class GestionComptesScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     bottom: 5,
                     right: 15,
                     child: Text(

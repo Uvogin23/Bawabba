@@ -6,6 +6,7 @@ import 'package:bawabba/ui/screens/diplomats_screen.dart';
 import 'package:bawabba/ui/screens/gestion_comptes.dart';
 import 'package:bawabba/ui/screens/home_page.dart';
 import 'package:bawabba/ui/screens/non_residents_screen.dart';
+import 'package:bawabba/ui/screens/police_login_screen.dart';
 import 'package:bawabba/ui/screens/tourists_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,6 +20,7 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final token = Provider.of<AuthProvider>(context, listen: false).token;
 
     return Container(
       width: screenWidth * 0.185,
@@ -61,10 +63,18 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MyHomePage()),
-              );
+              if (token != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LoginScreenPolice()),
+                );
+              }
             },
             child: Stack(
               children: [
@@ -116,10 +126,19 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const DiplomatsHome()),
-              );
+              if (token != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DiplomatsHome()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LoginScreenPolice()),
+                );
+              }
             },
             child: Stack(
               children: [
@@ -167,10 +186,18 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TouristsHome()),
-              );
+              if (token != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TouristsHome()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LoginScreenPolice()),
+                );
+              }
             },
             child: Stack(
               children: [
@@ -218,11 +245,19 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const AlgerianTouristsHome()),
-              );
+              if (token != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AlgerianTouristsHome()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LoginScreenPolice()),
+                );
+              }
             },
             child: Stack(
               children: [
@@ -270,11 +305,19 @@ class SideMenu extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const NonResidentsHome()),
-              );
+              if (token != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NonResidentsHome()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LoginScreenPolice()),
+                );
+              }
             },
             child: Stack(
               children: [
@@ -324,10 +367,18 @@ class SideMenu extends StatelessWidget {
           // More menu items here, e.g., Diplomates, Touriste étrangers, etc.
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CitizenHome()),
-              );
+              if (token != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CitizenHome()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LoginScreenPolice()),
+                );
+              }
             },
             child: Stack(
               children: [
@@ -402,11 +453,20 @@ class SideMenu extends StatelessWidget {
                     );
                   },
                 );*/
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const GestionComptesHome()),
-                );
+                if (token != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GestionComptesHome()),
+                  );
+                  //Provider.of<AuthProvider>(context, listen: false).logout();
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreenPolice()),
+                  );
+                }
               },
               child: Container(
                 padding:
@@ -441,7 +501,11 @@ class SideMenu extends StatelessWidget {
             child: GestureDetector(
               onTap: () async {
                 Provider.of<AuthProvider>(context, listen: false).logout();
-                await windowManager.close();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LoginScreenPolice()),
+                );
               },
               child: Container(
                 padding:

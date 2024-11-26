@@ -1,3 +1,4 @@
+import 'package:bawabba/core/models/user.dart';
 import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/main.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final url = Uri.parse('http://127.0.0.1:5000/login'); // Your API endpoint
     try {
+      print('object');
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -41,7 +43,10 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final token = data['access_token'];
+        final user = User.fromJson(data['user']);
         Provider.of<AuthProvider>(context, listen: false).token = token;
+        Provider.of<AuthProvider>(context, listen: false).user = user;
+        print(response.body);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const MyHomePage()),

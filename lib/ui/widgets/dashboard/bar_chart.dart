@@ -9,32 +9,27 @@ class BarChartScreen extends StatelessWidget {
   const BarChartScreen({Key? key}) : super(key: key);
 
   // Fetch months data
-  Future<Map<String, int>> fetchChartData(BuildContext context) async {
-    final token = Provider.of<AuthProvider>(context, listen: false).token;
+  Future<Map<String, int>> fetchChartData() async {
     final url =
         Uri.parse('http://127.0.0.1:5000/api/stats/bardata'); // Update URL
-    if (token != null) {
-      final response = await http.get(url);
 
-      if (response.statusCode == 200) {
-        try {
-          return Map<String, int>.from(json.decode(response.body));
-        } catch (e) {
-          throw Exception('Failed to parse chart data: $e');
-        }
-      } else {
-        throw Exception('Failed to load chart data: ${response.statusCode}');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      try {
+        return Map<String, int>.from(json.decode(response.body));
+      } catch (e) {
+        throw Exception('Failed to parse chart data: $e');
       }
     } else {
-      print('No token found');
-      throw Exception('token==null');
+      throw Exception('Failed to load chart data: ${response.statusCode}');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, int>>(
-      future: fetchChartData(context),
+      future: fetchChartData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
