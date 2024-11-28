@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
         final data = jsonDecode(response.body);
         final token = data['access_token'];
         final user = User.fromJson(data['user']);
-        print(user);
+
         Provider.of<AuthProvider>(context, listen: false).token = token;
         Provider.of<AuthProvider>(context, listen: false).user = user;
         Navigator.pushReplacement(
