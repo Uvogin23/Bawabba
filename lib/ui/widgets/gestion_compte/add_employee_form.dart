@@ -7,8 +7,14 @@ import 'package:bawabba/core/services/card_stats.dart';
 import 'package:bawabba/core/models/user.dart';
 import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/main.dart';
-
 import 'package:provider/provider.dart';
+
+enum Role {
+  admin,
+  operator,
+}
+
+enum Grade { ap, bp, bcp, ip, ipp, op, opp, cp, cpp, cdp, cnp, cnpp }
 
 class AddEmployeeForm extends StatefulWidget {
   const AddEmployeeForm({Key? key}) : super(key: key);
@@ -22,12 +28,13 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _gradeController = TextEditingController();
-  final TextEditingController _roleController = TextEditingController();
   final TextEditingController _badgeNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  Role? selectedRole;
+  Grade? selectedGrade;
+
   bool _isLoading = false;
   String? _errorMessage;
 
@@ -36,12 +43,13 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
     _usernameController.clear(); // Clear the name field
     _firstNameController.clear();
     _lastNameController.clear();
-    _gradeController.clear();
-    _roleController.clear();
     _badgeNumberController.clear();
     _passwordController.clear();
     _confirmPasswordController.clear();
-    // Clear the email field
+    setState(() {
+      selectedRole = null;
+      selectedGrade = null; // Clear the dropdown selection
+    });
   }
 
   Future<void> _addemployee() async {
@@ -53,16 +61,17 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
     final url =
         Uri.parse('http://127.0.0.1:5000/add_employee'); // Your API endpoint
     try {
+      print(selectedRole?.name);
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'username': _usernameController.text,
           'password': _passwordController.text,
-          'role': _roleController.text,
+          'role': selectedRole?.name,
           'first_name': _firstNameController.text,
           'last_name': _lastNameController.text,
-          'grade': _gradeController.text,
+          'grade': selectedGrade?.name,
           'badge_number': _badgeNumberController.text,
         }),
       );
@@ -72,8 +81,11 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
           const SnackBar(content: Text('تمت إضافة المستخدم بنجاح')),
         );
       } else {
-        _errorMessage =
-            'الموظف موجود بقاعدة البيانات \n غير اسم المستخدم او رقم الذاتية ';
+        setState(() {
+          _errorMessage =
+              'الموظف موجود بقاعدة البيانات \n غير اسم المستخدم او رقم الذاتية ';
+        });
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text(
@@ -85,7 +97,7 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
         _errorMessage = 'Error connecting to the server';
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('2')),
+        const SnackBar(content: Text('Error connecting to the server')),
       );
     } finally {
       setState(() {
@@ -100,7 +112,7 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
       width: 1150,
       height: 500,
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Color.fromARGB(255, 251, 252, 252),
         borderRadius: BorderRadius.all(
           Radius.circular(15),
         ),
@@ -196,51 +208,17 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
                         ),
                         SizedBox(
                           height: 50,
-                          width: 230,
-                          child: TextFormField(
-                            controller: _gradeController,
-                            maxLines: 1,
-                            maxLength: 20,
-                            decoration: const InputDecoration(
-                                hintText: 'الرتبة',
-                                prefixIcon: Icon(Icons.abc),
-                                fillColor: Color.fromARGB(255, 231, 231, 231),
-                                filled: true),
-                            // The validator receives the text that the user has entered.
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى إدخال الرتبة ';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
                           width: 350,
                           child: TextFormField(
                             controller: _usernameController,
                             maxLines: 1,
                             maxLength: 12,
                             decoration: const InputDecoration(
-                                hintText: 'إسم المستخدم',
-                                prefixIcon: Icon(Icons.person),
-                                fillColor: Color.fromARGB(255, 231, 231, 231),
-                                filled: true),
+                              hintText: 'إسم المستخدم',
+                              prefixIcon: Icon(Icons.person),
+                              fillColor: Color.fromARGB(255, 231, 231, 231),
+                              filled: true,
+                            ),
                             // The validator receives the text that the user has entered.
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -250,30 +228,14 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
                             },
                           ),
                         ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 280,
-                          child: TextFormField(
-                            controller: _roleController,
-                            maxLines: 1,
-                            maxLength: 12,
-                            decoration: const InputDecoration(
-                                hintText: 'الدور',
-                                prefixIcon: Icon(Icons.folder_shared_sharp),
-                                fillColor: Color.fromARGB(255, 231, 231, 231),
-                                filled: true),
-                            // The validator receives the text that the user has entered.
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى إدخال الدور ';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         const SizedBox(
                           width: 20,
                         ),
@@ -298,17 +260,6 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
                             },
                           ),
                         ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
                         const SizedBox(
                           width: 20,
                         ),
@@ -360,6 +311,121 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
                               }
                               if (value != _passwordController.text) {
                                 return 'كلمة المرور غير مطابقة';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 280,
+                          child: DropdownButtonFormField<Grade>(
+                            isExpanded: false,
+                            isDense: true,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.abc),
+                              fillColor: Color.fromARGB(255, 231, 231, 231),
+                              hintText: "الرتبة",
+                              filled: true,
+                            ),
+                            value: selectedGrade,
+                            onChanged: (Grade? newValu) {
+                              setState(() {
+                                selectedGrade = newValu;
+                              });
+                            },
+                            items: Grade.values.map((Grade grade) {
+                              return DropdownMenuItem<Grade>(
+                                value: grade,
+                                child: (grade.name == 'ap')
+                                    ? const Text('عون شرطة')
+                                    : (grade.name == 'bp')
+                                        ? const Text('حافظ شرطة')
+                                        : (grade.name == 'bcp')
+                                            ? const Text('حافظ أول للشرطة')
+                                            : (grade.name == 'ip')
+                                                ? const Text('مفتش شرطة')
+                                                : (grade.name == 'ipp')
+                                                    ? const Text(
+                                                        'مفتش رئيسي للشرطة')
+                                                    : (grade.name == 'op')
+                                                        ? const Text(
+                                                            'ضابط شرطة')
+                                                        : (grade.name == 'opp')
+                                                            ? const Text(
+                                                                'ضابط شرطة رئيسي')
+                                                            : (grade.name ==
+                                                                    'cp')
+                                                                ? const Text(
+                                                                    'محافظ شرطة')
+                                                                : (grade.name ==
+                                                                        'cpp')
+                                                                    ? const Text(
+                                                                        'عميد شرطة')
+                                                                    : (grade.name ==
+                                                                            'cdp')
+                                                                        ? const Text(
+                                                                            'عميد أول للشرطة')
+                                                                        : (grade.name ==
+                                                                                'cnp')
+                                                                            ? const Text('مراقب شرطة')
+                                                                            : const Text('مراقب أول للشرطة'),
+                              );
+                            }).toList(),
+                            validator: (value) {
+                              if (value == null) {
+                                return "يرجى إدخال الرتبة";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 280,
+                          child: DropdownButtonFormField<Role>(
+                            isExpanded: false,
+                            isDense: true,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.folder_shared),
+                              fillColor: Color.fromARGB(255, 231, 231, 231),
+                              hintText: "الدور",
+                              filled: true,
+                            ),
+                            value: selectedRole,
+                            onChanged: (Role? newValue) {
+                              setState(() {
+                                selectedRole = newValue;
+                              });
+                            },
+                            items: Role.values.map((Role role) {
+                              return DropdownMenuItem<Role>(
+                                value: role,
+                                child: role.name == 'admin'
+                                    ? const Text('مشرف')
+                                    : const Text('مستخدم'),
+                              );
+                            }).toList(),
+                            validator: (value) {
+                              if (value == null) {
+                                return "يرجى إدخال الدور";
                               }
                               return null;
                             },
