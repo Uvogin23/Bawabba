@@ -109,7 +109,7 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 1150,
+      width: 1180,
       height: 500,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 251, 252, 252),

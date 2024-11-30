@@ -11,12 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:window_manager/window_manager.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_tourist.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_diplomat.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_alg.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_acc.dart';
-import 'package:bawabba/ui/widgets/dashboard/chart_display.dart';
 
 class GestionComptesHome extends StatefulWidget {
   const GestionComptesHome({

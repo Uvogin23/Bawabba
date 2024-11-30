@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/employee.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,10 +10,18 @@ import 'package:bawabba/core/models/user.dart';
 import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/main.dart';
 import 'package:provider/provider.dart';
+import 'package:printing/printing.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 enum Role {
   admin,
   operator,
+}
+
+Future<pw.Font> _loadFont(String path) async {
+  final fontData = await rootBundle.load(path);
+  return pw.Font.ttf(fontData.buffer.asByteData());
 }
 
 enum Grade { ap, bp, bcp, ip, ipp, op, opp, cp, cpp, cdp, cnp, cnpp }
@@ -413,11 +422,95 @@ class _EmployeeTable extends State<EmployeeTable> {
     }
   }
 
+  Future<void> _printDataTable(List<Employee> employees) async {
+    final pdf = pw.Document();
+    final arabicFont = await _loadFont('assets/fonts/Cairo-Regular.ttf');
+
+    pdf.addPage(
+      pw.Page(
+        build: (context) {
+          return pw.Directionality(
+            textDirection: pw.TextDirection.rtl,
+            child: pw.TableHelper.fromTextArray(
+              headers: [
+                'الدور',
+                'الرتبة',
+                'إسم المستخدم',
+                'رقم الذاتية',
+                'اللقب',
+                'الإسم',
+                'رقم',
+              ],
+              data: employees.map((employee) {
+                return [
+                  _getRoleLabel(employee.role),
+                  _getGradeLabel(employee.grade),
+                  employee.username,
+                  employee.badgeNumber,
+                  employee.lastName,
+                  employee.firstName,
+                  employee.employeeId.toString(),
+                ];
+              }).toList(),
+              headerStyle: pw.TextStyle(
+                font: arabicFont,
+                fontSize: 12,
+                fontWeight: pw.FontWeight.bold,
+              ),
+              cellStyle: pw.TextStyle(
+                font: arabicFont,
+                fontSize: 10,
+              ),
+              cellAlignment: pw.Alignment.centerRight,
+            ),
+          );
+        },
+      ),
+    );
+
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async => pdf.save());
+  }
+
+  String _getGradeLabel(String grade) {
+    switch (grade) {
+      case 'ap':
+        return 'عون شرطة';
+      case 'bp':
+        return 'حافظ شرطة';
+      case 'bcp':
+        return 'حافظ أول للشرطة';
+      case 'ip':
+        return 'مفتش شرطة';
+      case 'ipp':
+        return 'مفتش رئيسي للشرطة';
+      case 'op':
+        return 'ضابط شرطة';
+      case 'opp':
+        return 'ضابط شرطة رئيسي';
+      case 'cp':
+        return 'محافظ شرطة';
+      case 'cpp':
+        return 'عميد شرطة';
+      case 'cdp':
+        return 'عميد أول للشرطة';
+      case 'cnp':
+        return 'مراقب شرطة';
+      default:
+        return 'مراقب أول للشرطة';
+    }
+  }
+
+  // Function to return the label for the role
+  String _getRoleLabel(String role) {
+    return role == 'admin' ? 'مشرف' : 'مستخدم';
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<AuthProvider>(context, listen: false).user;
     return Container(
-      width: 1150,
+      width: 1180,
       height: 450,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 252, 251, 251),
@@ -524,50 +617,16 @@ class _EmployeeTable extends State<EmployeeTable> {
                                 255, 144, 151, 165)) // Highlight color
                             : WidgetStateProperty.all(Colors.transparent),
                         cells: [
-                          DataCell(Text(employee.employeeId.toString())),
-                          DataCell(Text(employee.firstName)),
-                          DataCell(Text(employee.lastName)),
-                          DataCell(Text(employee.badgeNumber)),
-                          DataCell(Text(employee.username)),
                           DataCell(
-                            (employee.grade == 'ap')
-                                ? const Text('عون شرطة')
-                                : (employee.grade == 'bp')
-                                    ? const Text('حافظ شرطة')
-                                    : (employee.grade == 'bcp')
-                                        ? const Text('حافظ أول للشرطة')
-                                        : (employee.grade == 'ip')
-                                            ? const Text('مفتش شرطة')
-                                            : (employee.grade == 'ipp')
-                                                ? const Text(
-                                                    'مفتش رئيسي للشرطة')
-                                                : (employee.grade == 'op')
-                                                    ? const Text('ضابط شرطة')
-                                                    : (employee.grade == 'opp')
-                                                        ? const Text(
-                                                            'ضابط شرطة رئيسي')
-                                                        : (employee.grade ==
-                                                                'cp')
-                                                            ? const Text(
-                                                                'محافظ شرطة')
-                                                            : (employee.grade ==
-                                                                    'cpp')
-                                                                ? const Text(
-                                                                    'عميد شرطة')
-                                                                : (employee.grade ==
-                                                                        'cdp')
-                                                                    ? const Text(
-                                                                        'عميد أول للشرطة')
-                                                                    : (employee.grade ==
-                                                                            'cnp')
-                                                                        ? const Text(
-                                                                            'مراقب شرطة')
-                                                                        : const Text(
-                                                                            'مراقب أول للشرطة'),
-                          ),
-                          DataCell(employee.role == 'admin'
-                              ? const Text("مشرف")
-                              : const Text("مستخدم")),
+                              SelectableText(employee.employeeId.toString())),
+                          DataCell(SelectableText(employee.firstName)),
+                          DataCell(SelectableText(employee.lastName)),
+                          DataCell(SelectableText(employee.badgeNumber)),
+                          DataCell(SelectableText(employee.username)),
+                          DataCell(
+                              SelectableText(_getGradeLabel(employee.grade))),
+                          DataCell(
+                              SelectableText(_getRoleLabel(employee.role))),
                           DataCell(
                             Row(
                               children: [
@@ -603,9 +662,21 @@ class _EmployeeTable extends State<EmployeeTable> {
               }
             },
           ),
-          const SizedBox(
-            height: 50,
-          )
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () async {
+                if (employees.isNotEmpty) {
+                  await _printDataTable(employees); // Pass employees list here
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("لا توجد بيانات للطباعة")),
+                  );
+                }
+              },
+              child: const Text('طباعة الجدول'),
+            ),
+          ),
         ],
       ),
     );
