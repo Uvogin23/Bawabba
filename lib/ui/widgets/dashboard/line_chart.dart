@@ -35,7 +35,7 @@ class LineChartScreen3 extends StatelessWidget {
   // Fetch Tourists data
   Future<List<int>> fetchNonResidentsData() async {
     final url =
-        Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-tourists');
+        Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-residents');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);

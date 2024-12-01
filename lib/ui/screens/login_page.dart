@@ -76,32 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            /*TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(labelText: 'Username'),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 20),
-            if (_errorMessage != null) ...[
-              Text(
-                _errorMessage!,
-                style: const TextStyle(color: Colors.red),
-              ),
-              const SizedBox(height: 20),
-            ],
-            ElevatedButton(
-              onPressed: _isLoading ? null : _login,
-              child: _isLoading
-                  ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text('Login'),
-            ),
-            const SizedBox(
-              height: 30,
-            ),*/
             Expanded(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(70, 50, 50, 40),

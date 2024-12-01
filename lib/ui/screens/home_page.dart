@@ -87,11 +87,11 @@ class MainContent extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const SizedBox(
-                              height: 50), // Space between cards and charts
+                          const SizedBox(height: 50),
+
                           Container(
                             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            width: 1230,
+                            width: screenWidth * 0.775,
                             height: 500,
                             decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 239, 242, 243),
@@ -109,7 +109,7 @@ class MainContent extends StatelessWidget {
                           ),
                           const SizedBox(height: 50),
                           Container(
-                            width: 1230,
+                            width: screenWidth * 0.775,
                             height: 500,
                             decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 239, 242, 243),
@@ -129,16 +129,26 @@ class MainContent extends StatelessWidget {
                           const SizedBox(height: 50),
                           Container(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            width: 1150,
+                            width: screenWidth * 0.775,
                             height: 470,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 144, 140, 140)
+                                        .withOpacity(0.5),
+                                    offset: Offset(4,
+                                        4), // Horizontal and vertical shadow displacement
+                                    blurRadius: 8.0, // Soft edges of the shadow
+                                    spreadRadius: 2.0, // Expands the shadow
+                                  ),
+                                ]),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 dataTablesDisplay(),
                                 dataTablesDisplay2(),

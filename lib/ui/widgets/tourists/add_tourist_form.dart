@@ -236,7 +236,7 @@ class _AddTouristForm extends State<AddTouristForm> {
     });
   }
 
-  Future<void> _addemployee() async {
+  Future<void> _addtourist() async {
     setState(() {
       _isLoading = true;
     });
@@ -291,15 +291,25 @@ class _AddTouristForm extends State<AddTouristForm> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
-      width: 1180,
-      height: 550,
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 251, 252, 252),
-        borderRadius: BorderRadius.all(
-          Radius.circular(15),
-        ),
-      ),
+      width: screenWidth * 0.775,
+      height: 600,
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 251, 252, 252),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 144, 140, 140).withOpacity(0.5),
+              offset:
+                  Offset(4, 4), // Horizontal and vertical shadow displacement
+              blurRadius: 8.0, // Soft edges of the shadow
+              spreadRadius: 2.0, // Expands the shadow
+            ),
+          ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -309,7 +319,7 @@ class _AddTouristForm extends State<AddTouristForm> {
           const Icon(
             Icons.group_add_outlined,
             size: 50,
-            color: Color.fromARGB(255, 13, 63, 89),
+            color: Color.fromARGB(255, 51, 51, 52),
           ),
           const SizedBox(
             height: 20,
@@ -318,7 +328,7 @@ class _AddTouristForm extends State<AddTouristForm> {
             'إضافة سائح جديد',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Color.fromARGB(255, 13, 63, 89),
+                color: Color.fromARGB(255, 39, 39, 39),
                 fontFamily: 'Times New Roman',
                 fontSize: 16,
                 letterSpacing:
@@ -389,7 +399,7 @@ class _AddTouristForm extends State<AddTouristForm> {
                                     BorderRadius.all(Radius.circular(15)),
                               ),
                               prefixIcon: Icon(Icons.abc),
-                              fillColor: Color.fromARGB(255, 230, 242, 245),
+                              fillColor: Color.fromARGB(255, 255, 255, 255),
                               filled: true,
                               hintText: "الجنسية",
                             ),
@@ -441,7 +451,7 @@ class _AddTouristForm extends State<AddTouristForm> {
                           });
                         },
                             rangeStart: DateTime.now()
-                                .subtract(const Duration(days: 0))),
+                                .subtract(const Duration(days: 1))),
                         _buildTextField(
                             _departureFlightInfoController, "معلومات المغادرة"),
                         _buildTextField(_msgRefController, "المرجع"),
@@ -484,7 +494,7 @@ class _AddTouristForm extends State<AddTouristForm> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               // All validations passed
-                              _isLoading ? null : _addemployee();
+                              _isLoading ? null : _addtourist();
                             }
                           },
                           child: _isLoading
@@ -529,7 +539,7 @@ class _AddTouristForm extends State<AddTouristForm> {
             controller: controller,
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.abc),
-              fillColor: const Color.fromARGB(255, 230, 242, 245),
+              fillColor: const Color.fromARGB(255, 255, 255, 255),
               filled: true,
               labelText: label,
               border: const OutlineInputBorder(
@@ -575,7 +585,7 @@ class _AddTouristForm extends State<AddTouristForm> {
               width: 250,
               child: TextFormField(
                 decoration: InputDecoration(
-                  fillColor: const Color.fromARGB(255, 230, 242, 245),
+                  fillColor: const Color.fromARGB(255, 255, 255, 255),
                   filled: true,
                   labelText: selectedDate == null
                       ? label

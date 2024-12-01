@@ -4,7 +4,6 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
 import 'package:bawabba/ui/widgets/gestion_compte/add_employee_form.dart';
-import 'package:bawabba/ui/widgets/gestion_compte/current_user_update.dart';
 import 'package:bawabba/ui/widgets/gestion_compte/employee_table.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:flutter/material.dart';

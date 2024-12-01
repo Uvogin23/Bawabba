@@ -101,7 +101,7 @@ Widget ChartDisplay2() {
     child: Container(
         height: 600,
         // Chart height
-        margin: const EdgeInsets.fromLTRB(50, 0, 10, 0),
+        margin: const EdgeInsets.fromLTRB(8, 0, 10, 0),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),

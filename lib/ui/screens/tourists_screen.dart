@@ -4,6 +4,7 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
+import 'package:bawabba/ui/widgets/tourists/tourists_table1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -100,23 +101,9 @@ class TouristsScreen extends StatelessWidget {
                         children: [
                           const AddTouristForm(),
                           const SizedBox(
-                              height: 50), // Space between cards and charts
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            width: 1180,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 97, 146, 163),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ),
-                          const SizedBox(height: 50),
+                              height: 20), // Space between cards and charts
+                          const TouristTable1(),
+                          const SizedBox(height: 20),
                           Container(
                             width: 1180,
                             height: 500,
@@ -132,7 +119,7 @@ class TouristsScreen extends StatelessWidget {
                             ),
                           ),
 
-                          const SizedBox(height: 50),
+                          const SizedBox(height: 20),
                           Container(
                             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                             width: 1180,
