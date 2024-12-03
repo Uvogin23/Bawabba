@@ -1,4 +1,4 @@
-import 'dart:convert';
+/*import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
 import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
@@ -34,7 +34,7 @@ Future<List<Tourist>> fetchCurrentTourists() async {
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {
-    throw Exception('Failed to load tourists: ${response.statusCode}');
+    throw Exception('Failed to load diplomats: ${response.statusCode}');
   }
 }
 
@@ -725,4 +725,4 @@ Future<void> addTouristLog(Map<String, dynamic> updatedData) async {
   if (response.statusCode != 201) {
     throw Exception('Failed to update tourist: ${response.body}');
   }
-}
+}*/

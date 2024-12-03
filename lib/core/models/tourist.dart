@@ -21,26 +21,27 @@ class Tourist {
   final String touristicGuide;
   final DateTime createdAt;
   final String msgRef;
+  final String? depMsgReff;
 
-  Tourist({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.dateOfBirth,
-    required this.placeOfBirth,
-    required this.passportNumber,
-    required this.passportExpiry,
-    required this.nationality,
-    required this.receivingAgency,
-    required this.circuit,
-    required this.arrivalDate,
-    required this.expectedDepartureDate,
-    required this.arrivalFlightInfo,
-    required this.departureFlightInfo,
-    required this.touristicGuide,
-    required this.createdAt,
-    required this.msgRef,
-  });
+  Tourist(
+      {required this.id,
+      required this.firstName,
+      required this.lastName,
+      required this.dateOfBirth,
+      required this.placeOfBirth,
+      required this.passportNumber,
+      required this.passportExpiry,
+      required this.nationality,
+      required this.receivingAgency,
+      required this.circuit,
+      required this.arrivalDate,
+      required this.expectedDepartureDate,
+      required this.arrivalFlightInfo,
+      required this.departureFlightInfo,
+      required this.touristicGuide,
+      required this.createdAt,
+      required this.msgRef,
+      this.depMsgReff});
 
   factory Tourist.fromJson(List<dynamic> json) {
     final rfc1123Format = DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
@@ -62,6 +63,7 @@ class Tourist {
       touristicGuide: json[14],
       createdAt: rfc1123Format.parse(json[15]),
       msgRef: json[16],
+      depMsgReff: json[17],
     );
   }
 
