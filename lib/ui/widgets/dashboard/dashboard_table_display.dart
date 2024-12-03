@@ -286,15 +286,14 @@ Widget dataTableTourists() {
                   )),
                   DataCell(Center(
                     child: Text(
-                      tourist.nationality ?? "N/A",
+                      tourist.nationality,
                       style: const TextStyle(
                           fontSize: 10, fontFamily: 'Times New Roman'),
                     ),
                   )),
                   DataCell(Center(
                     child: Text(
-                      tourist.arrivalDate?.toLocal().toString().split(' ')[0] ??
-                          "N/A",
+                      tourist.arrivalDate.toLocal().toString().split(' ')[0],
                       style: const TextStyle(
                           fontSize: 10, fontFamily: 'Times New Roman'),
                     ),
