@@ -319,7 +319,7 @@ class _AddTouristForm extends State<AddTouristForm> {
           const Icon(
             Icons.group_add_outlined,
             size: 50,
-            color: Color.fromARGB(255, 51, 51, 52),
+            color: Color.fromARGB(255, 225, 180, 32),
           ),
           const SizedBox(
             height: 20,
@@ -328,9 +328,9 @@ class _AddTouristForm extends State<AddTouristForm> {
             'إضافة سائح جديد',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Color.fromARGB(255, 39, 39, 39),
+                color: Color.fromARGB(255, 0, 0, 0),
                 fontFamily: 'Times New Roman',
-                fontSize: 16,
+                fontSize: 20,
                 letterSpacing:
                     0 /*percentages not used in flutter. defaulting to zero*/,
                 fontWeight: FontWeight.bold,
@@ -486,11 +486,22 @@ class _AddTouristForm extends State<AddTouristForm> {
                           width: 15,
                         ),
                         ElevatedButton(
+                          onPressed: _clearForm, // Call the clear function
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromARGB(255, 224, 232, 235),
                             elevation: 5,
                           ),
+                          child: const Text("مسح الإستمارة"),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        ElevatedButton(
+                          style: const ButtonStyle(
+                              elevation: WidgetStatePropertyAll(5),
+                              backgroundColor: WidgetStatePropertyAll(
+                                  Color.fromARGB(255, 7, 80, 122))),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               // All validations passed
@@ -499,20 +510,13 @@ class _AddTouristForm extends State<AddTouristForm> {
                           },
                           child: _isLoading
                               ? const CircularProgressIndicator(
-                                  color: Colors.white)
-                              : const Text('إضافة السائح'),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        ElevatedButton(
-                          onPressed: _clearForm, // Call the clear function
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 224, 232, 235),
-                            elevation: 5,
-                          ),
-                          child: const Text("مسح الإستمارة"),
+                                  color: Color.fromARGB(255, 233, 191, 24))
+                              : const Text(
+                                  'إضافة السائح',
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                ),
                         ),
                         const SizedBox(
                           width: 15,

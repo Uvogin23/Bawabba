@@ -4,7 +4,9 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
+import 'package:bawabba/ui/widgets/tourists/tourists_actions.dart';
 import 'package:bawabba/ui/widgets/tourists/tourists_table1.dart';
+import 'package:bawabba/ui/widgets/tourists/tourists_table2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -100,24 +102,15 @@ class TouristsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const AddTouristForm(),
-                          const SizedBox(
-                              height: 20), // Space between cards and charts
-                          const TouristTable1(),
                           const SizedBox(height: 20),
-                          Container(
-                            width: 1180,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 69, 107, 120),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ),
+                          const TouristsActions(),
+                          // Space between cards and charts
+
+                          const SizedBox(height: 20),
+                          const TouristTable2(),
+
+                          const SizedBox(height: 20),
+                          const TouristTable1(),
 
                           const SizedBox(height: 20),
                           Container(

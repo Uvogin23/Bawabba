@@ -184,7 +184,7 @@ class _TouristTable1 extends State<TouristTable1> {
                 child: Icon(
                   Icons.list,
                   size: 30,
-                  color: Color.fromARGB(255, 5, 5, 5),
+                  color: Color.fromARGB(255, 233, 191, 24),
                 ),
               ),
               SizedBox(
@@ -196,7 +196,7 @@ class _TouristTable1 extends State<TouristTable1> {
                   'السياح المتواجدون بإقليم الولاية ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Color.fromARGB(255, 39, 39, 40),
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontFamily: 'Times New Roman',
                       fontSize: 16,
                       letterSpacing:
@@ -228,7 +228,7 @@ class _TouristTable1 extends State<TouristTable1> {
                     columnSpacing: 35.0,
                     headingRowHeight: 40.0,
                     headingRowColor: WidgetStateProperty.resolveWith(
-                        (states) => const Color.fromARGB(255, 212, 218, 141)),
+                        (states) => const Color.fromARGB(255, 233, 191, 24)),
                     sortColumnIndex: sortColumnIndex,
                     sortAscending: isAscending,
                     columns: [
@@ -370,6 +370,10 @@ class _TouristTable1 extends State<TouristTable1> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 240, 244, 245),
+                    elevation: 5,
+                  ),
                   onPressed: () async {
                     if (selectedTouristIds.isNotEmpty) {
                       logDepDialog(
@@ -388,6 +392,10 @@ class _TouristTable1 extends State<TouristTable1> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(100, 30, 8, 8),
                 child: ElevatedButton(
+                  style: const ButtonStyle(
+                      elevation: WidgetStatePropertyAll(5),
+                      backgroundColor: WidgetStatePropertyAll(
+                          Color.fromARGB(255, 7, 80, 122))),
                   onPressed: () async {
                     if (tourists.isNotEmpty) {
                       await _printDataTable(
@@ -398,7 +406,10 @@ class _TouristTable1 extends State<TouristTable1> {
                       );
                     }
                   },
-                  child: const Text('طباعة الجدول'),
+                  child: const Text(
+                    'طباعة الجدول',
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
                 ),
               ),
             ],

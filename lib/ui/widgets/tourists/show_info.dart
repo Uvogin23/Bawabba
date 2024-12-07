@@ -87,6 +87,10 @@ void viewTourist(Tourist tourist, BuildContext context) {
                   "المسار السياحي",
                   tourist.circuit,
                 ),
+                _buildTouristInfoRow2(
+                  "مرجع المغادرة",
+                  tourist.depMsgReff,
+                ),
               ],
             ),
           ),
@@ -122,6 +126,28 @@ Widget _buildTouristInfoRow(
         _buildInfoColumn(label2, value2),
       ],
     ),
+  );
+}
+
+Widget _buildTouristInfoRow2(
+  String label1,
+  String? value1,
+) {
+  if (value1 != null) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildInfoColumn(label1, value1),
+        ],
+      ),
+    );
+  }
+  return const Text(
+    'السائح لا يزال متواجدا بإقليم الإختصاص ',
+    style:
+        TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.red),
   );
 }
 

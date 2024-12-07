@@ -1,4 +1,4 @@
-/*import 'dart:convert';
+import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
 import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
@@ -17,9 +17,9 @@ import 'package:provider/provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-Future<List<Tourist>> fetchCurrentTourists() async {
+Future<List<Tourist>> fetchExpectedTourists() async {
   final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/api/tourists/still_in_city'));
+      .get(Uri.parse('http://127.0.0.1:5000/api/tourists/supposed_to_leave'));
 
   if (response.statusCode == 200) {
     try {
@@ -38,14 +38,14 @@ Future<List<Tourist>> fetchCurrentTourists() async {
   }
 }
 
-class TouristTable1 extends StatefulWidget {
-  const TouristTable1({Key? key}) : super(key: key);
+class TouristTable2 extends StatefulWidget {
+  const TouristTable2({Key? key}) : super(key: key);
 
   @override
-  State<TouristTable1> createState() => _TouristTable1();
+  State<TouristTable2> createState() => _TouristTable2();
 }
 
-class _TouristTable1 extends State<TouristTable1> {
+class _TouristTable2 extends State<TouristTable2> {
   late Future<List<Tourist>> touristsFuture;
   late List<Tourist> tourists;
   bool isAscending = true;
@@ -88,31 +88,11 @@ class _TouristTable1 extends State<TouristTable1> {
     });
   }
 
-  Future<void> deleteTouristAPI(int id) async {
-    final url = Uri.parse('http://127.0.0.1:5000/api/tourists/Delete/$id');
-
-    final response = await http.delete(url);
-    if (response.statusCode == 200) {
-      setState(() {
-        tourists.removeWhere((tourist) => tourist.id == id);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('تم حذف السائح بنجاح')),
-        );
-        // Call the success callback
-        Navigator.pop(context);
-      });
-    }
-
-    if (response.statusCode != 200) {
-      throw Exception('خلل أثناء محاولة حذف السائح: ${response.body}');
-    }
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    touristsFuture = fetchCurrentTourists();
+    touristsFuture = fetchExpectedTourists();
   }
 
   void sortData(int columnIndex, bool ascending) {
@@ -148,12 +128,12 @@ class _TouristTable1 extends State<TouristTable1> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<AuthProvider>(context, listen: false).user;
+    //final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
       width: screenWidth * 0.775,
-      height: 600,
+      height: 400,
       decoration: BoxDecoration(
           color: const Color.fromARGB(255, 255, 255, 255),
           borderRadius: const BorderRadius.all(
@@ -184,7 +164,7 @@ class _TouristTable1 extends State<TouristTable1> {
                 child: Icon(
                   Icons.list,
                   size: 30,
-                  color: Color.fromARGB(255, 5, 5, 5),
+                  color: Color.fromARGB(255, 233, 191, 24),
                 ),
               ),
               SizedBox(
@@ -193,12 +173,33 @@ class _TouristTable1 extends State<TouristTable1> {
               Padding(
                 padding: EdgeInsets.only(top: 8),
                 child: Text(
-                  'السياح المتواجدون بإقليم الولاية ',
+                  'قائمة السياح المغادرين ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Color.fromARGB(255, 39, 39, 40),
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontFamily: 'Times New Roman',
                       fontSize: 16,
+                      letterSpacing:
+                          0 /*percentages not used in flutter. defaulting to zero*/,
+                      fontWeight: FontWeight.bold,
+                      height: 1),
+                ),
+              ),
+            ],
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 10, right: 70),
+                child: Text(
+                  'يغادرون بتاريخ اليوم أو تاريخ الأمس',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 79, 79, 82),
+                      fontFamily: 'Times New Roman',
+                      fontSize: 12,
                       letterSpacing:
                           0 /*percentages not used in flutter. defaulting to zero*/,
                       fontWeight: FontWeight.bold,
@@ -225,60 +226,90 @@ class _TouristTable1 extends State<TouristTable1> {
                     child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: DataTable(
-                    columnSpacing: 35.0,
+                    columnSpacing: 40.0,
                     headingRowHeight: 40.0,
                     headingRowColor: WidgetStateProperty.resolveWith(
-                        (states) => const Color.fromARGB(255, 212, 218, 141)),
+                        (states) => Color.fromARGB(255, 7, 80, 122)),
                     sortColumnIndex: sortColumnIndex,
                     sortAscending: isAscending,
                     columns: [
-                      DataColumn(
-                        label: const Text(""),
+                      const DataColumn(
+                        label: Text(
+                          "",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                       DataColumn(
-                        label: const Text("الرقم"),
+                        label: const Text(
+                          "الرقم",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       DataColumn(
-                        label: const Text("الإسم"),
+                        label: const Text(
+                          "الإسم",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       DataColumn(
-                        label: const Text("اللقب"),
+                        label: const Text(
+                          "اللقب",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       DataColumn(
-                        label: const Text(" الجنسية"),
+                        label: const Text(
+                          " الجنسية",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       const DataColumn(
-                        label: Text("تاريخ الوصول"),
+                        label: Text(
+                          "تاريخ الوصول",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                       const DataColumn(
-                        label: Text("يغادر يوم"),
+                        label: Text(
+                          "يغادر يوم",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                       DataColumn(
-                        label: const Text("المرجع"),
+                        label: const Text(
+                          "المرجع",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       DataColumn(
-                        label: const Text("الوكالة السياحية"),
+                        label: const Text(
+                          "الوكالة السياحية",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       const DataColumn(
-                        label: Text(""),
+                        label: Text(
+                          "",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                     rows: tourists.map((tourist) {
@@ -292,7 +323,7 @@ class _TouristTable1 extends State<TouristTable1> {
                                     ? Icons.check_box
                                     : Icons.check_box_outline_blank,
                                 color: selectedTouristIds.contains(tourist.id)
-                                    ? const Color.fromARGB(255, 212, 218, 141)
+                                    ? const Color.fromARGB(255, 144, 194, 230)
                                     : Colors.grey,
                               ),
                               onPressed: () {
@@ -337,22 +368,6 @@ class _TouristTable1 extends State<TouristTable1> {
                                   onPressed: () => showUpdateTouristDialog(
                                       context, tourist.id),
                                 ),
-                                user?.role == 'operator'
-                                    ? IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content: Text('عملية ممنوعة')),
-                                          );
-                                        })
-                                    : IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () {
-                                          showDeleteTouristDialog(
-                                              context, tourist.id);
-                                        }),
                               ],
                             ),
                           ),
@@ -370,6 +385,10 @@ class _TouristTable1 extends State<TouristTable1> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 240, 244, 245),
+                    elevation: 5,
+                  ),
                   onPressed: () async {
                     if (selectedTouristIds.isNotEmpty) {
                       logDepDialog(
@@ -382,12 +401,18 @@ class _TouristTable1 extends State<TouristTable1> {
                       );
                     }
                   },
-                  child: const Text('مغادرة '),
+                  child: const Text(
+                    'مغادرة ',
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(100, 30, 8, 8),
                 child: ElevatedButton(
+                  style: const ButtonStyle(
+                      elevation: WidgetStatePropertyAll(5),
+                      backgroundColor: WidgetStatePropertyAll(
+                          Color.fromARGB(255, 7, 80, 122))),
                   onPressed: () async {
                     if (tourists.isNotEmpty) {
                       await _printDataTable(
@@ -398,7 +423,10 @@ class _TouristTable1 extends State<TouristTable1> {
                       );
                     }
                   },
-                  child: const Text('طباعة الجدول'),
+                  child: const Text(
+                    'طباعة الجدول',
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
                 ),
               ),
             ],
@@ -408,49 +436,6 @@ class _TouristTable1 extends State<TouristTable1> {
           ),
         ],
       ),
-    );
-  }
-
-  void showDeleteTouristDialog(BuildContext context, int touristId) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(
-            "تأكيد الحذف",
-            textAlign: TextAlign.center,
-          ),
-          content: const Text(
-            "هل أنت متأكد من حذف السائح ؟ لا يمكن إلغاء الحذف بعد تأكيده",
-            textAlign: TextAlign.center,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("إلغاء"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                try {
-                  await deleteTouristAPI(touristId);
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('خلل أثناء محاولة حذف السائح: $e')),
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    const Color.fromARGB(255, 239, 214, 212), // Red for delete
-              ),
-              child: const Text(
-                "حذف",
-                style: TextStyle(),
-              ),
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -725,4 +710,4 @@ Future<void> addTouristLog(Map<String, dynamic> updatedData) async {
   if (response.statusCode != 201) {
     throw Exception('Failed to update tourist: ${response.body}');
   }
-}*/
+}

@@ -217,41 +217,6 @@ class _EmployeeTable extends State<EmployeeTable> {
                     const SizedBox(
                       height: 20,
                     ),
-                    employees.firstWhere((emp) => emp.id == id).username !=
-                            user?.username
-                        ? DropdownButtonFormField<Role>(
-                            isExpanded: false,
-                            isDense: true,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.folder_shared),
-                              fillColor: Color.fromARGB(255, 246, 249, 250),
-                              hintText: "الدور",
-                              filled: true,
-                            ),
-                            value: selectedRole,
-                            onChanged: (Role? newValue) {
-                              setState(() {
-                                selectedRole = newValue;
-                              });
-                            },
-                            items: Role.values.map((Role role) {
-                              return DropdownMenuItem<Role>(
-                                value: role,
-                                child: role.name == 'admin'
-                                    ? const Text('مشرف')
-                                    : const Text('مستخدم'),
-                              );
-                            }).toList(),
-                            validator: (value) {
-                              if (value == null) {
-                                return "يرجى إدخال الدور";
-                              }
-                              return null;
-                            },
-                          )
-                        : const SizedBox(
-                            height: 10,
-                          )
                   ],
                 )),
           ),
