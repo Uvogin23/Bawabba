@@ -61,9 +61,9 @@ class TouristsScreen extends StatelessWidget {
               width: screenWidth * 0.815,
               height: screenHeight,
               color: const Color.fromARGB(255, 239, 242, 243),
-              child: Stack(
+              child: const Stack(
                 children: <Widget>[
-                  const Positioned(
+                  Positioned(
                     top: 11,
                     right: 20,
                     child: Text(
@@ -78,7 +78,7 @@ class TouristsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Positioned(
+                  Positioned(
                     top: 36,
                     right: 30,
                     child: Text(
@@ -101,39 +101,25 @@ class TouristsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const AddTouristForm(),
-                          const SizedBox(height: 20),
-                          const TouristsActions(),
+                          AddTouristForm(),
+                          SizedBox(height: 20),
+                          TouristsActions(),
                           // Space between cards and charts
 
-                          const SizedBox(height: 20),
-                          const TouristTable2(),
+                          SizedBox(height: 20),
+                          TouristTable2(),
 
-                          const SizedBox(height: 20),
-                          const TouristTable1(),
+                          SizedBox(height: 20),
+                          TouristTable1(),
 
-                          const SizedBox(height: 20),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            width: 1180,
-                            height: 470,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 147, 86, 86),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ),
+                          SizedBox(height: 20),
+
                           // Space between cards and charts
                         ],
                       ),
                     ),
                   ),
-                  const Positioned(
+                  Positioned(
                     bottom: 5,
                     left: 15,
                     child: Text(
@@ -148,7 +134,7 @@ class TouristsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Positioned(
+                  Positioned(
                     bottom: 5,
                     right: 15,
                     child: Text(

@@ -30,7 +30,6 @@ Future<List<Tourist>> fetchExpectedTourists() async {
 
       return list;
     } catch (e) {
-      print('Error parsing tourists: $e');
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {

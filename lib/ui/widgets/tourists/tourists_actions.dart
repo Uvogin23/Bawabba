@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
 import 'package:bawabba/ui/widgets/tourists/by_month_table.dart';
+import 'package:bawabba/ui/widgets/tourists/by_nationality_table.dart';
 import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
+import 'package:bawabba/ui/widgets/tourists/tourist_history.dart';
+import 'package:bawabba/ui/widgets/tourists/tourist_history_all.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -67,37 +70,6 @@ class _TouristsActions extends State<TouristsActions> {
   void initState() {
     // TODO: implement initState
     super.initState();
-  }
-
-  void sortData(int columnIndex, bool ascending) {
-    setState(() {
-      isAscending = ascending;
-      sortColumnIndex = columnIndex;
-      if (columnIndex == 1) {
-        tourists.sort(
-            (a, b) => ascending ? a.id.compareTo(b.id) : b.id.compareTo(a.id));
-      } else if (columnIndex == 2) {
-        tourists.sort((a, b) => ascending
-            ? a.firstName.compareTo(b.firstName)
-            : b.firstName.compareTo(a.firstName));
-      } else if (columnIndex == 3) {
-        tourists.sort((a, b) => ascending
-            ? a.lastName.compareTo(b.lastName)
-            : b.lastName.compareTo(a.lastName));
-      } else if (columnIndex == 4) {
-        tourists.sort((a, b) => ascending
-            ? a.nationality.compareTo(b.nationality)
-            : b.nationality.compareTo(a.nationality));
-      } else if (columnIndex == 7) {
-        tourists.sort((a, b) => ascending
-            ? a.msgRef.compareTo(b.msgRef)
-            : b.msgRef.compareTo(a.msgRef));
-      } else if (columnIndex == 8) {
-        tourists.sort((a, b) => ascending
-            ? a.receivingAgency.compareTo(b.receivingAgency)
-            : b.receivingAgency.compareTo(a.receivingAgency));
-      }
-    });
   }
 
   Widget _buildTextField(TextEditingController controller, String label) {
@@ -172,9 +144,9 @@ class _TouristsActions extends State<TouristsActions> {
         // Map the response data to a list of Tourist objects
         List<Tourist> list =
             data.map<Tourist>((item) => Tourist.fromJson(item)).toList();
-
+        tourists = list;
         // Show a dialog based on the results
-        _showSearchResultsDialog(context, list);
+        _showSearchResultsDialog(context, tourists);
       } else {
         throw Exception('Failed to load tourists: ${response.statusCode}');
       }
@@ -209,50 +181,32 @@ class _TouristsActions extends State<TouristsActions> {
                         (states) => const Color.fromARGB(255, 144, 194, 230)),
                     sortColumnIndex: sortColumnIndex,
                     sortAscending: isAscending,
-                    columns: [
+                    columns: const [
                       DataColumn(
-                        label: const Text("الرقم"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
+                        label: Text("الرقم"),
                       ),
                       DataColumn(
-                        label: const Text("الإسم"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
+                        label: Text("الإسم"),
                       ),
                       DataColumn(
-                        label: const Text("اللقب"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
+                        label: Text("اللقب"),
                       ),
                       DataColumn(
-                        label: const Text(" الجنسية"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
+                        label: Text(" الجنسية"),
                       ),
-                      const DataColumn(
+                      DataColumn(
                         label: Text("تاريخ الوصول"),
                       ),
-                      const DataColumn(
+                      DataColumn(
                         label: Text("يغادر يوم"),
                       ),
                       DataColumn(
-                        label: const Text("المرجع"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
+                        label: Text("المرجع"),
                       ),
                       DataColumn(
-                        label: const Text("الوكالة السياحية"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
+                        label: Text("الوكالة السياحية"),
                       ),
-                      const DataColumn(
+                      DataColumn(
                         label: Text(""),
                       ),
                     ],
@@ -278,11 +232,6 @@ class _TouristsActions extends State<TouristsActions> {
                                       const Icon(Icons.remove_red_eye_outlined),
                                   onPressed: () =>
                                       viewTourist(tourist, context),
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  onPressed: () => showUpdateTouristDialog(
-                                      context, tourist.id),
                                 ),
                               ],
                             ),
@@ -350,7 +299,7 @@ class _TouristsActions extends State<TouristsActions> {
         children: [
           Expanded(
             child: Container(
-              margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
+              margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
               width: screenWidth * 0.385,
               height: 450,
               decoration: BoxDecoration(
@@ -486,7 +435,7 @@ class _TouristsActions extends State<TouristsActions> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -499,9 +448,9 @@ class _TouristsActions extends State<TouristsActions> {
                               const Color.fromARGB(255, 240, 244, 245),
                           elevation: 5,
                         ),
-                        child: Text("مسح الإستمارة"),
+                        child: const Text("مسح الإستمارة"),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       ElevatedButton(
@@ -583,7 +532,7 @@ class _TouristsActions extends State<TouristsActions> {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
+              margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
               width: screenWidth * 0.385,
               height: 450,
               child: Column(
@@ -591,7 +540,7 @@ class _TouristsActions extends State<TouristsActions> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: EdgeInsets.fromLTRB(15, 2, 5, 2),
+                    margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
                     width: screenWidth * 0.385,
                     height: 130,
                     decoration: BoxDecoration(
@@ -684,7 +633,7 @@ class _TouristsActions extends State<TouristsActions> {
                                         255, 240, 244, 245),
                                     elevation: 5,
                                   ),
-                                  child: Text("مسح "),
+                                  child: const Text("مسح "),
                                 ), // Space between input and button
                                 const SizedBox(width: 15),
                                 ElevatedButton(
@@ -715,7 +664,7 @@ class _TouristsActions extends State<TouristsActions> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(15, 2, 5, 2),
+                    margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
                     width: screenWidth * 0.385,
                     height: 130,
                     decoration: BoxDecoration(
@@ -733,34 +682,59 @@ class _TouristsActions extends State<TouristsActions> {
                             spreadRadius: 2.0, // Expands the shadow
                           ),
                         ]),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Icon(Icons.search,
-                                size: 30,
-                                color: Color.fromARGB(255, 4, 45, 110)),
-                            Text(
-                              " بحث بإستعمال معايير محددة  ",
-                              textAlign: TextAlign.right,
+                        const Padding(
+                          padding: EdgeInsets.only(top: 20, right: 30),
+                          child: Row(
+                            children: [
+                              Icon(Icons.flag_circle,
+                                  size: 30,
+                                  color: Color.fromARGB(255, 225, 180, 32)),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "عدد السياح الأجانب المسجلين بالتطبيقة حسب الجنسية",
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                    fontFamily: 'Times New Roman',
+                                    fontSize: 18,
+                                    letterSpacing:
+                                        0 /*percentages not used in flutter. defaulting to zero*/,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        Center(
+                          child: ElevatedButton(
+                            style: const ButtonStyle(
+                                elevation: WidgetStatePropertyAll(5),
+                                backgroundColor: WidgetStatePropertyAll(
+                                    Color.fromARGB(255, 7, 80, 122))),
+                            onPressed: () {
+                              showTouristsByNationality(context);
+                            },
+                            child: const Text(
+                              'إظهار النتائج',
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 3, 14, 52),
-                                  fontFamily: 'Times New Roman',
-                                  fontSize: 20,
-                                  letterSpacing:
-                                      0 /*percentages not used in flutter. defaulting to zero*/,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1),
+                                  color: Color.fromARGB(255, 255, 255, 255)),
                             ),
-                          ],
+                          ),
                         )
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(15, 2, 5, 2),
+                    margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
                     width: screenWidth * 0.385,
                     height: 130,
                     decoration: BoxDecoration(
@@ -778,6 +752,87 @@ class _TouristsActions extends State<TouristsActions> {
                             spreadRadius: 2.0, // Expands the shadow
                           ),
                         ]),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 20, right: 30),
+                          child: Row(
+                            children: [
+                              Icon(Icons.history,
+                                  size: 30,
+                                  color: Color.fromARGB(255, 225, 180, 32)),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "قائمة السياح الأجانب المسجلين بالتطبيقة",
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                    fontFamily: 'Times New Roman',
+                                    fontSize: 18,
+                                    letterSpacing:
+                                        0 /*percentages not used in flutter. defaulting to zero*/,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              style: const ButtonStyle(
+                                  elevation: WidgetStatePropertyAll(5),
+                                  backgroundColor: WidgetStatePropertyAll(
+                                      Color.fromARGB(255, 166, 149, 24))),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return HistoryTable2();
+                                  },
+                                );
+                              },
+                              child: const Text(
+                                '  القائمة الكاملة  ',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255)),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 50,
+                            ),
+                            ElevatedButton(
+                              style: const ButtonStyle(
+                                  elevation: WidgetStatePropertyAll(5),
+                                  backgroundColor: WidgetStatePropertyAll(
+                                      Color.fromARGB(255, 7, 80, 122))),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return HistoryTable();
+                                  },
+                                );
+                              },
+                              child: const Text(
+                                'السياح المغادرين',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
