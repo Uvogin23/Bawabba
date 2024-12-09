@@ -1,3 +1,4 @@
+import 'package:bawabba/core/services/config.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -110,8 +111,8 @@ Widget futurePiechart() {
 }
 
 Future<CustomPieChartData> fetchPieChartStatistics() async {
-  final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/api/stats/overall_counts'));
+  final response =
+      await http.get(Uri.parse('${Config.baseUrl}/api/stats/overall_counts'));
 
   if (response.statusCode == 200) {
     try {

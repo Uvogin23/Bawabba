@@ -1,4 +1,5 @@
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:flutter/material.dart';
 import 'package:bawabba/core/models/diplomat.dart';
 import 'package:bawabba/core/models/citizen.dart';
@@ -10,7 +11,7 @@ import 'package:provider/single_child_widget.dart';
 
 Future<List<Diplomat>> fetchDiplomats() async {
   final response =
-      await http.get(Uri.parse('http://127.0.0.1:5000/api/diplomats/last-two'));
+      await http.get(Uri.parse('${Config.baseUrl}/api/diplomats/last-two'));
 
   if (response.statusCode == 200) {
     try {
@@ -31,7 +32,7 @@ Future<List<Diplomat>> fetchDiplomats() async {
 
 Future<List<Tourist>> fetchTourists() async {
   final response =
-      await http.get(Uri.parse('http://127.0.0.1:5000/api/tourists/last-two'));
+      await http.get(Uri.parse('${Config.baseUrl}/api/tourists/last-two'));
 
   if (response.statusCode == 200) {
     try {
@@ -51,8 +52,8 @@ Future<List<Tourist>> fetchTourists() async {
 }
 
 Future<List<Citizen>> fetchCitizens() async {
-  final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/api/stats/last-two/sortie'));
+  final response =
+      await http.get(Uri.parse('${Config.baseUrl}/api/stats/last-two/sortie'));
 
   if (response.statusCode == 200) {
     try {
@@ -72,8 +73,8 @@ Future<List<Citizen>> fetchCitizens() async {
 }
 
 Future<List<NonResident>> fetchNonResidents() async {
-  final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/api/stats/last-two/entre'));
+  final response =
+      await http.get(Uri.parse('${Config.baseUrl}/api/stats/last-two/entre'));
 
   if (response.statusCode == 200) {
     try {

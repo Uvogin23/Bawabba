@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +20,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 Future<List<Tourist>> fetchHistoryTourists() async {
   final response =
-      await http.get(Uri.parse('http://127.0.0.1:5000/api/tourists/history'));
+      await http.get(Uri.parse('${Config.baseUrl}/api/tourists/history'));
 
   if (response.statusCode == 200) {
     try {

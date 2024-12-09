@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bawabba/core/services/config.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
@@ -10,8 +11,7 @@ class BarChartScreen extends StatelessWidget {
 
   // Fetch months data
   Future<Map<String, int>> fetchChartData() async {
-    final url =
-        Uri.parse('http://127.0.0.1:5000/api/stats/bardata'); // Update URL
+    final url = Uri.parse('${Config.baseUrl}/api/stats/bardata'); // Update URL
 
     final response = await http.get(url);
 

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bawabba/core/services/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -241,8 +242,8 @@ class _AddTouristForm extends State<AddTouristForm> {
       _isLoading = true;
     });
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-    final url = Uri.parse(
-        'http://127.0.0.1:5000/api/tourists/Add'); // Your API endpoint
+    final url =
+        Uri.parse('${Config.baseUrl}/api/tourists/Add'); // Your API endpoint
     try {
       final response = await http.post(
         url,

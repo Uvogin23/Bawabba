@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
 import 'package:flutter/services.dart';
@@ -18,8 +19,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 Future<List<Tourist>> fetchCurrentTourists() async {
-  final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/api/tourists/still_in_city'));
+  final response =
+      await http.get(Uri.parse('${Config.baseUrl}/api/tourists/still_in_city'));
 
   if (response.statusCode == 200) {
     try {
@@ -89,7 +90,7 @@ class _TouristTable1 extends State<TouristTable1> {
   }
 
   Future<void> deleteTouristAPI(int id) async {
-    final url = Uri.parse('http://127.0.0.1:5000/api/tourists/Delete/$id');
+    final url = Uri.parse('${Config.baseUrl}/api/tourists/Delete/$id');
 
     final response = await http.delete(url);
     if (response.statusCode == 200) {
@@ -726,7 +727,7 @@ Future<pw.Font> _loadFont(String path) async {
 }
 
 Future<void> addTouristLog(Map<String, dynamic> updatedData) async {
-  final url = Uri.parse('http://127.0.0.1:5000/api/tourists/add_departure_log');
+  final url = Uri.parse('${Config.baseUrl}/api/tourists/add_departure_log');
   final response = await http.post(
     url,
     headers: {'Content-Type': 'application/json'},

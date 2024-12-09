@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/employee.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -27,8 +28,8 @@ Future<pw.Font> _loadFont(String path) async {
 enum Grade { ap, bp, bcp, ip, ipp, op, opp, cp, cpp, cdp, cnp, cnpp }
 
 Future<List<Employee>> fetchemployees() async {
-  final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/get_all_users_employees'));
+  final response =
+      await http.get(Uri.parse('${Config.baseUrl}/get_all_users_employees'));
 
   if (response.statusCode == 200) {
     try {
@@ -267,7 +268,7 @@ class _EmployeeTable extends State<EmployeeTable> {
   }
 
   void _updateEmployee(int id) async {
-    final String apiUrl = 'http://127.0.0.1:5000/update_employee/$id';
+    final String apiUrl = '${Config.baseUrl}/update_employee/$id';
 
     // Create a map for the fields to update
     Map<String, dynamic> data = {};
@@ -354,7 +355,7 @@ class _EmployeeTable extends State<EmployeeTable> {
   }
 
   void _deleteEmployee(int id) async {
-    final String apiUrl = 'http://127.0.0.1:5000/delete_user/$id';
+    final String apiUrl = '${Config.baseUrl}/delete_user/$id';
 
     try {
       final response = await http.delete(

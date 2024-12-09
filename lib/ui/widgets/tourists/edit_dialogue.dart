@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/screens/tourists_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -176,7 +177,7 @@ void showUpdateTouristDialog(
 }
 
 Future<void> updateTouristAPI(int id, Map<String, dynamic> updatedData) async {
-  final url = Uri.parse('http://127.0.0.1:5000/api/tourists/Update/$id');
+  final url = Uri.parse('${Config.baseUrl}/api/tourists/Update/$id');
   final response = await http.put(
     url,
     headers: {'Content-Type': 'application/json'},

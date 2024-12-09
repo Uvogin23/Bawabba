@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
 import 'package:bawabba/ui/widgets/tourists/by_month_table.dart';
 import 'package:bawabba/ui/widgets/tourists/by_nationality_table.dart';
@@ -129,7 +130,7 @@ class _TouristsActions extends State<TouristsActions> {
 
   Future<void> fetchFilteredTourists(
       BuildContext context, Map<String, dynamic> updatedData) async {
-    final url = Uri.parse('http://127.0.0.1:5000/api/tourists/filter');
+    final url = Uri.parse('${Config.baseUrl}/api/tourists/filter');
 
     try {
       final response = await http.post(

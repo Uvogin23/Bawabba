@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bawabba/core/services/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,7 +8,7 @@ import 'package:bawabba/core/services/card_stats.dart';
 
 Future<CardStatistics> fetchStatistics() async {
   final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/api/stats/diplomat_accompaniment'));
+      .get(Uri.parse('${Config.baseUrl}/api/stats/diplomat_accompaniment'));
 
   if (response.statusCode == 200) {
     return CardStatistics.fromJson(json.decode(response.body));

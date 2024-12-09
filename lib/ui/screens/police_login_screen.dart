@@ -1,5 +1,6 @@
 import 'package:bawabba/core/models/user.dart';
 import 'package:bawabba/core/services/auth_provider.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
       _errorMessage = null;
     });
 
-    final url = Uri.parse('http://127.0.0.1:5000/login'); // Your API endpoint
+    final url = Uri.parse('${Config.baseUrl}/login'); // Your API endpoint
     try {
       final response = await http.post(
         url,

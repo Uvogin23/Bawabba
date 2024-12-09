@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:bawabba/core/services/config.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _errorMessage = null;
     });
 
-    final url = Uri.parse('http://127.0.0.1:5000/login'); // Your API endpoint
+    final url = Uri.parse('${Config.baseUrl}/login'); // Your API endpoint
     try {
       print('object');
       final response = await http.post(

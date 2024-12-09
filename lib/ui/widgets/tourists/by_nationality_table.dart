@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/tourists_table1.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +19,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 void showTouristsByNationality(BuildContext context) {
   Future<List<Map<String, dynamic>>> fetchTouristsByNationality() async {
-    final url = Uri.parse('http://127.0.0.1:5000/api/tourists/counts');
+    final url = Uri.parse('${Config.baseUrl}/api/tourists/counts');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

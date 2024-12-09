@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bawabba/core/services/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -59,7 +60,7 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
     });
 
     final url =
-        Uri.parse('http://127.0.0.1:5000/add_employee'); // Your API endpoint
+        Uri.parse('${Config.baseUrl}/add_employee'); // Your API endpoint
     try {
       print(selectedRole?.name);
       final response = await http.post(

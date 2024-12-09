@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bawabba/core/services/config.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +9,7 @@ class LineChartScreen2 extends StatelessWidget {
 
   // Fetch months data
   Future<List<String>> fetchMonthsData() async {
-    final url = Uri.parse('http://127.0.0.1:5000/api/stats/12months');
+    final url = Uri.parse('${Config.baseUrl}/api/stats/12months');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
@@ -21,7 +22,7 @@ class LineChartScreen2 extends StatelessWidget {
   // Fetch Algerians data
   Future<List<int>> fetchAlgeriansData() async {
     final url =
-        Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-algerian');
+        Uri.parse('${Config.baseUrl}/api/stats/last-12-months-algerian');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
@@ -34,7 +35,7 @@ class LineChartScreen2 extends StatelessWidget {
   // Fetch Tourists data
   Future<List<int>> fetchTouristsData() async {
     final url =
-        Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-tourists');
+        Uri.parse('${Config.baseUrl}/api/stats/last-12-months-tourists');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
@@ -47,7 +48,7 @@ class LineChartScreen2 extends StatelessWidget {
   // Fetch Diplomats data
   Future<List<int>> fetchDiplomatsData() async {
     final url =
-        Uri.parse('http://127.0.0.1:5000/api/stats/last-12-months-diplomats');
+        Uri.parse('${Config.baseUrl}/api/stats/last-12-months-diplomats');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);

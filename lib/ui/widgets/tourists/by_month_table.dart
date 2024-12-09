@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/tourists_table1.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -18,8 +19,8 @@ import 'package:pdf/widgets.dart' as pw;
 
 void showTouristsByMonth(BuildContext context, int year) {
   Future<Map<String, dynamic>> fetchTouristsData(int year) async {
-    final url = Uri.parse(
-        'http://127.0.0.1:5000/api/tourists/monthly_counts?year=$year');
+    final url =
+        Uri.parse('${Config.baseUrl}/api/tourists/monthly_counts?year=$year');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

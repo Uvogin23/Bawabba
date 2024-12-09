@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +20,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 Future<List<Tourist>> fetchExpectedTourists() async {
   final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/api/tourists/supposed_to_leave'));
+      .get(Uri.parse('${Config.baseUrl}/api/tourists/supposed_to_leave'));
 
   if (response.statusCode == 200) {
     try {
@@ -699,7 +700,7 @@ Future<pw.Font> _loadFont(String path) async {
 }
 
 Future<void> addTouristLog(Map<String, dynamic> updatedData) async {
-  final url = Uri.parse('http://127.0.0.1:5000/api/tourists/add_departure_log');
+  final url = Uri.parse('${Config.baseUrl}/api/tourists/add_departure_log');
   final response = await http.post(
     url,
     headers: {'Content-Type': 'application/json'},
