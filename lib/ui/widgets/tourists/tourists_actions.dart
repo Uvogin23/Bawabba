@@ -71,6 +71,7 @@ class _TouristsActions extends State<TouristsActions> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    tourists = [];
   }
 
   Widget _buildTextField(TextEditingController controller, String label) {

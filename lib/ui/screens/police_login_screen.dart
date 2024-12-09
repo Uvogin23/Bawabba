@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 225, 227, 228),
+      backgroundColor: const Color.fromARGB(255, 225, 227, 228),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
+                padding: const EdgeInsets.fromLTRB(110, 10, 110, 10),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -100,158 +100,26 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                               bottomRight: Radius.circular(20),
                               topRight: Radius.circular(20)),
                           color: Color.fromARGB(255, 255, 255, 255)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.account_circle_rounded,
-                            size: 100,
-                            color: Color.fromARGB(255, 13, 63, 89),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Text(
-                            'تسجيــــــل الدخــــول',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 13, 63, 89),
-                                fontFamily: 'Times New Roman',
-                                fontSize: 24,
-                                letterSpacing:
-                                    0 /*percentages not used in flutter. defaulting to zero*/,
-                                fontWeight: FontWeight.bold,
-                                height: 1),
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    maxLines: 1,
-                                    maxLength: 12,
-                                    controller: _usernameController,
-                                    decoration: const InputDecoration(
-                                        hintText: 'إسم المستخدم',
-                                        prefixIcon: Icon(Icons.person),
-                                        fillColor:
-                                            Color.fromARGB(255, 231, 231, 231),
-                                        filled: true),
-                                    // The validator receives the text that the user has entered.
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'يرجى إدخال إسم المستخدم';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  TextFormField(
-                                    maxLines: 1,
-                                    maxLength: 20,
-                                    controller: _passwordController,
-                                    obscureText: true,
-                                    decoration: const InputDecoration(
-                                        hintText: ' كلمة المرور',
-                                        prefixIcon: Icon(Icons.lock),
-                                        fillColor:
-                                            Color.fromARGB(255, 220, 242, 254),
-                                        filled: true),
-                                    // The validator receives the text that the user has entered.
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'يرجى إدخال كلمة المرور';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
-                              )),
-                          const SizedBox(height: 20),
-                          if (_errorMessage != null) ...[
-                            Text(
-                              _errorMessage!,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                            const SizedBox(height: 20),
-                          ],
-                          ElevatedButton(
-                            onPressed: () {
-                              // Validate returns true if the form is valid, or false otherwise.
-                              if (_formKey.currentState!.validate()) {
-                                _isLoading ? null : _login();
-                              }
-                            },
-                            child: _isLoading
-                                ? const CircularProgressIndicator(
-                                    color: Colors.white)
-                                : const Text('تسجيل الدخول'),
-                          ),
-                        ],
-                      ),
-                    )),
-                    Expanded(
-                        flex: 1,
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(120, 50, 0, 50),
-                          padding: EdgeInsets.all(16),
+                      child: Container(
+                          height: 600,
                           decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 2,
-                                  color: Color.fromARGB(255, 158, 159, 162),
-                                )
-                              ],
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(20),
-                                  topLeft: Radius.circular(20)),
-                              color: Color.fromARGB(255, 13, 63, 89)),
+                              color: Color.fromARGB(255, 255, 255, 255)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 10),
-                                    width: 60,
-                                    height: 80.0,
-                                    decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/logodgsn.png'),
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 10),
-                                    width: 90,
-                                    height: 95.0,
-                                    decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/algerieLogo.png'),
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              const Icon(
+                                Icons.account_circle_rounded,
+                                size: 100,
+                                color: Color.fromARGB(255, 13, 63, 89),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
                               const Text(
-                                ' الجمهورية الجزائرية الديمقراطية الشعبية\n وزارة الداخلية و الجماعات المحلية \n المديرية العامة للأمن الوطني ',
+                                'تسجيــــــل الدخــــول',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    color: Color.fromARGB(255, 13, 63, 89),
                                     fontFamily: 'Times New Roman',
                                     fontSize: 24,
                                     letterSpacing:
@@ -259,38 +127,229 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                     fontWeight: FontWeight.bold,
                                     height: 1),
                               ),
-                              SizedBox(
-                                height: 40,
+                              const SizedBox(
+                                height: 50,
                               ),
-                              Container(
-                                margin: const EdgeInsets.only(top: 5),
-                                width: 100,
-                                height: 100.0,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/images/logo.png'),
-                                    fit: BoxFit.fitWidth,
-                                  ),
+                              Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    children: [
+                                      TextFormField(
+                                        maxLines: 1,
+                                        maxLength: 12,
+                                        controller: _usernameController,
+                                        decoration: const InputDecoration(
+                                            hintText: 'إسم المستخدم',
+                                            prefixIcon: Icon(Icons.person),
+                                            fillColor: Color.fromARGB(
+                                                255, 231, 231, 231),
+                                            filled: true),
+                                        // The validator receives the text that the user has entered.
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'يرجى إدخال إسم المستخدم';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      TextFormField(
+                                        maxLines: 1,
+                                        maxLength: 20,
+                                        controller: _passwordController,
+                                        obscureText: true,
+                                        decoration: const InputDecoration(
+                                            hintText: ' كلمة المرور',
+                                            prefixIcon: Icon(Icons.lock),
+                                            fillColor: Color.fromARGB(
+                                                255, 220, 242, 254),
+                                            filled: true),
+                                        // The validator receives the text that the user has entered.
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'يرجى إدخال كلمة المرور';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ],
+                                  )),
+                              const SizedBox(height: 20),
+                              if (_errorMessage != null) ...[
+                                Text(
+                                  _errorMessage!,
+                                  style: const TextStyle(color: Colors.red),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              const Text(
-                                'تطبيقة متابعة الدخول و الخروج\nعبر حدود ولاية جانت',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(255, 255, 255, 1),
-                                    fontFamily: 'Times New Roman',
-                                    fontSize: 24,
-                                    letterSpacing:
-                                        0 /*percentages not used in flutter. defaulting to zero*/,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
+                                const SizedBox(height: 20),
+                              ],
+                              ElevatedButton(
+                                onPressed: () {
+                                  // Validate returns true if the form is valid, or false otherwise.
+                                  if (_formKey.currentState!.validate()) {
+                                    _isLoading ? null : _login();
+                                  }
+                                },
+                                child: _isLoading
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.white)
+                                    : const Text('تسجيل الدخول'),
                               ),
                             ],
-                          ),
-                        )),
+                          )),
+                    )),
+                    Expanded(
+                        flex: 1,
+                        child: Container(
+                            margin: const EdgeInsets.fromLTRB(120, 50, 0, 50),
+                            padding: const EdgeInsets.all(16),
+                            decoration: const BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 2,
+                                    color: Color.fromARGB(255, 158, 159, 162),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(20),
+                                    topLeft: Radius.circular(20)),
+                                color: Color.fromARGB(255, 13, 63, 89)),
+                            child: Container(
+                              height: 600,
+                              decoration: const BoxDecoration(
+                                  color: Color.fromARGB(255, 13, 63, 89)),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 60,
+                                          height: 80.0,
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/logodgsn.png'),
+                                              fit: BoxFit.fitWidth,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        Container(
+                                          width: 90,
+                                          height: 95.0,
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/algerieLogo.png'),
+                                              fit: BoxFit.fitWidth,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    const Text(
+                                      ' الجمـهـوريـــة الجزائـريـــة الديمقــراطيــة الشعــبـيـــة',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 24,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      ' وزارة الداخلية و الجمــــاعـــات المحلــية ',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 24,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      'المديـــرية العـــامة للأمــن الوطنـــي ',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 24,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    ),
+                                  ]),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 0),
+                                    width: 180,
+                                    height: 180.0,
+                                    decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/logo.png'),
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  const Text(
+                                    'تطبيقة متابعة الدخول و الخروج',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Times New Roman',
+                                        fontSize: 24,
+                                        letterSpacing:
+                                            0 /*percentages not used in flutter. defaulting to zero*/,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1),
+                                  ),
+                                  const Text(
+                                    'عبر حدود ولاية جانت',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Times New Roman',
+                                        fontSize: 24,
+                                        letterSpacing:
+                                            0 /*percentages not used in flutter. defaulting to zero*/,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  )
+                                ],
+                              ),
+                            ))),
                   ],
                 ),
               ),

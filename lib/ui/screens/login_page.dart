@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 225, 227, 228),
+      backgroundColor: const Color.fromARGB(255, 225, 227, 228),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(70, 50, 50, 40),
+                padding: const EdgeInsets.fromLTRB(70, 50, 50, 40),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         flex: 1,
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(120, 50, 0, 50),
-                          padding: EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(16),
                           decoration: const BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
                                   Container(
@@ -194,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontWeight: FontWeight.bold,
                                     height: 1),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 40,
                               ),
                               Container(
@@ -208,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 40,
                               ),
                               const Text(
@@ -236,114 +236,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-
-/*class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Container(
-        width: screenWidth * 1,
-        height: screenHeight * 1,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(1),
-            topRight: Radius.circular(1),
-            bottomLeft: Radius.circular(1),
-            bottomRight: Radius.circular(1),
-          ),
-          boxShadow: [
-            BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.25),
-                offset: Offset(0, 4),
-                blurRadius: 34)
-          ],
-          color: Color.fromRGBO(255, 255, 255, 1),
-        ),
-        child: Stack(children: <Widget>[
-          Positioned(
-              top: 150,
-              left: 200,
-              right: 200,
-              bottom: 150,
-              child: Container(
-                  width: screenWidth * 0.8,
-                  height: screenHeight * 0.8,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                    color: Color.fromRGBO(25, 83, 153, 1),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(255, 82, 83, 99), // Shadow color
-                        blurRadius: 10, // Blur radius
-                        offset: Offset(0, 0), // Offset in x and y directions
-                      ),
-                    ],
-                  ))),
-          Positioned(
-              top: 270,
-              left: 1000,
-              right: 300,
-              bottom: 270,
-              child: //Mask holder Template
-                  Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                        ),
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        boxShadow: [
-                          BoxShadow(
-                            color:
-                                Color.fromARGB(255, 82, 83, 99), // Shadow color
-                            blurRadius: 10, // Blur radius
-                            offset:
-                                Offset(0, 0), // Offset in x and y directions
-                          ),
-                        ],
-                      ),
-                      child: null)),
-          Positioned(
-            top: 330,
-            left: 490,
-            child: Container(
-              width: 200,
-              height: 200.0,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/change.png'),
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-            ),
-          ),
-          const Positioned(
-            top: 570,
-            left: 450,
-            child: Text(
-              'تطبيقة متابعة الدخول و الخروج\nعبر حدود ولاية جانت',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color.fromRGBO(255, 255, 255, 1),
-                fontFamily: 'Times New Roman',
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                height: 1,
-              ),
-            ),
-          ),
-        ]));
-  }
-}*/

@@ -93,6 +93,7 @@ class _TouristTable2 extends State<TouristTable2> {
     // TODO: implement initState
     super.initState();
     touristsFuture = fetchExpectedTourists();
+    tourists = [];
   }
 
   void sortData(int columnIndex, bool ascending) {

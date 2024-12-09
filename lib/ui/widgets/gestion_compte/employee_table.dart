@@ -94,8 +94,6 @@ class _EmployeeTable extends State<EmployeeTable> {
   }
 
   void editEmployee(int id) {
-    // Show the Edit Employee popup dialog
-    final user = Provider.of<AuthProvider>(context, listen: false).user;
     showDialog(
       context: context,
       builder: (BuildContext context) {

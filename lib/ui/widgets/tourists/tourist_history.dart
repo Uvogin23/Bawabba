@@ -56,6 +56,7 @@ class _HistoryTable extends State<HistoryTable> {
     // TODO: implement initState
     super.initState();
     touristsFuture = fetchHistoryTourists();
+    tourists = [];
   }
 
   void sortData(int columnIndex, bool ascending) {
