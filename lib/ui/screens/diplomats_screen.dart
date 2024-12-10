@@ -2,6 +2,7 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/diplomats/diplomats_table2.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -78,7 +79,7 @@ class DiplomatsScreen extends StatelessWidget {
                     top: 36,
                     right: 30,
                     child: Text(
-                      ' حركة الدبلوماسيين',
+                      ' تسيير دخول و خروج الدبلوماسيين',
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: Color.fromRGBO(0, 0, 0, 1),
@@ -89,7 +90,7 @@ class DiplomatsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  /*Positioned.fill(
+                  Positioned.fill(
                     right: 0,
                     top: 100,
                     bottom: 30,
@@ -97,88 +98,24 @@ class DiplomatsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 1200,
-                            height: 300,
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: const Stack(
-                              children: <Widget>[
-                                DashboardCardDiplomat(),
-                                DashboardCardTourist(),
-                                DashboardCardAlg(),
-                                DashboardCardAcc(),
-                                DashboardCardEntre(),
-                                DashboardCardSortie(),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                              height: 50), // Space between cards and charts
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            width: 1230,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 239, 242, 243),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ChartDisplay(),
-                                ChartDisplayPie(),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 50),
-                          Container(
-                            width: 1230,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 239, 242, 243),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                BarChartDisplay(),
-                                ChartDisplay2(),
-                              ],
-                            ),
-                          ),
+                          //AddTouristForm(),
+                          SizedBox(height: 20),
+                          // TouristsActions(),
+                          // Space between cards and charts
 
-                          const SizedBox(height: 50),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            width: 1150,
-                            height: 470,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                dataTablesDisplay(),
-                                dataTablesDisplay2(),
-                              ],
-                            ),
-                          ),
+                          SizedBox(height: 20),
+                          // TouristTable2(),
+
+                          SizedBox(height: 20),
+                          DiplomatTable1(),
+
+                          SizedBox(height: 20),
+
                           // Space between cards and charts
                         ],
                       ),
                     ),
-                  ),*/
+                  ),
                   Positioned(
                     bottom: 5,
                     left: 15,
