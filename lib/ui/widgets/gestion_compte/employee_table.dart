@@ -279,7 +279,7 @@ class _EmployeeTable extends State<EmployeeTable> {
     if (data.isEmpty) {
       throw Exception(' إملأ الخانات');
     }
-    print(jsonEncode(data));
+
     try {
       final response = await http.put(
         Uri.parse(apiUrl),

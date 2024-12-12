@@ -68,7 +68,7 @@ class _TouristTable1 extends State<TouristTable1> {
   final TextEditingController _touristicGuideController =
       TextEditingController();
   final TextEditingController _msgRefController = TextEditingController();
-  Map<int, bool> selectedItems = {};
+
   List<int> selectedTouristIds = [];
 
   void _clearForm() {

@@ -24,7 +24,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 Future<List<Diplomat>> fetchCurrentDiplomats() async {
   final response = await http
-      .get(Uri.parse('${Config.baseUrl}/api/diplomats/supposed_to_leave'));
+      .get(Uri.parse('${Config.baseUrl}/api/diplomats/still_in_city'));
 
   if (response.statusCode == 200) {
     try {
@@ -43,14 +43,14 @@ Future<List<Diplomat>> fetchCurrentDiplomats() async {
   }
 }
 
-class DiplomatTable2 extends StatefulWidget {
-  const DiplomatTable2({Key? key}) : super(key: key);
+class DiplomatTable1 extends StatefulWidget {
+  const DiplomatTable1({Key? key}) : super(key: key);
 
   @override
-  State<DiplomatTable2> createState() => _DiplomatTable2();
+  State<DiplomatTable1> createState() => _DiplomatTable1();
 }
 
-class _DiplomatTable2 extends State<DiplomatTable2> {
+class _DiplomatTable1 extends State<DiplomatTable1> {
   late Future<List<Diplomat>> diplomatsFuture;
   late List<Diplomat> diplomats;
   bool isAscending = true;
@@ -129,11 +129,12 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
       width: screenWidth * 0.775,
-      height: 400,
+      height: 600,
       decoration: BoxDecoration(
           color: const Color.fromARGB(255, 255, 255, 255),
           borderRadius: const BorderRadius.all(
@@ -173,33 +174,12 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
               Padding(
                 padding: EdgeInsets.only(top: 8),
                 child: Text(
-                  ' قائمة الدبلوماسيون المغادرين   ',
+                  'الدبلوماسيون المتواجدون بإقليم الولاية ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
                       fontFamily: 'Times New Roman',
                       fontSize: 16,
-                      letterSpacing:
-                          0 /*percentages not used in flutter. defaulting to zero*/,
-                      fontWeight: FontWeight.bold,
-                      height: 1),
-                ),
-              ),
-            ],
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 10, right: 70),
-                child: Text(
-                  'يغادرون بتاريخ اليوم أو تاريخ الأمس',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 79, 79, 82),
-                      fontFamily: 'Times New Roman',
-                      fontSize: 12,
                       letterSpacing:
                           0 /*percentages not used in flutter. defaulting to zero*/,
                       fontWeight: FontWeight.bold,
@@ -230,7 +210,7 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                     columnSpacing: 35.0,
                     headingRowHeight: 40.0,
                     headingRowColor: WidgetStateProperty.resolveWith(
-                        (states) => Color.fromARGB(255, 7, 80, 122)),
+                        (states) => const Color.fromARGB(255, 233, 191, 24)),
                     sortColumnIndex: sortColumnIndex,
                     sortAscending: isAscending,
                     columns: [
@@ -238,67 +218,43 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                         label: const Text(""),
                       ),
                       DataColumn(
-                        label: const Text(
-                          "الرقم",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        label: const Text("الرقم"),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       DataColumn(
-                        label: const Text(
-                          "الإسم",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        label: const Text("الإسم"),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       DataColumn(
-                        label: const Text(
-                          "اللقب",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        label: const Text("اللقب"),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       DataColumn(
-                        label: const Text(
-                          " الجنسية",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        label: const Text(" الجنسية"),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       const DataColumn(
-                        label: Text(
-                          "تاريخ الوصول",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        label: Text("تاريخ الوصول"),
                       ),
                       const DataColumn(
-                        label: Text(
-                          "يغادر يوم",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        label: Text("يغادر يوم"),
                       ),
                       DataColumn(
-                        label: const Text(
-                          "المرجع",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        label: const Text("المرجع"),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
                       ),
                       DataColumn(
-                        label: const Text(
-                          "الوكالة السياحية",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        label: const Text("الوكالة السياحية"),
                         onSort: (columnIndex, ascending) {
                           sortData(columnIndex, ascending);
                         },
@@ -377,6 +333,22 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                                   onPressed: () => showUpdateDiplomatDialog(
                                       context, diplomat.id),
                                 ),
+                                user?.role == 'operator'
+                                    ? IconButton(
+                                        icon: const Icon(Icons.delete),
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text('عملية ممنوعة')),
+                                          );
+                                        })
+                                    : IconButton(
+                                        icon: const Icon(Icons.delete),
+                                        onPressed: () {
+                                          showDeleteDiplomatDialog(
+                                              context, diplomat.id);
+                                        }),
                               ],
                             ),
                           ),

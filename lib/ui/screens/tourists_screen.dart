@@ -3,6 +3,7 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
+import 'package:bawabba/ui/widgets/side_menu2.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
 import 'package:bawabba/ui/widgets/tourists/tourists_actions.dart';
 import 'package:bawabba/ui/widgets/tourists/tourists_table1.dart';
@@ -34,7 +35,7 @@ class _TouristsHome extends State<TouristsHome> {
     return const Scaffold(
       body: Row(
         children: <Widget>[
-          SideMenu(),
+          SideMenu2(),
           TouristsScreen(),
           //LoginPage()
         ],

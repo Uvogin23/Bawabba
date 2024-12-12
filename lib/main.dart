@@ -1,4 +1,5 @@
 import 'package:bawabba/ui/screens/police_login_screen.dart';
+import 'package:bawabba/ui/widgets/side_menu2.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return const Scaffold(
       body: Row(
         children: <Widget>[
-          SideMenu(),
+          SideMenu2(),
           MainContent(),
         ],
       ),

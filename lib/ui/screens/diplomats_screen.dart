@@ -2,8 +2,10 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/diplomats/diplomats_table1.dart';
 import 'package:bawabba/ui/widgets/diplomats/diplomats_table2.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
+import 'package:bawabba/ui/widgets/side_menu2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +33,7 @@ class _DiplomatsHomeState extends State<DiplomatsHome> {
     return const Scaffold(
       body: Row(
         children: <Widget>[
-          SideMenu(),
+          SideMenu2(),
           DiplomatsScreen(),
           //LoginPage()
         ],
@@ -104,7 +106,7 @@ class DiplomatsScreen extends StatelessWidget {
                           // Space between cards and charts
 
                           SizedBox(height: 20),
-                          // TouristTable2(),
+                          DiplomatTable2(),
 
                           SizedBox(height: 20),
                           DiplomatTable1(),

@@ -6,6 +6,7 @@ import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
 import 'package:bawabba/ui/widgets/gestion_compte/add_employee_form.dart';
 import 'package:bawabba/ui/widgets/gestion_compte/employee_table.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
+import 'package:bawabba/ui/widgets/side_menu2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +27,7 @@ class _GestionComptesHome extends State<GestionComptesHome> {
     return Scaffold(
       body: Row(
         children: <Widget>[
-          const SideMenu(),
+          const SideMenu2(),
           GestionComptesScreen(),
           //LoginPage()
         ],
