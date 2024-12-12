@@ -2,6 +2,7 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/diplomats/add_diplomat_form.dart';
 import 'package:bawabba/ui/widgets/diplomats/diplomats_table1.dart';
 import 'package:bawabba/ui/widgets/diplomats/diplomats_table2.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
@@ -100,7 +101,7 @@ class DiplomatsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          //AddTouristForm(),
+                          AddDiplomatForm(),
                           SizedBox(height: 20),
                           // TouristsActions(),
                           // Space between cards and charts
