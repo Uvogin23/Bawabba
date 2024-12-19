@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:bawabba/core/services/config.dart';
+import 'package:bawabba/ui/widgets/diplomats/add_dip_tourist.dart';
+import 'package:bawabba/ui/widgets/diplomats/show_dip_tour.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -331,6 +333,15 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('تمت إضافة دبلوماسي بنجاح')),
         );
+        int id = await fetchLastDiplomatId();
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AddDipTourist(
+              id: id,
+            );
+          },
+        );
       } else {
         setState(() {});
 
@@ -347,6 +358,24 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  Future<int> fetchLastDiplomatId() async {
+    const String apiUrl = '${Config.baseUrl}/api/diplomats/last_id'; // API URL
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        return data['last_id'] as int; // Return the last ID
+      } else {
+        print(
+            'Failed to load last diplomat ID. Status: ${response.statusCode}');
+        return 99999999999999999;
+      }
+    } catch (e) {
+      print('Error fetching last diplomat ID: $e');
+      return 99999999999999999;
     }
   }
 

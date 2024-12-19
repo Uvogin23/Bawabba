@@ -101,7 +101,7 @@ class _ViewDipTour extends State<ViewDipTour> {
     return StatefulBuilder(builder: (BuildContext context, setState) {
       return AlertDialog(
           title: const Text(
-            "قائمة السياح الأجانب المرافقين للدبلوماسيين",
+            "قائمة السياح الأجانب المرافقين للدبلوماسيين ",
             textAlign: TextAlign.right,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
