@@ -132,311 +132,311 @@ class _TouristTable2 extends State<TouristTable2> {
     //final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      width: screenWidth * 0.775,
-      height: 400,
-      decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 255, 255),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(15),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: const Color.fromARGB(255, 144, 140, 140).withOpacity(0.5),
-              offset: const Offset(
-                  4, 4), // Horizontal and vertical shadow displacement
-              blurRadius: 8.0, // Soft edges of the shadow
-              spreadRadius: 2.0, // Expands the shadow
-            ),
-          ]),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: 30),
-                child: Icon(
-                  Icons.list,
-                  size: 30,
-                  color: Color.fromARGB(255, 233, 191, 24),
+    return FutureBuilder<List<Tourist>>(
+      future: touristsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text("Error: ${snapshot.error}"));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text("لا يوجد سياح بإقليم الولاية"));
+        } else {
+          tourists = snapshot.data!;
+          final containerHeight = tourists.length < 7 ? 600.0 : 800.0;
+          return Container(
+            width: screenWidth * 0.775,
+            height: containerHeight,
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(15),
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: Text(
-                  'قائمة السياح المغادرين ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontFamily: 'Times New Roman',
-                      fontSize: 16,
-                      letterSpacing:
-                          0 /*percentages not used in flutter. defaulting to zero*/,
-                      fontWeight: FontWeight.bold,
-                      height: 1),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromARGB(255, 144, 140, 140)
+                        .withOpacity(0.5),
+                    offset: const Offset(
+                        4, 4), // Horizontal and vertical shadow displacement
+                    blurRadius: 8.0, // Soft edges of the shadow
+                    spreadRadius: 2.0, // Expands the shadow
+                  ),
+                ]),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-            ],
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 10, right: 70),
-                child: Text(
-                  'يغادرون بتاريخ اليوم أو تاريخ الأمس',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 79, 79, 82),
-                      fontFamily: 'Times New Roman',
-                      fontSize: 12,
-                      letterSpacing:
-                          0 /*percentages not used in flutter. defaulting to zero*/,
-                      fontWeight: FontWeight.bold,
-                      height: 1),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 30),
+                      child: Icon(
+                        Icons.list,
+                        size: 30,
+                        color: Color.fromARGB(255, 233, 191, 24),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 8),
+                      child: Text(
+                        'قائمة السياح المغادرين ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontFamily: 'Times New Roman',
+                            fontSize: 16,
+                            letterSpacing:
+                                0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.bold,
+                            height: 1),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          FutureBuilder<List<Tourist>>(
-            future: touristsFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text("Error: ${snapshot.error}"));
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text("لا يوجد سياح بإقليم الولاية"));
-              } else {
-                tourists = snapshot.data!;
-                return Expanded(
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 10, right: 70),
+                      child: Text(
+                        'يغادرون بتاريخ اليوم أو تاريخ الأمس',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 79, 79, 82),
+                            fontFamily: 'Times New Roman',
+                            fontSize: 12,
+                            letterSpacing:
+                                0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.bold,
+                            height: 1),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Expanded(
                     child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: DataTable(
-                    columnSpacing: 40.0,
-                    headingRowHeight: 40.0,
-                    headingRowColor: WidgetStateProperty.resolveWith(
-                        (states) => Color.fromARGB(255, 7, 80, 122)),
-                    sortColumnIndex: sortColumnIndex,
-                    sortAscending: isAscending,
-                    columns: [
-                      const DataColumn(
-                        label: Text(
-                          "",
-                          style: TextStyle(color: Colors.white),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: 40.0,
+                      headingRowHeight: 40.0,
+                      headingRowColor: WidgetStateProperty.resolveWith(
+                          (states) => Color.fromARGB(255, 7, 80, 122)),
+                      sortColumnIndex: sortColumnIndex,
+                      sortAscending: isAscending,
+                      columns: [
+                        const DataColumn(
+                          label: Text(
+                            "",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: const Text(
-                          "الرقم",
-                          style: TextStyle(color: Colors.white),
+                        DataColumn(
+                          label: const Text(
+                            "الرقم",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
                         ),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text(
-                          "الإسم",
-                          style: TextStyle(color: Colors.white),
+                        DataColumn(
+                          label: const Text(
+                            "الإسم",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
                         ),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text(
-                          "اللقب",
-                          style: TextStyle(color: Colors.white),
+                        DataColumn(
+                          label: const Text(
+                            "اللقب",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
                         ),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text(
-                          " الجنسية",
-                          style: TextStyle(color: Colors.white),
+                        DataColumn(
+                          label: const Text(
+                            " الجنسية",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
                         ),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      const DataColumn(
-                        label: Text(
-                          "تاريخ الوصول",
-                          style: TextStyle(color: Colors.white),
+                        const DataColumn(
+                          label: Text(
+                            "تاريخ الوصول",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                      const DataColumn(
-                        label: Text(
-                          "يغادر يوم",
-                          style: TextStyle(color: Colors.white),
+                        const DataColumn(
+                          label: Text(
+                            "يغادر يوم",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                      DataColumn(
-                        label: const Text(
-                          "المرجع",
-                          style: TextStyle(color: Colors.white),
+                        DataColumn(
+                          label: const Text(
+                            "المرجع",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
                         ),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text(
-                          "الوكالة السياحية",
-                          style: TextStyle(color: Colors.white),
+                        const DataColumn(
+                          label: Text(
+                            "",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      const DataColumn(
-                        label: Text(
-                          "",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
-                    rows: tourists.map((tourist) {
-                      return DataRow(
-                        color: WidgetStateProperty.all(Colors.transparent),
-                        cells: [
-                          DataCell(
-                            IconButton(
-                              icon: Icon(
-                                selectedTouristIds.contains(tourist.id)
-                                    ? Icons.check_box
-                                    : Icons.check_box_outline_blank,
-                                color: selectedTouristIds.contains(tourist.id)
-                                    ? const Color.fromARGB(255, 144, 194, 230)
-                                    : Colors.grey,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (selectedTouristIds.contains(tourist.id)) {
-                                    // Deselect the tourist
-                                    selectedTouristIds.remove(tourist.id);
-                                  } else {
-                                    // Select the tourist
-                                    selectedTouristIds.add(tourist.id);
-                                  }
-                                });
-                                /*for (int i = 0;
+                      ],
+                      rows: tourists.map((tourist) {
+                        return DataRow(
+                          color: WidgetStateProperty.all(Colors.transparent),
+                          cells: [
+                            DataCell(
+                              IconButton(
+                                icon: Icon(
+                                  selectedTouristIds.contains(tourist.id)
+                                      ? Icons.check_box
+                                      : Icons.check_box_outline_blank,
+                                  color: selectedTouristIds.contains(tourist.id)
+                                      ? const Color.fromARGB(255, 144, 194, 230)
+                                      : Colors.grey,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    if (selectedTouristIds
+                                        .contains(tourist.id)) {
+                                      // Deselect the tourist
+                                      selectedTouristIds.remove(tourist.id);
+                                    } else {
+                                      // Select the tourist
+                                      selectedTouristIds.add(tourist.id);
+                                    }
+                                  });
+                                  /*for (int i = 0;
                                     i < selectedTouristIds.length;
                                     i++) {
                                   print(selectedTouristIds);
                                 }*/
-                              },
+                                },
+                              ),
                             ),
-                          ),
-                          DataCell(SelectableText(tourist.id.toString())),
-                          DataCell(SelectableText(tourist.firstName)),
-                          DataCell(SelectableText(tourist.lastName)),
-                          DataCell(SelectableText(tourist.nationality)),
-                          DataCell(
-                              SelectableText(formatDate(tourist.arrivalDate))),
-                          DataCell(SelectableText(
-                              formatDate(tourist.expectedDepartureDate))),
-                          DataCell(SelectableText(tourist.msgRef)),
-                          DataCell(SelectableText(tourist.receivingAgency)),
-                          DataCell(
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon:
-                                      const Icon(Icons.remove_red_eye_outlined),
-                                  onPressed: () =>
-                                      viewTourist(tourist, context),
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  onPressed: () => showUpdateTouristDialog(
-                                      context, tourist.id),
-                                ),
-                              ],
+                            DataCell(SelectableText(tourist.id.toString())),
+                            DataCell(SelectableText(tourist.firstName)),
+                            DataCell(SelectableText(tourist.lastName)),
+                            DataCell(SelectableText(tourist.nationality)),
+                            DataCell(SelectableText(
+                                formatDate(tourist.arrivalDate))),
+                            DataCell(SelectableText(
+                                formatDate(tourist.expectedDepartureDate))),
+                            DataCell(SelectableText(tourist.msgRef)),
+                            DataCell(
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(
+                                        Icons.remove_red_eye_outlined),
+                                    onPressed: () =>
+                                        viewTourist(tourist, context),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.edit),
+                                    onPressed: () => showUpdateTouristDialog(
+                                        context, tourist.id),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      );
-                    }).toList(),
+                          ],
+                        );
+                      }).toList(),
+                    ),
                   ),
-                ));
-              }
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 240, 244, 245),
-                    elevation: 5,
-                  ),
-                  onPressed: () async {
-                    if (selectedTouristIds.isNotEmpty) {
-                      logDepDialog(
-                        context,
-                      ); // Pass employees list here
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text("يرجى إختيار السياح المغادرين")),
-                      );
-                    }
-                  },
-                  child: const Text(
-                    'مغادرة ',
-                  ),
+                )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 240, 244, 245),
+                          elevation: 5,
+                        ),
+                        onPressed: () async {
+                          if (selectedTouristIds.isNotEmpty) {
+                            logDepDialog(
+                              context,
+                            ); // Pass employees list here
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text("يرجى إختيار السياح المغادرين")),
+                            );
+                          }
+                        },
+                        child: const Text(
+                          'مغادرة ',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 30, 8, 8),
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                            elevation: WidgetStatePropertyAll(5),
+                            backgroundColor: WidgetStatePropertyAll(
+                                Color.fromARGB(255, 7, 80, 122))),
+                        onPressed: () async {
+                          if (tourists.isNotEmpty) {
+                            await _printDataTable(
+                                tourists); // Pass employees list here
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("لا توجد بيانات للطباعة")),
+                            );
+                          }
+                        },
+                        child: const Text(
+                          'طباعة الجدول',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(100, 30, 8, 8),
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                      elevation: WidgetStatePropertyAll(5),
-                      backgroundColor: WidgetStatePropertyAll(
-                          Color.fromARGB(255, 7, 80, 122))),
-                  onPressed: () async {
-                    if (tourists.isNotEmpty) {
-                      await _printDataTable(
-                          tourists); // Pass employees list here
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("لا توجد بيانات للطباعة")),
-                      );
-                    }
-                  },
-                  child: const Text(
-                    'طباعة الجدول',
-                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                  ),
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
-      ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 

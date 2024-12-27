@@ -294,15 +294,6 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                           sortData(columnIndex, ascending);
                         },
                       ),
-                      DataColumn(
-                        label: const Text(
-                          "الوكالة السياحية",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
                       const DataColumn(
                         label: Text(""),
                       ),
@@ -350,7 +341,6 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                           DataCell(SelectableText(
                               formatDate(diplomat.expectedDepartureDate))),
                           DataCell(SelectableText(diplomat.msgRef)),
-                          DataCell(SelectableText(diplomat.receivingAgency)),
                           DataCell(
                             Row(
                               children: [

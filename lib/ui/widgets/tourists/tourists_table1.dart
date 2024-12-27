@@ -273,12 +273,6 @@ class _TouristTable1 extends State<TouristTable1> {
                           sortData(columnIndex, ascending);
                         },
                       ),
-                      DataColumn(
-                        label: const Text("الوكالة السياحية"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
                       const DataColumn(
                         label: Text(""),
                       ),
@@ -324,7 +318,6 @@ class _TouristTable1 extends State<TouristTable1> {
                           DataCell(SelectableText(
                               formatDate(tourist.expectedDepartureDate))),
                           DataCell(SelectableText(tourist.msgRef)),
-                          DataCell(SelectableText(tourist.receivingAgency)),
                           DataCell(
                             Row(
                               children: [
