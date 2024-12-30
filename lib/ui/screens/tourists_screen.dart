@@ -61,7 +61,7 @@ class TouristsScreen extends StatelessWidget {
             Container(
               width: screenWidth * 0.815,
               height: screenHeight,
-              color: const Color.fromARGB(255, 239, 242, 243),
+              color: const Color.fromARGB(255, 249, 248, 247),
               child: const Stack(
                 children: <Widget>[
                   Positioned(
@@ -93,6 +93,9 @@ class TouristsScreen extends StatelessWidget {
                         height: 1.5,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 05,
                   ),
                   Positioned.fill(
                     right: 0,

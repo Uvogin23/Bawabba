@@ -371,11 +371,11 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
       } else {
         print(
             'Failed to load last diplomat ID. Status: ${response.statusCode}');
-        return 99999999999999999;
+        return 1;
       }
     } catch (e) {
       print('Error fetching last diplomat ID: $e');
-      return 99999999999999999;
+      return 2;
     }
   }
 
@@ -387,19 +387,12 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
       width: screenWidth * 0.775,
       height: 700,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 251, 252, 252),
-          borderRadius: BorderRadius.all(
-            Radius.circular(15),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 144, 140, 140).withOpacity(0.5),
-              offset:
-                  Offset(4, 4), // Horizontal and vertical shadow displacement
-              blurRadius: 8.0, // Soft edges of the shadow
-              spreadRadius: 2.0, // Expands the shadow
-            ),
-          ]),
+        color: const Color.fromARGB(255, 255, 255, 255),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(5),
+        ),
+        border: Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

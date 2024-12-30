@@ -60,7 +60,7 @@ class DiplomatsScreen extends StatelessWidget {
             Container(
               width: screenWidth * 0.815,
               height: screenHeight,
-              color: const Color.fromARGB(255, 239, 242, 243),
+              color: const Color.fromARGB(255, 249, 248, 247),
               child: const Stack(
                 children: <Widget>[
                   Positioned(
@@ -102,17 +102,17 @@ class DiplomatsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           AddDiplomatForm(),
-                          SizedBox(height: 20),
+                          SizedBox(height: 10),
                           // TouristsActions(),
                           // Space between cards and charts
 
-                          SizedBox(height: 20),
+                          SizedBox(height: 10),
                           DiplomatTable2(),
 
                           SizedBox(height: 20),
                           DiplomatTable1(),
 
-                          SizedBox(height: 20),
+                          SizedBox(height: 10),
 
                           // Space between cards and charts
                         ],

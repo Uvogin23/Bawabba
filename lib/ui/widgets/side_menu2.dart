@@ -27,7 +27,13 @@ class SideMenu2 extends StatelessWidget {
         width: screenWidth * 0.185,
         height: screenHeight * 1,
         decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(1),
+          ),
           color: Color.fromRGBO(255, 255, 255, 1),
+          border: Border(
+            left: BorderSide(color: Color.fromARGB(255, 76, 77, 78), width: 1),
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(5),

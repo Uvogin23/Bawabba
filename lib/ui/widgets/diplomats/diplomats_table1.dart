@@ -132,282 +132,294 @@ class _DiplomatTable1 extends State<DiplomatTable1> {
     final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      width: screenWidth * 0.775,
-      height: 600,
-      decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 255, 255),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(15),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: const Color.fromARGB(255, 144, 140, 140).withOpacity(0.5),
-              offset: const Offset(
-                  4, 4), // Horizontal and vertical shadow displacement
-              blurRadius: 8.0, // Soft edges of the shadow
-              spreadRadius: 2.0, // Expands the shadow
+    return FutureBuilder<List<Diplomat>>(
+      future: diplomatsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text("Error: ${snapshot.error}"));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text("لا يوجد دبلوماسيون بإقليم الولاية"));
+        } else {
+          diplomats = snapshot.data!;
+          final containerHeight = diplomats.length < 4 ? 500.0 : 800.0;
+          return Container(
+            width: screenWidth * 0.775,
+            height: containerHeight,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(5),
+              ),
+              border:
+                  Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
             ),
-          ]),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: 30),
-                child: Icon(
-                  Icons.list,
-                  size: 30,
-                  color: Color.fromARGB(255, 233, 191, 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: Text(
-                  'الدبلوماسيون المتواجدون بإقليم الولاية ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontFamily: 'Times New Roman',
-                      fontSize: 16,
-                      letterSpacing:
-                          0 /*percentages not used in flutter. defaulting to zero*/,
-                      fontWeight: FontWeight.bold,
-                      height: 1),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 30),
+                      child: Icon(
+                        Icons.list,
+                        size: 30,
+                        color: Color.fromARGB(255, 233, 191, 24),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 8),
+                      child: Text(
+                        'الدبلوماسيون المتواجدون بإقليم الولاية ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontFamily: 'Times New Roman',
+                            fontSize: 16,
+                            letterSpacing:
+                                0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.bold,
+                            height: 1),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          FutureBuilder<List<Diplomat>>(
-            future: diplomatsFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text("Error: ${snapshot.error}"));
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(
-                    child: Text("لا يوجد دبلوماسيون بإقليم الولاية"));
-              } else {
-                diplomats = snapshot.data!;
-                return Expanded(
+                const SizedBox(
+                  height: 30,
+                ),
+                Expanded(
                     child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: DataTable(
-                    columnSpacing: 35.0,
-                    headingRowHeight: 40.0,
-                    headingRowColor: WidgetStateProperty.resolveWith(
-                        (states) => const Color.fromARGB(255, 233, 191, 24)),
-                    sortColumnIndex: sortColumnIndex,
-                    sortAscending: isAscending,
-                    columns: [
-                      DataColumn(
-                        label: const Text(""),
-                      ),
-                      DataColumn(
-                        label: const Text("الرقم"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text("الإسم"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text("اللقب"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text(" الجنسية"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      const DataColumn(
-                        label: Text("تاريخ الوصول"),
-                      ),
-                      const DataColumn(
-                        label: Text("يغادر يوم"),
-                      ),
-                      DataColumn(
-                        label: const Text("المرجع"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      const DataColumn(
-                        label: Text(""),
-                      ),
-                    ],
-                    rows: diplomats.map((diplomat) {
-                      return DataRow(
-                        color: WidgetStateProperty.all(Colors.transparent),
-                        cells: [
-                          DataCell(
-                            IconButton(
-                              icon: Icon(
-                                selectedDiplomatsIds.contains(diplomat.id)
-                                    ? Icons.check_box
-                                    : Icons.check_box_outline_blank,
-                                color: selectedDiplomatsIds
-                                        .contains(diplomat.id)
-                                    ? const Color.fromARGB(255, 212, 218, 141)
-                                    : Colors.grey,
+                        scrollDirection: Axis.vertical,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+                            columnSpacing: 35.0,
+                            headingRowHeight: 40.0,
+                            headingRowColor: WidgetStateProperty.resolveWith(
+                                (states) =>
+                                    const Color.fromARGB(255, 233, 191, 24)),
+                            sortColumnIndex: sortColumnIndex,
+                            sortAscending: isAscending,
+                            columns: [
+                              const DataColumn(
+                                label: Text(""),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  if (selectedDiplomatsIds
-                                      .contains(diplomat.id)) {
-                                    // Deselect the tourist
-                                    selectedDiplomatsIds.remove(diplomat.id);
-                                  } else {
-                                    // Select the tourist
-                                    selectedDiplomatsIds.add(diplomat.id);
-                                  }
-                                });
-                                /*for (int i = 0;
+                              DataColumn(
+                                label: const Text("الرقم"),
+                                onSort: (columnIndex, ascending) {
+                                  sortData(columnIndex, ascending);
+                                },
+                              ),
+                              DataColumn(
+                                label: const Text("الإسم"),
+                                onSort: (columnIndex, ascending) {
+                                  sortData(columnIndex, ascending);
+                                },
+                              ),
+                              DataColumn(
+                                label: const Text("اللقب"),
+                                onSort: (columnIndex, ascending) {
+                                  sortData(columnIndex, ascending);
+                                },
+                              ),
+                              DataColumn(
+                                label: const Text(" الجنسية"),
+                                onSort: (columnIndex, ascending) {
+                                  sortData(columnIndex, ascending);
+                                },
+                              ),
+                              const DataColumn(
+                                label: Text("تاريخ الوصول"),
+                              ),
+                              const DataColumn(
+                                label: Text("يغادر يوم"),
+                              ),
+                              DataColumn(
+                                label: const Text("المرجع"),
+                                onSort: (columnIndex, ascending) {
+                                  sortData(columnIndex, ascending);
+                                },
+                              ),
+                              const DataColumn(
+                                label: Text(""),
+                              ),
+                            ],
+                            rows: diplomats.map((diplomat) {
+                              return DataRow(
+                                color:
+                                    WidgetStateProperty.all(Colors.transparent),
+                                cells: [
+                                  DataCell(
+                                    IconButton(
+                                      icon: Icon(
+                                        selectedDiplomatsIds
+                                                .contains(diplomat.id)
+                                            ? Icons.check_box
+                                            : Icons.check_box_outline_blank,
+                                        color: selectedDiplomatsIds
+                                                .contains(diplomat.id)
+                                            ? const Color.fromARGB(
+                                                255, 212, 218, 141)
+                                            : Colors.grey,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          if (selectedDiplomatsIds
+                                              .contains(diplomat.id)) {
+                                            // Deselect the tourist
+                                            selectedDiplomatsIds
+                                                .remove(diplomat.id);
+                                          } else {
+                                            // Select the tourist
+                                            selectedDiplomatsIds
+                                                .add(diplomat.id);
+                                          }
+                                        });
+                                        /*for (int i = 0;
                                     i < selectedTouristIds.length;
                                     i++) {
                                   print(selectedTouristIds);
                                 }*/
-                              },
-                            ),
+                                      },
+                                    ),
+                                  ),
+                                  DataCell(
+                                      SelectableText(diplomat.id.toString())),
+                                  DataCell(SelectableText(diplomat.firstName)),
+                                  DataCell(SelectableText(diplomat.lastName)),
+                                  DataCell(
+                                      SelectableText(diplomat.nationality)),
+                                  DataCell(SelectableText(
+                                      formatDate(diplomat.arrivalDate))),
+                                  DataCell(SelectableText(formatDate(
+                                      diplomat.expectedDepartureDate))),
+                                  DataCell(SelectableText(diplomat.msgRef)),
+                                  DataCell(
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(
+                                              Icons.remove_red_eye_outlined),
+                                          onPressed: () =>
+                                              viewDiplomat(diplomat, context),
+                                        ),
+                                        IconButton(
+                                            icon: const Icon(
+                                                Icons.person_search_sharp),
+                                            onPressed: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return ViewDipTour(
+                                                    id: diplomat.id,
+                                                  );
+                                                },
+                                              );
+                                            }),
+                                        IconButton(
+                                          icon: const Icon(Icons.edit),
+                                          onPressed: () =>
+                                              showUpdateDiplomatDialog(
+                                                  context, diplomat.id),
+                                        ),
+                                        user?.role == 'operator'
+                                            ? IconButton(
+                                                icon: const Icon(Icons.delete),
+                                                onPressed: () {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                        content: Text(
+                                                            'عملية ممنوعة')),
+                                                  );
+                                                })
+                                            : IconButton(
+                                                icon: const Icon(Icons.delete),
+                                                onPressed: () {
+                                                  showDeleteDiplomatDialog(
+                                                      context, diplomat.id);
+                                                }),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
                           ),
-                          DataCell(SelectableText(diplomat.id.toString())),
-                          DataCell(SelectableText(diplomat.firstName)),
-                          DataCell(SelectableText(diplomat.lastName)),
-                          DataCell(SelectableText(diplomat.nationality)),
-                          DataCell(
-                              SelectableText(formatDate(diplomat.arrivalDate))),
-                          DataCell(SelectableText(
-                              formatDate(diplomat.expectedDepartureDate))),
-                          DataCell(SelectableText(diplomat.msgRef)),
-                          DataCell(
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon:
-                                      const Icon(Icons.remove_red_eye_outlined),
-                                  onPressed: () =>
-                                      viewDiplomat(diplomat, context),
-                                ),
-                                IconButton(
-                                    icon: const Icon(Icons.person_search_sharp),
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return ViewDipTour(
-                                            id: diplomat.id,
-                                          );
-                                        },
-                                      );
-                                    }),
-                                IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  onPressed: () => showUpdateDiplomatDialog(
-                                      context, diplomat.id),
-                                ),
-                                user?.role == 'operator'
-                                    ? IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content: Text('عملية ممنوعة')),
-                                          );
-                                        })
-                                    : IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () {
-                                          showDeleteDiplomatDialog(
-                                              context, diplomat.id);
-                                        }),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    }).toList(),
-                  ),
-                ));
-              }
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 240, 244, 245),
-                    elevation: 5,
-                  ),
-                  onPressed: () async {
-                    if (selectedDiplomatsIds.isNotEmpty) {
-                      logDepDialog(
-                        context,
-                      ); // Pass employees list here
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text("يرجى إختيار السياح المغادرين")),
-                      );
-                    }
-                  },
-                  child: const Text('مغادرة '),
+                        ))),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 240, 244, 245),
+                          elevation: 5,
+                        ),
+                        onPressed: () async {
+                          if (selectedDiplomatsIds.isNotEmpty) {
+                            logDepDialog(
+                              context,
+                            ); // Pass employees list here
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text("يرجى إختيار السياح المغادرين")),
+                            );
+                          }
+                        },
+                        child: const Text('مغادرة '),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 30, 8, 8),
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                            elevation: WidgetStatePropertyAll(5),
+                            backgroundColor: WidgetStatePropertyAll(
+                                Color.fromARGB(255, 7, 80, 122))),
+                        onPressed: () async {
+                          if (diplomats.isNotEmpty) {
+                            await _printDataTable(
+                                diplomats); // Pass employees list here
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("لا توجد بيانات للطباعة")),
+                            );
+                          }
+                        },
+                        child: const Text(
+                          'طباعة الجدول',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(100, 30, 8, 8),
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                      elevation: WidgetStatePropertyAll(5),
-                      backgroundColor: WidgetStatePropertyAll(
-                          Color.fromARGB(255, 7, 80, 122))),
-                  onPressed: () async {
-                    if (diplomats.isNotEmpty) {
-                      await _printDataTable(
-                          diplomats); // Pass employees list here
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("لا توجد بيانات للطباعة")),
-                      );
-                    }
-                  },
-                  child: const Text(
-                    'طباعة الجدول',
-                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                  ),
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
-      ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 

@@ -148,20 +148,13 @@ class _TouristTable2 extends State<TouristTable2> {
             width: screenWidth * 0.775,
             height: containerHeight,
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color.fromARGB(255, 144, 140, 140)
-                        .withOpacity(0.5),
-                    offset: const Offset(
-                        4, 4), // Horizontal and vertical shadow displacement
-                    blurRadius: 8.0, // Soft edges of the shadow
-                    spreadRadius: 2.0, // Expands the shadow
-                  ),
-                ]),
+              color: const Color.fromARGB(255, 255, 255, 255),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(5),
+              ),
+              border:
+                  Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

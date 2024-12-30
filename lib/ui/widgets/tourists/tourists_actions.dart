@@ -305,20 +305,13 @@ class _TouristsActions extends State<TouristsActions> {
               width: screenWidth * 0.385,
               height: 450,
               decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 144, 140, 140)
-                          .withOpacity(0.5),
-                      offset: const Offset(
-                          4, 4), // Horizontal and vertical shadow displacement
-                      blurRadius: 8.0, // Soft edges of the shadow
-                      spreadRadius: 2.0, // Expands the shadow
-                    ),
-                  ]),
+                color: const Color.fromARGB(255, 255, 255, 255),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
+                ),
+                border: Border.all(
+                    color: Color.fromARGB(255, 76, 77, 78), width: 1),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -546,20 +539,13 @@ class _TouristsActions extends State<TouristsActions> {
                     width: screenWidth * 0.385,
                     height: 130,
                     decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 144, 140, 140)
-                                .withOpacity(0.5),
-                            offset: const Offset(4,
-                                4), // Horizontal and vertical shadow displacement
-                            blurRadius: 8.0, // Soft edges of the shadow
-                            spreadRadius: 2.0, // Expands the shadow
-                          ),
-                        ]),
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 76, 77, 78), width: 1),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -670,20 +656,13 @@ class _TouristsActions extends State<TouristsActions> {
                     width: screenWidth * 0.385,
                     height: 130,
                     decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 144, 140, 140)
-                                .withOpacity(0.5),
-                            offset: const Offset(4,
-                                4), // Horizontal and vertical shadow displacement
-                            blurRadius: 8.0, // Soft edges of the shadow
-                            spreadRadius: 2.0, // Expands the shadow
-                          ),
-                        ]),
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 76, 77, 78), width: 1),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -740,6 +719,14 @@ class _TouristsActions extends State<TouristsActions> {
                     width: screenWidth * 0.385,
                     height: 130,
                     decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 76, 77, 78), width: 1),
+                    ),
+                    /*BoxDecoration(
                         color: const Color.fromARGB(255, 255, 255, 255),
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
@@ -753,7 +740,7 @@ class _TouristsActions extends State<TouristsActions> {
                             blurRadius: 8.0, // Soft edges of the shadow
                             spreadRadius: 2.0, // Expands the shadow
                           ),
-                        ]),
+                        ]),*/
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
