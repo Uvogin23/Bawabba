@@ -39,22 +39,24 @@ class DashboardCardAlg extends StatelessWidget {
               child: Container(
                   width: 370,
                   height: 127,
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      const BoxShadow(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 76, 77, 78), width: 1),
+                    boxShadow: const [
+                      BoxShadow(
                         color:
                             Color.fromARGB(255, 255, 255, 255), // Shadow color
                         blurRadius: 10, // Blur radius
                         offset: Offset(0, 1), // Offset in x and y directions
                       ),
                     ],
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15),
                       bottomLeft: Radius.circular(15),
                       bottomRight: Radius.circular(15),
                     ),
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                    color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                   child: Stack(children: <Widget>[
                     const Positioned(

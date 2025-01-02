@@ -61,7 +61,7 @@ class TouristsScreen extends StatelessWidget {
             Container(
               width: screenWidth * 0.815,
               height: screenHeight,
-              color: const Color.fromARGB(255, 249, 248, 247),
+              color: const Color.fromARGB(255, 239, 242, 243),
               child: const Stack(
                 children: <Widget>[
                   Positioned(

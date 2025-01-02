@@ -132,20 +132,14 @@ class MainContent extends StatelessWidget {
                             width: screenWidth * 0.775,
                             height: 470,
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(15),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromARGB(255, 144, 140, 140)
-                                        .withOpacity(0.5),
-                                    offset: Offset(4,
-                                        4), // Horizontal and vertical shadow displacement
-                                    blurRadius: 8.0, // Soft edges of the shadow
-                                    spreadRadius: 2.0, // Expands the shadow
-                                  ),
-                                ]),
+                              border: Border.all(
+                                  color: Color.fromARGB(255, 76, 77, 78),
+                                  width: 1),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,

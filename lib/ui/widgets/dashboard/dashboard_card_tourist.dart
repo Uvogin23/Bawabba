@@ -39,7 +39,9 @@ class DashboardCardTourist extends StatelessWidget {
               child: Container(
                   width: 370,
                   height: 127,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Color.fromARGB(255, 76, 77, 78), width: 1),
                     boxShadow: [
                       const BoxShadow(
                         color:

@@ -3,6 +3,7 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
 import 'package:bawabba/ui/widgets/diplomats/add_diplomat_form.dart';
+import 'package:bawabba/ui/widgets/diplomats/diplomats_actions.dart';
 import 'package:bawabba/ui/widgets/diplomats/diplomats_table1.dart';
 import 'package:bawabba/ui/widgets/diplomats/diplomats_table2.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
@@ -60,7 +61,7 @@ class DiplomatsScreen extends StatelessWidget {
             Container(
               width: screenWidth * 0.815,
               height: screenHeight,
-              color: const Color.fromARGB(255, 249, 248, 247),
+              color: const Color.fromARGB(255, 239, 242, 243),
               child: const Stack(
                 children: <Widget>[
                   Positioned(
@@ -103,7 +104,7 @@ class DiplomatsScreen extends StatelessWidget {
                         children: [
                           AddDiplomatForm(),
                           SizedBox(height: 10),
-                          // TouristsActions(),
+                          DiplomatsActions(),
                           // Space between cards and charts
 
                           SizedBox(height: 10),

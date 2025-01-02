@@ -14,6 +14,7 @@ Widget ChartDisplay() {
         height: 600, // Chart height
         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
+          border: Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
           color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
@@ -103,6 +104,7 @@ Widget ChartDisplay2() {
         // Chart height
         margin: const EdgeInsets.fromLTRB(8, 0, 10, 0),
         decoration: BoxDecoration(
+          border: Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
           color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
@@ -182,6 +184,7 @@ Widget ChartDisplayPie() {
         // Chart height
         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
+          border: Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
           color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
@@ -284,6 +287,7 @@ Widget BarChartDisplay() {
         height: 600, // Chart height
         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
+          border: Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
           color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
