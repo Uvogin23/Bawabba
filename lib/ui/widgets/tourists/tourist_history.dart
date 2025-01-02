@@ -34,7 +34,7 @@ Future<List<Tourist>> fetchHistoryTourists() async {
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {
-    throw Exception('Failed to load diplomats: ${response.statusCode}');
+    throw Exception('Failed to load tourists: ${response.statusCode}');
   }
 }
 

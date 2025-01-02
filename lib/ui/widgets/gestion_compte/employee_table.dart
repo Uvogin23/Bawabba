@@ -479,19 +479,12 @@ class _EmployeeTable extends State<EmployeeTable> {
       width: screenWidth * 0.775,
       height: 450,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 252, 251, 251),
-          borderRadius: BorderRadius.all(
-            Radius.circular(15),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 144, 140, 140).withOpacity(0.5),
-              offset:
-                  Offset(4, 4), // Horizontal and vertical shadow displacement
-              blurRadius: 8.0, // Soft edges of the shadow
-              spreadRadius: 2.0, // Expands the shadow
-            ),
-          ]),
+        color: Color.fromARGB(255, 252, 251, 251),
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+        border: Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,

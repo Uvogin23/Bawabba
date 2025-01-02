@@ -92,7 +92,7 @@ class _HistoryTable2 extends State<HistoryTable2> {
     return StatefulBuilder(builder: (BuildContext context, setState) {
       return AlertDialog(
           title: const Text(
-            "قائمة السياح الذين غادروا إقليم ولاية جانت",
+            "قائمة السياح ",
             textAlign: TextAlign.right,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),

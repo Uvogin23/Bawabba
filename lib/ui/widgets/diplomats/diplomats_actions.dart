@@ -4,6 +4,8 @@ import 'package:bawabba/core/models/tourist.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/diplomats/by_month_table.dart';
 import 'package:bawabba/ui/widgets/diplomats/by_nationality_table.dart';
+import 'package:bawabba/ui/widgets/diplomats/diplomat_history.dart';
+import 'package:bawabba/ui/widgets/diplomats/diplomat_history_all.dart';
 import 'package:bawabba/ui/widgets/diplomats/show_info.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
 import 'package:bawabba/ui/widgets/tourists/by_month_table.dart';
@@ -761,7 +763,7 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                                 width: 5,
                               ),
                               Text(
-                                "قائمة السياح الأجانب المسجلين بالتطبيقة",
+                                "قائمة الدبلوماسيين الأجانب المسجلين بالتطبيقة",
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 0, 0, 0),
@@ -791,7 +793,7 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return HistoryTable2();
+                                    return DiplomatHistoryTable2();
                                   },
                                 );
                               },
@@ -813,7 +815,7 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return HistoryTable();
+                                    return const DiplomatHistory();
                                   },
                                 );
                               },
