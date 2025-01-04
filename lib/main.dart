@@ -7,7 +7,7 @@ import 'package:bawabba/core/services/auth_provider.dart';
 import 'dart:convert';
 import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:bawabba/ui/screens/home_page.dart';
-import 'package:bawabba/ui/screens/login_page.dart';
+import 'package:bawabba/ui/screens/army_login_page.dart';
 
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         home: Consumer<AuthProvider>(
           builder: (context, authProvider, child) {
             return authProvider.token == null
-                ? const LoginScreenPolice()
+                ? const LoginScreenArmy()
                 : const MyHomePage(); // Show login or home based on token
           },
         ),

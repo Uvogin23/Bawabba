@@ -35,7 +35,7 @@ class DashboardCardSortie extends StatelessWidget {
           CardStatistics stats = snapshot.data!;
           return Positioned(
               top: 160,
-              right: 800,
+              right: 600,
               child: Container(
                   width: 370,
                   height: 127,

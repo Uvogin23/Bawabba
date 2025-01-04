@@ -81,7 +81,7 @@ class MainContent extends StatelessWidget {
                                 DashboardCardDiplomat(),
                                 DashboardCardTourist(),
                                 DashboardCardAlg(),
-                                DashboardCardAcc(),
+                                //DashboardCardAcc(),
                                 DashboardCardEntre(),
                                 DashboardCardSortie(),
                               ],

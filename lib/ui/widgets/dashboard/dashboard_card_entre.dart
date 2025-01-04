@@ -35,7 +35,7 @@ class DashboardCardEntre extends StatelessWidget {
           CardStatistics stats = snapshot.data!;
           return Positioned(
               top: 160,
-              right: 410,
+              right: 200,
               child: Container(
                   width: 370,
                   height: 127,
