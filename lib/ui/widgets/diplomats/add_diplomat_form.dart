@@ -426,7 +426,8 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
           Expanded(
             child: Form(
               key: _formKey,
-              child: SingleChildScrollView(
+              child: Scrollbar(
+                  child: SingleChildScrollView(
                 child: Column(
                   children: [
                     const SizedBox(
@@ -624,7 +625,7 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                     ),
                   ],
                 ),
-              ),
+              )),
             ),
           ),
         ],

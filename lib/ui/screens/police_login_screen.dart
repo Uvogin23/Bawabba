@@ -257,13 +257,13 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                       height: 20,
                                     ),
                                     const Text(
-                                      ' الجمـهـوريـــة الجزائـريـــة الديمقــراطيــة الشعــبـيـــة',
+                                      ' الجمـهـوريـة الجزائـرية الديمقراطيــة الشعــبـية',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color:
                                               Color.fromRGBO(255, 255, 255, 1),
                                           fontFamily: 'Times New Roman',
-                                          fontSize: 24,
+                                          fontSize: 22,
                                           letterSpacing:
                                               0 /*percentages not used in flutter. defaulting to zero*/,
                                           fontWeight: FontWeight.bold,
@@ -273,13 +273,13 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                       height: 10,
                                     ),
                                     const Text(
-                                      ' وزارة الداخلية و الجمــــاعـــات المحلــية ',
+                                      ' وزارة الداخلية و الجماعــات المحلـية ',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color:
                                               Color.fromRGBO(255, 255, 255, 1),
                                           fontFamily: 'Times New Roman',
-                                          fontSize: 24,
+                                          fontSize: 22,
                                           letterSpacing:
                                               0 /*percentages not used in flutter. defaulting to zero*/,
                                           fontWeight: FontWeight.bold,
@@ -289,13 +289,13 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                       height: 10,
                                     ),
                                     const Text(
-                                      'المديـــرية العـــامة للأمــن الوطنـــي ',
+                                      'المديرية العـامة للأمــن الوطنـي ',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color:
                                               Color.fromRGBO(255, 255, 255, 1),
                                           fontFamily: 'Times New Roman',
-                                          fontSize: 24,
+                                          fontSize: 22,
                                           letterSpacing:
                                               0 /*percentages not used in flutter. defaulting to zero*/,
                                           fontWeight: FontWeight.bold,
@@ -303,12 +303,12 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                     ),
                                   ]),
                                   SizedBox(
-                                    height: 30,
+                                    height: 15,
                                   ),
                                   Container(
                                     margin: const EdgeInsets.only(top: 0),
-                                    width: 180,
-                                    height: 180.0,
+                                    width: 160,
+                                    height: 160.0,
                                     decoration: const BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
@@ -318,7 +318,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 30,
+                                    height: 15,
                                   ),
                                   const Text(
                                     'تطبيقة متابعة الدخول و الخروج',
@@ -326,7 +326,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                     style: TextStyle(
                                         color: Color.fromRGBO(255, 255, 255, 1),
                                         fontFamily: 'Times New Roman',
-                                        fontSize: 24,
+                                        fontSize: 22,
                                         letterSpacing:
                                             0 /*percentages not used in flutter. defaulting to zero*/,
                                         fontWeight: FontWeight.bold,
@@ -338,7 +338,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                     style: TextStyle(
                                         color: Color.fromRGBO(255, 255, 255, 1),
                                         fontFamily: 'Times New Roman',
-                                        fontSize: 24,
+                                        fontSize: 22,
                                         letterSpacing:
                                             0 /*percentages not used in flutter. defaulting to zero*/,
                                         fontWeight: FontWeight.bold,

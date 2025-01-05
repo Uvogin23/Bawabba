@@ -17,7 +17,7 @@ void main() async {
   await windowManager.ensureInitialized();
 
   // Set the minimum window size here
-  windowManager.setMinimumSize(const Size(1500, 720));
+  //windowManager.setMinimumSize(const Size(1500, 720));
   //windowManager.setMaximumSize(const Size(1600, 820));
   // Fullscreen on startup
   // windowManager.waitUntilReadyToShow().then((_) async {
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         home: Consumer<AuthProvider>(
           builder: (context, authProvider, child) {
             return authProvider.token == null
-                ? const LoginScreenArmy()
+                ? const LoginScreenPolice()
                 : const MyHomePage(); // Show login or home based on token
           },
         ),

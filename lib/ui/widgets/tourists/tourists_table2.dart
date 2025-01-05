@@ -294,6 +294,42 @@ class _TouristTable2 extends State<TouristTable2> {
                             sortData(columnIndex, ascending);
                           },
                         ),
+                        DataColumn(
+                          label: const Text(
+                            "المرجع",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
+                        ),
+                        DataColumn(
+                          label: const Text(
+                            "المرجع",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
+                        ),
+                        DataColumn(
+                          label: const Text(
+                            "المرجع",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
+                        ),
+                        DataColumn(
+                          label: const Text(
+                            "المرجع",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            sortData(columnIndex, ascending);
+                          },
+                        ),
                         const DataColumn(
                           label: Text(
                             "",
@@ -342,6 +378,10 @@ class _TouristTable2 extends State<TouristTable2> {
                                 formatDate(tourist.arrivalDate))),
                             DataCell(SelectableText(
                                 formatDate(tourist.expectedDepartureDate))),
+                            DataCell(SelectableText(tourist.msgRef)),
+                            DataCell(SelectableText(tourist.msgRef)),
+                            DataCell(SelectableText(tourist.msgRef)),
+                            DataCell(SelectableText(tourist.msgRef)),
                             DataCell(SelectableText(tourist.msgRef)),
                             DataCell(
                               Row(
