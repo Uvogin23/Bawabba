@@ -21,7 +21,7 @@ void main() async {
   //windowManager.setMaximumSize(const Size(1600, 820));
   // Fullscreen on startup
   // windowManager.waitUntilReadyToShow().then((_) async {
-  // await windowManager.setFullScreen(true);
+  await windowManager.setFullScreen(true);
   //});
 
   runApp(

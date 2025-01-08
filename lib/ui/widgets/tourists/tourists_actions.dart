@@ -176,73 +176,75 @@ class _TouristsActions extends State<TouristsActions> {
                 )
               : SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: DataTable(
-                    columnSpacing: 40.0,
-                    headingRowHeight: 40.0,
-                    headingRowColor: WidgetStateProperty.resolveWith(
-                        (states) => const Color.fromARGB(255, 144, 194, 230)),
-                    sortColumnIndex: sortColumnIndex,
-                    sortAscending: isAscending,
-                    columns: const [
-                      DataColumn(
-                        label: Text("الرقم"),
-                      ),
-                      DataColumn(
-                        label: Text("الإسم"),
-                      ),
-                      DataColumn(
-                        label: Text("اللقب"),
-                      ),
-                      DataColumn(
-                        label: Text(" الجنسية"),
-                      ),
-                      DataColumn(
-                        label: Text("تاريخ الوصول"),
-                      ),
-                      DataColumn(
-                        label: Text("يغادر يوم"),
-                      ),
-                      DataColumn(
-                        label: Text("المرجع"),
-                      ),
-                      DataColumn(
-                        label: Text("الوكالة السياحية"),
-                      ),
-                      DataColumn(
-                        label: Text(""),
-                      ),
-                    ],
-                    rows: tourists.map((tourist) {
-                      return DataRow(
-                        color: WidgetStateProperty.all(Colors.transparent),
-                        cells: [
-                          DataCell(SelectableText(tourist.id.toString())),
-                          DataCell(SelectableText(tourist.firstName)),
-                          DataCell(SelectableText(tourist.lastName)),
-                          DataCell(SelectableText(tourist.nationality)),
-                          DataCell(
-                              SelectableText(formatDate(tourist.arrivalDate))),
-                          DataCell(SelectableText(
-                              formatDate(tourist.expectedDepartureDate))),
-                          DataCell(SelectableText(tourist.msgRef)),
-                          DataCell(SelectableText(tourist.receivingAgency)),
-                          DataCell(
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon:
-                                      const Icon(Icons.remove_red_eye_outlined),
-                                  onPressed: () =>
-                                      viewTourist(tourist, context),
-                                ),
-                              ],
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: 40.0,
+                      headingRowHeight: 40.0,
+                      headingRowColor: WidgetStateProperty.resolveWith(
+                          (states) => const Color.fromARGB(255, 144, 194, 230)),
+                      sortColumnIndex: sortColumnIndex,
+                      sortAscending: isAscending,
+                      columns: const [
+                        DataColumn(
+                          label: Text("الرقم"),
+                        ),
+                        DataColumn(
+                          label: Text("الإسم"),
+                        ),
+                        DataColumn(
+                          label: Text("اللقب"),
+                        ),
+                        DataColumn(
+                          label: Text(" الجنسية"),
+                        ),
+                        DataColumn(
+                          label: Text("تاريخ الوصول"),
+                        ),
+                        DataColumn(
+                          label: Text("يغادر يوم"),
+                        ),
+                        DataColumn(
+                          label: Text("المرجع"),
+                        ),
+                        DataColumn(
+                          label: Text("الوكالة السياحية"),
+                        ),
+                        DataColumn(
+                          label: Text(""),
+                        ),
+                      ],
+                      rows: tourists.map((tourist) {
+                        return DataRow(
+                          color: WidgetStateProperty.all(Colors.transparent),
+                          cells: [
+                            DataCell(SelectableText(tourist.id.toString())),
+                            DataCell(SelectableText(tourist.firstName)),
+                            DataCell(SelectableText(tourist.lastName)),
+                            DataCell(SelectableText(tourist.nationality)),
+                            DataCell(SelectableText(
+                                formatDate(tourist.arrivalDate))),
+                            DataCell(SelectableText(
+                                formatDate(tourist.expectedDepartureDate))),
+                            DataCell(SelectableText(tourist.msgRef)),
+                            DataCell(SelectableText(tourist.receivingAgency)),
+                            DataCell(
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(
+                                        Icons.remove_red_eye_outlined),
+                                    onPressed: () =>
+                                        viewTourist(tourist, context),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      );
-                    }).toList(),
-                  ),
-                ),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  )),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),

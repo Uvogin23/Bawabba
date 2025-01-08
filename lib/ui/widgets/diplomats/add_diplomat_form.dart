@@ -426,8 +426,8 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
           Expanded(
             child: Form(
               key: _formKey,
-              child: Scrollbar(
-                  child: SingleChildScrollView(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
                 child: Column(
                   children: [
                     const SizedBox(
@@ -441,13 +441,22 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                           width: 15,
                         ),
                         _buildTextField(_firstNameController, "الإسم"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(_lastNameController, "اللقب"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildDatePickerField("تاريخ الميلاد", _dateOfBirth,
                             (date) {
                           setState(() {
                             _dateOfBirth = date;
                           });
                         }),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(
                             _placeOfBirthController, "مكان الميلاد"),
                         const SizedBox(
@@ -464,6 +473,9 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                         ),
                         _buildTextField(
                             _passportNumberController, "رقم جواز السفر"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildDatePickerField("تاريخ الإنتهاء", _passportExpiry,
                             (date) {
                           setState(() {
@@ -472,8 +484,14 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                         },
                             rangeStart: DateTime.now()
                                 .subtract(const Duration(days: 0))),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(_diplomaticCardController,
                             "رقم البطاقة الدبلوماسية"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(_fonctionController, "الوظيفة"),
                         const SizedBox(
                           width: 15,
@@ -521,6 +539,9 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                             },
                           ),
                         ),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildDatePickerField(" تاريخ الوصول", _arrivalDate,
                             (date) {
                           setState(() {
@@ -529,8 +550,14 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                         },
                             rangeStart: DateTime.now()
                                 .subtract(const Duration(days: 3))),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(
                             _arrivalFlightInfoController, "معلومات الوصول"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildDatePickerField(
                             "التاريخ المتوقع للمغادرة", _expectedDepartureDate,
                             (date) {
@@ -554,6 +581,9 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                         ),
                         _buildTextField(
                             _departureFlightInfoController, "معلومات المغادرة"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(_msgRefController, "المرجع"),
                         const SizedBox(
                           width: 15,
@@ -569,7 +599,13 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                         ),
                         _buildTextField(
                             _receivingAgencyController, "الوكالة السياحية"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(_circuitController, "المسار"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(
                             _touristicGuideController, "المرشد السياحي"),
                         const SizedBox(
@@ -625,7 +661,7 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                     ),
                   ],
                 ),
-              )),
+              ),
             ),
           ),
         ],

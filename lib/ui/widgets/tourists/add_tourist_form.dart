@@ -338,6 +338,7 @@ class _AddTouristForm extends State<AddTouristForm> {
             child: Form(
               key: _formKey,
               child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
                 child: Column(
                   children: [
                     const SizedBox(
@@ -351,13 +352,22 @@ class _AddTouristForm extends State<AddTouristForm> {
                           width: 15,
                         ),
                         _buildTextField(_firstNameController, "الإسم"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(_lastNameController, "اللقب"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildDatePickerField("تاريخ الميلاد", _dateOfBirth,
                             (date) {
                           setState(() {
                             _dateOfBirth = date;
                           });
                         }),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(
                             _placeOfBirthController, "مكان الميلاد"),
                         const SizedBox(
@@ -374,6 +384,9 @@ class _AddTouristForm extends State<AddTouristForm> {
                         ),
                         _buildTextField(
                             _passportNumberController, "رقم جواز السفر"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildDatePickerField("تاريخ الإنتهاء", _passportExpiry,
                             (date) {
                           setState(() {
@@ -382,6 +395,9 @@ class _AddTouristForm extends State<AddTouristForm> {
                         },
                             rangeStart: DateTime.now()
                                 .subtract(const Duration(days: 0))),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         SizedBox(
                           height: 85,
                           width: 250,
@@ -416,6 +432,9 @@ class _AddTouristForm extends State<AddTouristForm> {
                             },
                           ),
                         ),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildDatePickerField(" تاريخ الوصول", _arrivalDate,
                             (date) {
                           setState(() {
@@ -438,6 +457,9 @@ class _AddTouristForm extends State<AddTouristForm> {
                         ),
                         _buildTextField(
                             _arrivalFlightInfoController, "معلومات الوصول"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildDatePickerField(
                             "التاريخ المتوقع للمغادرة", _expectedDepartureDate,
                             (date) {
@@ -447,8 +469,14 @@ class _AddTouristForm extends State<AddTouristForm> {
                         },
                             rangeStart: DateTime.now()
                                 .subtract(const Duration(days: 1))),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(
                             _departureFlightInfoController, "معلومات المغادرة"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(_msgRefController, "المرجع"),
                         const SizedBox(
                           width: 15,
@@ -464,7 +492,13 @@ class _AddTouristForm extends State<AddTouristForm> {
                         ),
                         _buildTextField(
                             _receivingAgencyController, "الوكالة السياحية"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(_circuitController, "المسار"),
+                        const SizedBox(
+                          width: 05,
+                        ),
                         _buildTextField(
                             _touristicGuideController, "المرشد السياحي"),
                         const SizedBox(
