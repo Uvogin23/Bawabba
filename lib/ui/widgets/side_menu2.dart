@@ -1,6 +1,7 @@
 import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/main.dart';
 import 'package:bawabba/ui/screens/algerian_screen.dart';
+import 'package:bawabba/ui/screens/army_login_page.dart';
 import 'package:bawabba/ui/screens/citizen_screen.dart';
 import 'package:bawabba/ui/screens/diplomats_screen.dart';
 import 'package:bawabba/ui/screens/gestion_comptes.dart';
@@ -383,7 +384,9 @@ class SideMenu2 extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const LoginScreenPolice()),
+                                        const LoginScreenPolice()
+                                    //const LoginScreenArmy()
+                                    ),
                               );
                             },
                             child: const Text(

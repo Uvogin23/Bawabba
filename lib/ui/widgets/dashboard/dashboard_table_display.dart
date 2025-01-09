@@ -175,18 +175,14 @@ Widget dataTableDiplomats() {
                   )),
                   DataCell(Center(
                     child: Text(
-                      diplomat.nationality ?? "N/A",
+                      diplomat.nationality,
                       style: const TextStyle(
                           fontSize: 10, fontFamily: 'Times New Roman'),
                     ),
                   )),
                   DataCell(Center(
                     child: Text(
-                      diplomat.arrivalDate
-                              ?.toLocal()
-                              .toString()
-                              .split(' ')[0] ??
-                          "N/A",
+                      diplomat.arrivalDate.toLocal().toString().split(' ')[0],
                       style: const TextStyle(
                           fontSize: 10, fontFamily: 'Times New Roman'),
                     ),

@@ -61,6 +61,7 @@ class MyApp extends StatelessWidget {
           builder: (context, authProvider, child) {
             return authProvider.token == null
                 ? const LoginScreenPolice()
+                //? const LoginScreenArmy()
                 : const MyHomePage(); // Show login or home based on token
           },
         ),

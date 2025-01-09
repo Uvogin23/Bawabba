@@ -41,22 +41,22 @@ class DashboardCardEntre extends StatelessWidget {
                   height: 127,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color.fromARGB(255, 76, 77, 78), width: 1),
-                    boxShadow: [
-                      const BoxShadow(
+                        color: const Color.fromARGB(255, 76, 77, 78), width: 1),
+                    boxShadow: const [
+                      BoxShadow(
                         color:
                             Color.fromARGB(255, 255, 255, 255), // Shadow color
                         blurRadius: 10, // Blur radius
                         offset: Offset(0, 1), // Offset in x and y directions
                       ),
                     ],
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: const Radius.circular(15),
                       topRight: Radius.circular(15),
                       bottomLeft: Radius.circular(15),
                       bottomRight: Radius.circular(15),
                     ),
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                    color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                   child: Stack(children: <Widget>[
                     const Positioned(

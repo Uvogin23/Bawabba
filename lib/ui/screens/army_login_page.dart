@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
+import 'package:window_manager/window_manager.dart';
 
 class LoginScreenArmy extends StatefulWidget {
   const LoginScreenArmy({Key? key}) : super(key: key);
@@ -110,7 +111,7 @@ class _LoginScreenState extends State<LoginScreenArmy> {
                               const Icon(
                                 Icons.account_circle_rounded,
                                 size: 100,
-                                color: Color.fromARGB(255, 59, 122, 4),
+                                color: Color.fromARGB(255, 47, 81, 15),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -119,7 +120,7 @@ class _LoginScreenState extends State<LoginScreenArmy> {
                                 'تسجيــــــل الدخــــول',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 59, 122, 4),
+                                    color: Color.fromARGB(255, 26, 48, 5),
                                     fontFamily: 'Times New Roman',
                                     fontSize: 24,
                                     letterSpacing:
@@ -181,17 +182,31 @@ class _LoginScreenState extends State<LoginScreenArmy> {
                                 ),
                                 const SizedBox(height: 20),
                               ],
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Validate returns true if the form is valid, or false otherwise.
-                                  if (_formKey.currentState!.validate()) {
-                                    _isLoading ? null : _login();
-                                  }
-                                },
-                                child: _isLoading
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white)
-                                    : const Text('تسجيل الدخول'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      windowManager.close();
+                                    },
+                                    child: const Text('خروج'),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      // Validate returns true if the form is valid, or false otherwise.
+                                      if (_formKey.currentState!.validate()) {
+                                        _isLoading ? null : _login();
+                                      }
+                                    },
+                                    child: _isLoading
+                                        ? const CircularProgressIndicator(
+                                            color: Colors.white)
+                                        : const Text('تسجيل الدخول'),
+                                  ),
+                                ],
                               ),
                             ],
                           )),

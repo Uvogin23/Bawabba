@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
+import 'package:window_manager/window_manager.dart';
 
 class LoginScreenPolice extends StatefulWidget {
   const LoginScreenPolice({Key? key}) : super(key: key);
@@ -181,17 +182,31 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                 ),
                                 const SizedBox(height: 20),
                               ],
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Validate returns true if the form is valid, or false otherwise.
-                                  if (_formKey.currentState!.validate()) {
-                                    _isLoading ? null : _login();
-                                  }
-                                },
-                                child: _isLoading
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white)
-                                    : const Text('تسجيل الدخول'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      windowManager.close();
+                                    },
+                                    child: const Text('خروج'),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      // Validate returns true if the form is valid, or false otherwise.
+                                      if (_formKey.currentState!.validate()) {
+                                        _isLoading ? null : _login();
+                                      }
+                                    },
+                                    child: _isLoading
+                                        ? const CircularProgressIndicator(
+                                            color: Colors.white)
+                                        : const Text('تسجيل الدخول'),
+                                  ),
+                                ],
                               ),
                             ],
                           )),
