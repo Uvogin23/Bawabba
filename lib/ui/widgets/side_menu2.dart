@@ -1,4 +1,5 @@
 import 'package:bawabba/core/services/auth_provider.dart';
+import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/main.dart';
 import 'package:bawabba/ui/screens/algerian_screen.dart';
 import 'package:bawabba/ui/screens/army_login_page.dart';
@@ -92,7 +93,7 @@ class SideMenu2 extends StatelessWidget {
                 },
                 leading: const Icon(
                   Icons.space_dashboard_rounded,
-                  color: Color.fromARGB(255, 7, 80, 122),
+                  color: Config.colorPrimary,
                   size: 25,
                 ),
                 trailing: const Icon(
@@ -132,7 +133,7 @@ class SideMenu2 extends StatelessWidget {
                 },
                 leading: const Icon(
                   Icons.people_sharp,
-                  color: Color.fromARGB(255, 7, 80, 122),
+                  color: Config.colorPrimary,
                   size: 25,
                 ),
                 trailing: const Icon(
@@ -172,7 +173,7 @@ class SideMenu2 extends StatelessWidget {
                 },
                 leading: const Icon(
                   Icons.connecting_airports_rounded,
-                  color: Color.fromARGB(255, 7, 80, 122),
+                  color: Config.colorPrimary,
                   size: 30,
                 ),
                 trailing: const Icon(
@@ -212,7 +213,7 @@ class SideMenu2 extends StatelessWidget {
                 },
                 leading: const Icon(
                   Icons.flag,
-                  color: Color.fromARGB(255, 7, 80, 122),
+                  color: Config.colorPrimary,
                   size: 25,
                 ),
                 trailing: const Icon(
@@ -252,7 +253,7 @@ class SideMenu2 extends StatelessWidget {
                 },
                 leading: const Icon(
                   Icons.contact_emergency_rounded,
-                  color: Color.fromARGB(255, 7, 80, 122),
+                  color: Config.colorPrimary,
                   size: 25,
                 ),
                 trailing: const Icon(
@@ -292,7 +293,7 @@ class SideMenu2 extends StatelessWidget {
                 },
                 leading: const Icon(
                   Icons.fact_check_rounded,
-                  color: Color.fromARGB(255, 7, 80, 122),
+                  color: Config.colorPrimary,
                   size: 25,
                 ),
                 trailing: const Icon(
@@ -344,7 +345,7 @@ class SideMenu2 extends StatelessWidget {
                             style: const ButtonStyle(
                                 elevation: WidgetStatePropertyAll(5),
                                 backgroundColor: WidgetStatePropertyAll(
-                                    Color.fromARGB(255, 7, 80, 122))),
+                                    Config.colorPrimary)),
                             onPressed: () {
                               if (token != null) {
                                 Navigator.push(

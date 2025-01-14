@@ -390,8 +390,8 @@ class _DiplomatTable1 extends State<DiplomatTable1> {
                       child: ElevatedButton(
                         style: const ButtonStyle(
                             elevation: WidgetStatePropertyAll(5),
-                            backgroundColor: WidgetStatePropertyAll(
-                                Color.fromARGB(255, 7, 80, 122))),
+                            backgroundColor:
+                                WidgetStatePropertyAll(Config.colorPrimary)),
                         onPressed: () async {
                           if (diplomats.isNotEmpty) {
                             await _printDataTable(

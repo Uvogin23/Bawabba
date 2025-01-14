@@ -133,8 +133,7 @@ class _ViewDipTour extends State<ViewDipTour> {
                           columnSpacing: 35.0,
                           headingRowHeight: 40.0,
                           headingRowColor: WidgetStateProperty.resolveWith(
-                              (states) =>
-                                  const Color.fromARGB(255, 7, 80, 122)),
+                              (states) => Config.colorPrimary),
                           sortColumnIndex: sortColumnIndex,
                           sortAscending: isAscending,
                           columns: [
@@ -317,8 +316,8 @@ class _ViewDipTour extends State<ViewDipTour> {
                       child: ElevatedButton(
                         style: const ButtonStyle(
                             elevation: WidgetStatePropertyAll(5),
-                            backgroundColor: WidgetStatePropertyAll(
-                                Color.fromARGB(255, 7, 80, 122))),
+                            backgroundColor:
+                                WidgetStatePropertyAll(Config.colorPrimary)),
                         onPressed: () async {
                           if (tourists.isNotEmpty) {
                             await _printDataTable(

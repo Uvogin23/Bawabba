@@ -513,8 +513,8 @@ class _TouristsActions extends State<TouristsActions> {
                         },
                         style: const ButtonStyle(
                             elevation: WidgetStatePropertyAll(5),
-                            backgroundColor: WidgetStatePropertyAll(
-                                Color.fromARGB(255, 7, 80, 122))),
+                            backgroundColor:
+                                WidgetStatePropertyAll(Config.colorPrimary)),
                         child: const Text(
                           "بحث عن سائح",
                           style: TextStyle(
@@ -630,7 +630,7 @@ class _TouristsActions extends State<TouristsActions> {
                                   style: const ButtonStyle(
                                       elevation: WidgetStatePropertyAll(5),
                                       backgroundColor: WidgetStatePropertyAll(
-                                          Color.fromARGB(255, 7, 80, 122))),
+                                          Config.colorPrimary)),
                                   onPressed: () {
                                     if (_formKey2.currentState!.validate()) {
                                       // All validations passed
@@ -702,7 +702,7 @@ class _TouristsActions extends State<TouristsActions> {
                             style: const ButtonStyle(
                                 elevation: WidgetStatePropertyAll(5),
                                 backgroundColor: WidgetStatePropertyAll(
-                                    Color.fromARGB(255, 7, 80, 122))),
+                                    Config.colorPrimary)),
                             onPressed: () {
                               showTouristsByNationality(context);
                             },
@@ -805,7 +805,7 @@ class _TouristsActions extends State<TouristsActions> {
                               style: const ButtonStyle(
                                   elevation: WidgetStatePropertyAll(5),
                                   backgroundColor: WidgetStatePropertyAll(
-                                      Color.fromARGB(255, 7, 80, 122))),
+                                      Config.colorPrimary)),
                               onPressed: () {
                                 showDialog(
                                   context: context,

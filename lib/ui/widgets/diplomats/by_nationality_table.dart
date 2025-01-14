@@ -64,7 +64,7 @@ void showDiplomatsByNationality(BuildContext context) {
                   padding: const EdgeInsets.all(10.0),
                   child: DataTable(
                     headingRowColor: WidgetStateProperty.resolveWith(
-                        (states) => Color.fromARGB(255, 7, 80, 122)),
+                        (states) => Config.colorPrimary),
                     columns: const [
                       DataColumn(
                           label: Text(

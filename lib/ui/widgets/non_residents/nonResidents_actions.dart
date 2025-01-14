@@ -511,7 +511,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                         style: const ButtonStyle(
                             elevation: WidgetStatePropertyAll(5),
                             backgroundColor:
-                                WidgetStatePropertyAll(Config.colorPolice)),
+                                WidgetStatePropertyAll(Config.colorPrimary)),
                         child: const Text(
                           "بحث عن رعية",
                           style: TextStyle(
@@ -627,7 +627,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                                   style: const ButtonStyle(
                                       elevation: WidgetStatePropertyAll(5),
                                       backgroundColor: WidgetStatePropertyAll(
-                                          Color.fromARGB(255, 7, 80, 122))),
+                                          Config.colorPrimary)),
                                   onPressed: () {
                                     if (_formKey2.currentState!.validate()) {
                                       // All validations passed
@@ -699,7 +699,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                             style: const ButtonStyle(
                                 elevation: WidgetStatePropertyAll(5),
                                 backgroundColor: WidgetStatePropertyAll(
-                                    Color.fromARGB(255, 7, 80, 122))),
+                                    Config.colorPrimary)),
                             onPressed: () {
                               showNonResidentsByNationality(context);
                             },
@@ -802,7 +802,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                               style: const ButtonStyle(
                                   elevation: WidgetStatePropertyAll(5),
                                   backgroundColor: WidgetStatePropertyAll(
-                                      Color.fromARGB(255, 7, 80, 122))),
+                                      Config.colorPrimary)),
                               onPressed: () {
                                 showDialog(
                                   context: context,

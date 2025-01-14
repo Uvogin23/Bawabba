@@ -497,7 +497,7 @@ class _EmployeeTable extends State<EmployeeTable> {
             child: Icon(
               Icons.list_alt_rounded,
               size: 50,
-              color: Color.fromARGB(255, 13, 63, 89),
+              color: Config.colorPrimary,
             ),
           ),
           const SizedBox(

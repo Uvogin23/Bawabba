@@ -390,8 +390,8 @@ class _TouristTable1 extends State<TouristTable1> {
                       child: ElevatedButton(
                         style: const ButtonStyle(
                             elevation: WidgetStatePropertyAll(5),
-                            backgroundColor: WidgetStatePropertyAll(
-                                Color.fromARGB(255, 7, 80, 122))),
+                            backgroundColor:
+                                WidgetStatePropertyAll(Config.colorPrimary)),
                         onPressed: () async {
                           if (tourists.isNotEmpty) {
                             await _printDataTable(

@@ -2,6 +2,7 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/non_residents/nonResident_table1.dart';
 import 'package:bawabba/ui/widgets/non_residents/nonResidents_actions.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:bawabba/ui/widgets/side_menu2.dart';
@@ -103,6 +104,8 @@ class NonResidentsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           NonResidentsActions(),
+                          SizedBox(height: 20),
+                          NonResidentTable1(),
                         ],
                       ),
                     ),

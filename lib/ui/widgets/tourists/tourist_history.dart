@@ -127,7 +127,7 @@ class _HistoryTable extends State<HistoryTable> {
                           columnSpacing: 40.0,
                           headingRowHeight: 40.0,
                           headingRowColor: WidgetStateProperty.resolveWith(
-                              (states) => Color.fromARGB(255, 7, 80, 122)),
+                              (states) => Config.colorPrimary),
                           sortColumnIndex: sortColumnIndex,
                           sortAscending: isAscending,
                           columns: [
@@ -248,8 +248,8 @@ class _HistoryTable extends State<HistoryTable> {
                       child: ElevatedButton(
                         style: const ButtonStyle(
                             elevation: WidgetStatePropertyAll(5),
-                            backgroundColor: WidgetStatePropertyAll(
-                                Color.fromARGB(255, 7, 80, 122))),
+                            backgroundColor:
+                                WidgetStatePropertyAll(Config.colorPrimary)),
                         onPressed: () async {
                           if (tourists.isNotEmpty) {
                             await _printDataTable(

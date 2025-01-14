@@ -1,10 +1,9 @@
 import 'dart:convert';
+import 'package:bawabba/core/models/non_resident.dart';
 import 'package:bawabba/core/models/tourist.dart';
-import 'package:bawabba/core/models/diplomat.dart';
 import 'package:bawabba/core/services/config.dart';
-import 'package:bawabba/ui/widgets/diplomats/edit_dialogue.dart';
-import 'package:bawabba/ui/widgets/diplomats/show_dip_tour.dart';
-import 'package:bawabba/ui/widgets/diplomats/show_info.dart';
+import 'package:bawabba/ui/widgets/non_residents/edit_dialogue.dart';
+import 'package:bawabba/ui/widgets/non_residents/show_info.dart';
 import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
 import 'package:flutter/services.dart';
@@ -22,43 +21,42 @@ import 'package:provider/provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-Future<List<Diplomat>> fetchCurrentDiplomats() async {
+Future<List<NonResident>> fetchCurrentNonResidents() async {
   final response = await http
-      .get(Uri.parse('${Config.baseUrl}/api/diplomats/supposed_to_leave'));
+      .get(Uri.parse('${Config.baseUrl}/api/non_residents/still_in_city'));
 
   if (response.statusCode == 200) {
     try {
       List<dynamic> data = json.decode(response.body);
 
-      List<Diplomat> list =
-          data.map<Diplomat>((item) => Diplomat.fromJson(item)).toList();
+      List<NonResident> list =
+          data.map<NonResident>((item) => NonResident.fromJson(item)).toList();
 
       return list;
     } catch (e) {
-      print('Error parsing tourists: $e');
+      print('Error parsing non_residents: $e');
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {
-    throw Exception('Failed to load tourists: ${response.statusCode}');
+    throw Exception('Failed to load non_residents: ${response.body}');
   }
 }
 
-class DiplomatTable2 extends StatefulWidget {
-  const DiplomatTable2({Key? key}) : super(key: key);
+class NonResidentTable1 extends StatefulWidget {
+  const NonResidentTable1({Key? key}) : super(key: key);
 
   @override
-  State<DiplomatTable2> createState() => _DiplomatTable2();
+  State<NonResidentTable1> createState() => _NonResidentTable1();
 }
 
-class _DiplomatTable2 extends State<DiplomatTable2> {
-  late Future<List<Diplomat>> diplomatsFuture;
-  late List<Diplomat> diplomats;
+class _NonResidentTable1 extends State<NonResidentTable1> {
+  late Future<List<NonResident>> nonResidentsFuture;
+  late List<NonResident> nonResidents;
   bool isAscending = true;
   int? sortColumnIndex;
   final _formKey = GlobalKey<FormState>();
 
-  Map<int, bool> selectedItems = {};
-  List<int> selectedDiplomatsIds = [];
+  List<int> selectedNonResidentsIds = [];
 
   void _clearForm() {
     _formKey.currentState?.reset(); // Reset the form state
@@ -68,15 +66,15 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
     });
   }
 
-  Future<void> deleteDiplomatAPI(int id) async {
-    final url = Uri.parse('${Config.baseUrl}/api/diplomats/$id');
+  Future<void> deleteNonResidentsAPI(int id) async {
+    final url = Uri.parse('${Config.baseUrl}/api/non_residents/Delete/$id');
 
     final response = await http.delete(url);
     if (response.statusCode == 200) {
       setState(() {
-        diplomats.removeWhere((diplomat) => diplomat.id == id);
+        nonResidents.removeWhere((nonResident) => nonResident.id == id);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('تم حذف الدبلوماسي بنجاح')),
+          const SnackBar(content: Text('تم حذف الرعية بنجاح')),
         );
         // Call the success callback
         Navigator.pop(context);
@@ -84,7 +82,7 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
     }
 
     if (response.statusCode != 200) {
-      throw Exception('خلل أثناء محاولة حذف الدبلوماسي: ${response.body}');
+      throw Exception('خلل أثناء محاولة حذف الرعية: ${response.body}');
     }
   }
 
@@ -92,8 +90,8 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    diplomatsFuture = fetchCurrentDiplomats();
-    diplomats = [];
+    nonResidentsFuture = fetchCurrentNonResidents();
+    nonResidents = [];
   }
 
   void sortData(int columnIndex, bool ascending) {
@@ -101,48 +99,49 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
       isAscending = ascending;
       sortColumnIndex = columnIndex;
       if (columnIndex == 1) {
-        diplomats.sort(
+        nonResidents.sort(
             (a, b) => ascending ? a.id.compareTo(b.id) : b.id.compareTo(a.id));
       } else if (columnIndex == 2) {
-        diplomats.sort((a, b) => ascending
+        nonResidents.sort((a, b) => ascending
             ? a.firstName.compareTo(b.firstName)
             : b.firstName.compareTo(a.firstName));
       } else if (columnIndex == 3) {
-        diplomats.sort((a, b) => ascending
+        nonResidents.sort((a, b) => ascending
             ? a.lastName.compareTo(b.lastName)
             : b.lastName.compareTo(a.lastName));
       } else if (columnIndex == 4) {
-        diplomats.sort((a, b) => ascending
+        nonResidents.sort((a, b) => ascending
             ? a.nationality.compareTo(b.nationality)
             : b.nationality.compareTo(a.nationality));
       } else if (columnIndex == 7) {
-        diplomats.sort((a, b) => ascending
+        nonResidents.sort((a, b) => ascending
             ? a.msgRef.compareTo(b.msgRef)
             : b.msgRef.compareTo(a.msgRef));
       } else if (columnIndex == 8) {
-        diplomats.sort((a, b) => ascending
-            ? a.receivingAgency.compareTo(b.receivingAgency)
-            : b.receivingAgency.compareTo(a.receivingAgency));
+        nonResidents.sort((a, b) => ascending
+            ? a.purposeOfVisit.compareTo(b.purposeOfVisit)
+            : b.purposeOfVisit.compareTo(a.purposeOfVisit));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return FutureBuilder<List<Diplomat>>(
-      future: diplomatsFuture,
+    return FutureBuilder<List<NonResident>>(
+      future: nonResidentsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text("Error: ${snapshot.error}"));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text("لا يوجد دبلوماسيون بإقليم الولاية"));
+          return const Center(child: Text("لا يوجد رعايا بإقليم الولاية"));
         } else {
-          diplomats = snapshot.data!;
-          final containerHeight = diplomats.length < 4 ? 500.0 : 800.0;
+          nonResidents = snapshot.data!;
+          final containerHeight = nonResidents.length < 7 ? 500.0 : 800.0;
           return Container(
             width: screenWidth * 0.775,
             height: containerHeight,
@@ -179,33 +178,12 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                     Padding(
                       padding: EdgeInsets.only(top: 8),
                       child: Text(
-                        ' قائمة الدبلوماسيون المغادرين   ',
+                        'الرعايا المتواجدون بإقليم الولاية ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
                             fontFamily: 'Times New Roman',
                             fontSize: 16,
-                            letterSpacing:
-                                0 /*percentages not used in flutter. defaulting to zero*/,
-                            fontWeight: FontWeight.bold,
-                            height: 1),
-                      ),
-                    ),
-                  ],
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 10, right: 70),
-                      child: Text(
-                        'يغادرون بتاريخ اليوم أو تاريخ الأمس',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 79, 79, 82),
-                            fontFamily: 'Times New Roman',
-                            fontSize: 12,
                             letterSpacing:
                                 0 /*percentages not used in flutter. defaulting to zero*/,
                             fontWeight: FontWeight.bold,
@@ -226,7 +204,8 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                         columnSpacing: 35.0,
                         headingRowHeight: 40.0,
                         headingRowColor: WidgetStateProperty.resolveWith(
-                            (states) => Config.colorPrimary),
+                            (states) =>
+                                const Color.fromARGB(255, 233, 191, 24)),
                         sortColumnIndex: sortColumnIndex,
                         sortAscending: isAscending,
                         columns: [
@@ -234,58 +213,37 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                             label: const Text(""),
                           ),
                           DataColumn(
-                            label: const Text(
-                              "الرقم",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            label: const Text("الرقم"),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
                           ),
                           DataColumn(
-                            label: const Text(
-                              "الإسم",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            label: const Text("الإسم"),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
                           ),
                           DataColumn(
-                            label: const Text(
-                              "اللقب",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            label: const Text("اللقب"),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
                           ),
                           DataColumn(
-                            label: const Text(
-                              " الجنسية",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            label: const Text(" الجنسية"),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
                           ),
                           const DataColumn(
-                            label: Text(
-                              "تاريخ الوصول",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            label: Text("تاريخ الوصول"),
                           ),
                           const DataColumn(
-                            label: Text(
-                              "يغادر يوم",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            label: Text("يغادر يوم"),
                           ),
                           DataColumn(
-                            label: const Text(
-                              "المرجع",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            label: const Text("المرجع"),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
@@ -294,32 +252,34 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                             label: Text(""),
                           ),
                         ],
-                        rows: diplomats.map((diplomat) {
+                        rows: nonResidents.map((nonResident) {
                           return DataRow(
                             color: WidgetStateProperty.all(Colors.transparent),
                             cells: [
                               DataCell(
                                 IconButton(
                                   icon: Icon(
-                                    selectedDiplomatsIds.contains(diplomat.id)
+                                    selectedNonResidentsIds
+                                            .contains(nonResident.id)
                                         ? Icons.check_box
                                         : Icons.check_box_outline_blank,
-                                    color: selectedDiplomatsIds
-                                            .contains(diplomat.id)
+                                    color: selectedNonResidentsIds
+                                            .contains(nonResident.id)
                                         ? const Color.fromARGB(
                                             255, 212, 218, 141)
                                         : Colors.grey,
                                   ),
                                   onPressed: () {
                                     setState(() {
-                                      if (selectedDiplomatsIds
-                                          .contains(diplomat.id)) {
+                                      if (selectedNonResidentsIds
+                                          .contains(nonResident.id)) {
                                         // Deselect the tourist
-                                        selectedDiplomatsIds
-                                            .remove(diplomat.id);
+                                        selectedNonResidentsIds
+                                            .remove(nonResident.id);
                                       } else {
                                         // Select the tourist
-                                        selectedDiplomatsIds.add(diplomat.id);
+                                        selectedNonResidentsIds
+                                            .add(nonResident.id);
                                       }
                                     });
                                     /*for (int i = 0;
@@ -330,15 +290,16 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                                   },
                                 ),
                               ),
-                              DataCell(SelectableText(diplomat.id.toString())),
-                              DataCell(SelectableText(diplomat.firstName)),
-                              DataCell(SelectableText(diplomat.lastName)),
-                              DataCell(SelectableText(diplomat.nationality)),
+                              DataCell(
+                                  SelectableText(nonResident.id.toString())),
+                              DataCell(SelectableText(nonResident.firstName)),
+                              DataCell(SelectableText(nonResident.lastName)),
+                              DataCell(SelectableText(nonResident.nationality)),
                               DataCell(SelectableText(
-                                  formatDate(diplomat.arrivalDate))),
-                              DataCell(SelectableText(
-                                  formatDate(diplomat.expectedDepartureDate))),
-                              DataCell(SelectableText(diplomat.msgRef)),
+                                  formatDate(nonResident.arrivalDate))),
+                              DataCell(SelectableText(formatDate(
+                                  nonResident.expectedDepartureDate))),
+                              DataCell(SelectableText(nonResident.msgRef)),
                               DataCell(
                                 Row(
                                   children: [
@@ -346,26 +307,31 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                                       icon: const Icon(
                                           Icons.remove_red_eye_outlined),
                                       onPressed: () =>
-                                          viewDiplomat(diplomat, context),
+                                          viewNonResident(nonResident, context),
                                     ),
-                                    IconButton(
-                                        icon: const Icon(
-                                            Icons.person_search_sharp),
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return ViewDipTour(
-                                                id: diplomat.id,
-                                              );
-                                            },
-                                          );
-                                        }),
                                     IconButton(
                                       icon: const Icon(Icons.edit),
-                                      onPressed: () => showUpdateDiplomatDialog(
-                                          context, diplomat.id),
+                                      onPressed: () =>
+                                          showUpdateNonResidentDialog(
+                                              context, nonResident.id),
                                     ),
+                                    user?.role == 'operator'
+                                        ? IconButton(
+                                            icon: const Icon(Icons.delete),
+                                            onPressed: () {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                    content:
+                                                        Text('عملية ممنوعة')),
+                                              );
+                                            })
+                                        : IconButton(
+                                            icon: const Icon(Icons.delete),
+                                            onPressed: () {
+                                              showDeleteNonResidentDialog(
+                                                  context, nonResident.id);
+                                            }),
                                   ],
                                 ),
                               ),
@@ -386,7 +352,7 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                           elevation: 5,
                         ),
                         onPressed: () async {
-                          if (selectedDiplomatsIds.isNotEmpty) {
+                          if (selectedNonResidentsIds.isNotEmpty) {
                             logDepDialog(
                               context,
                             ); // Pass employees list here
@@ -394,7 +360,7 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content:
-                                      Text("يرجى إختيار السياح المغادرين")),
+                                      Text("يرجى إختيار الرعايا المغادرين")),
                             );
                           }
                         },
@@ -409,9 +375,9 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                             backgroundColor:
                                 WidgetStatePropertyAll(Config.colorPrimary)),
                         onPressed: () async {
-                          if (diplomats.isNotEmpty) {
+                          if (nonResidents.isNotEmpty) {
                             await _printDataTable(
-                                diplomats); // Pass employees list here
+                                nonResidents); // Pass employees list here
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -439,7 +405,7 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
     );
   }
 
-  void showDeleteDiplomatDialog(BuildContext context, int diplomatId) {
+  void showDeleteNonResidentDialog(BuildContext context, int nonResidentId) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -449,7 +415,7 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
             textAlign: TextAlign.center,
           ),
           content: const Text(
-            "هل أنت متأكد من حذف الدبلوماسي ؟ لا يمكن إلغاء الحذف بعد تأكيده",
+            "هل أنت متأكد من حذف الرعية ؟ لا يمكن إلغاء الحذف بعد تأكيده",
             textAlign: TextAlign.center,
           ),
           actions: [
@@ -460,11 +426,10 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  await deleteDiplomatAPI(diplomatId);
+                  await deleteNonResidentsAPI(nonResidentId);
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                        content: Text('خلل أثناء محاولة حذف الدبلوماسي: $e')),
+                    SnackBar(content: Text('خلل أثناء محاولة حذف الرعية: $e')),
                   );
                 }
               },
@@ -613,9 +578,9 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                   try {
                     //await updateTouristAPI(touristId, updatedData);
 
-                    for (int i = 0; i < selectedDiplomatsIds.length; i++) {
+                    for (int i = 0; i < selectedNonResidentsIds.length; i++) {
                       final updatedData = {
-                        'diplomat_id': selectedDiplomatsIds.elementAt(i),
+                        'tourist_id': selectedNonResidentsIds.elementAt(i),
                         if (expectedDepartureDateController.text.isNotEmpty)
                           'departure_time':
                               expectedDepartureDateController.text,
@@ -626,14 +591,14 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                           'dep_msg_ref': msgRefController.text,
                       };
 
-                      addDiplomatLog(updatedData);
-                      updateDiplomatAPI(
-                          selectedDiplomatsIds.elementAt(i), updatedData2);
+                      addNonResidentsLog(updatedData);
+                      updateTouristAPI(
+                          selectedNonResidentsIds.elementAt(i), updatedData2);
                     }
                     setState(() {
-                      diplomats.removeWhere((tourist) =>
-                          selectedDiplomatsIds.contains(tourist.id));
-                      selectedDiplomatsIds = [];
+                      nonResidents.removeWhere((tourist) =>
+                          selectedNonResidentsIds.contains(tourist.id));
+                      selectedNonResidentsIds = [];
                     });
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -660,16 +625,16 @@ String formatDate(DateTime date) {
   return formatter.format(date);
 }
 
-Future<void> _printDataTable(List<Diplomat> tourists) async {
+Future<void> _printDataTable(List<NonResident> tourists) async {
   final pdf = pw.Document();
   final arabicFont = await _loadFont('assets/fonts/Cairo-Regular.ttf');
 
   final headers = [
     'المرجع',
     'تاريخ المغادرة',
-    'الوكالة',
+    'المضيف',
     'جواز السفر',
-    'معلومات الوصول',
+    'الغرض من الزيارة',
     'تاريخ الوصول',
     'الجنسية',
     'اللقب',
@@ -682,9 +647,9 @@ Future<void> _printDataTable(List<Diplomat> tourists) async {
     return [
       tourist.msgRef,
       formatDate(tourist.expectedDepartureDate),
-      tourist.receivingAgency,
+      tourist.host,
       tourist.passportNumber,
-      tourist.arrivalFlightInfo,
+      tourist.purposeOfVisit,
       formatDate(tourist.arrivalDate),
       tourist.nationality,
       tourist.lastName,
@@ -743,8 +708,9 @@ Future<pw.Font> _loadFont(String path) async {
   return pw.Font.ttf(fontData.buffer.asByteData());
 }
 
-Future<void> addDiplomatLog(Map<String, dynamic> updatedData) async {
-  final url = Uri.parse('${Config.baseUrl}/api/dipomats/add_departure_log');
+Future<void> addNonResidentsLog(Map<String, dynamic> updatedData) async {
+  final url =
+      Uri.parse('${Config.baseUrl}/api/non_residents/add_departure_log');
   final response = await http.post(
     url,
     headers: {'Content-Type': 'application/json'},
@@ -752,6 +718,6 @@ Future<void> addDiplomatLog(Map<String, dynamic> updatedData) async {
   );
 
   if (response.statusCode != 201) {
-    throw Exception('Failed to update Diplomat: ${response.body}');
+    throw Exception('Failed to update non_residents: ${response.body}');
   }
 }

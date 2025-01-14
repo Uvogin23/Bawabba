@@ -636,8 +636,8 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
                         ElevatedButton(
                           style: const ButtonStyle(
                               elevation: WidgetStatePropertyAll(5),
-                              backgroundColor: WidgetStatePropertyAll(
-                                  Color.fromARGB(255, 7, 80, 122))),
+                              backgroundColor:
+                                  WidgetStatePropertyAll(Config.colorPrimary)),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               // All validations passed

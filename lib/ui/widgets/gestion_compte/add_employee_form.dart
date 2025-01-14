@@ -130,7 +130,7 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
           const Icon(
             Icons.group_add_outlined,
             size: 50,
-            color: Color.fromARGB(255, 13, 63, 89),
+            color: Config.colorPrimary,
           ),
           const SizedBox(
             height: 20,
@@ -139,7 +139,7 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
             'إضافة مستخدم جديد',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Color.fromARGB(255, 13, 63, 89),
+                color: Config.colorPrimary,
                 fontFamily: 'Times New Roman',
                 fontSize: 16,
                 letterSpacing:
