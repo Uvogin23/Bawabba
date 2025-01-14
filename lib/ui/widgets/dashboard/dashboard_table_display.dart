@@ -47,7 +47,7 @@ Future<List<Tourist>> fetchTourists() async {
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {
-    throw Exception('Failed to load diplomats: ${response.statusCode}');
+    throw Exception('Failed to load tourists: ${response.statusCode}');
   }
 }
 
@@ -64,17 +64,17 @@ Future<List<Citizen>> fetchCitizens() async {
 
       return list;
     } catch (e) {
-      print('Error parsing tourists: $e');
+      print('Error parsing Citizens: $e');
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {
-    throw Exception('Failed to load diplomats: ${response.statusCode}');
+    throw Exception('Failed to load Citizens: ${response.statusCode}');
   }
 }
 
 Future<List<NonResident>> fetchNonResidents() async {
   final response =
-      await http.get(Uri.parse('${Config.baseUrl}/api/stats/last-two/entre'));
+      await http.get(Uri.parse('${Config.baseUrl}/api/non_residents/last-two'));
 
   if (response.statusCode == 200) {
     try {
@@ -85,11 +85,11 @@ Future<List<NonResident>> fetchNonResidents() async {
 
       return list;
     } catch (e) {
-      print('Error parsing tourists: $e');
+      print('Error parsing non_residents: $e');
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {
-    throw Exception('Failed to load diplomats: ${response.statusCode}');
+    throw Exception('Failed to load non_residents: ${response.statusCode}');
   }
 }
 

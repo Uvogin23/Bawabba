@@ -20,9 +20,9 @@ void main() async {
   //windowManager.setMinimumSize(const Size(1500, 720));
   //windowManager.setMaximumSize(const Size(1600, 820));
   // Fullscreen on startup
-  // windowManager.waitUntilReadyToShow().then((_) async {
-  await windowManager.setFullScreen(true);
-  //});
+  windowManager.waitUntilReadyToShow().then((_) async {
+    await windowManager.setFullScreen(true);
+  });
 
   runApp(
     ChangeNotifierProvider(

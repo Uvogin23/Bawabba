@@ -2,6 +2,7 @@ import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
 import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/non_residents/nonResidents_actions.dart';
 import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:bawabba/ui/widgets/side_menu2.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,10 @@ class NonResidentsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  /*Positioned.fill(
+                  SizedBox(
+                    height: 05,
+                  ),
+                  Positioned.fill(
                     right: 0,
                     top: 100,
                     bottom: 30,
@@ -98,88 +102,11 @@ class NonResidentsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 1200,
-                            height: 300,
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: const Stack(
-                              children: <Widget>[
-                                DashboardCardDiplomat(),
-                                DashboardCardTourist(),
-                                DashboardCardAlg(),
-                                DashboardCardAcc(),
-                                DashboardCardEntre(),
-                                DashboardCardSortie(),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                              height: 50), // Space between cards and charts
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            width: 1230,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 239, 242, 243),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ChartDisplay(),
-                                ChartDisplayPie(),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 50),
-                          Container(
-                            width: 1230,
-                            height: 500,
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 239, 242, 243),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                BarChartDisplay(),
-                                ChartDisplay2(),
-                              ],
-                            ),
-                          ),
-
-                          const SizedBox(height: 50),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            width: 1150,
-                            height: 470,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                dataTablesDisplay(),
-                                dataTablesDisplay2(),
-                              ],
-                            ),
-                          ),
-                          // Space between cards and charts
+                          NonResidentsActions(),
                         ],
                       ),
                     ),
-                  ),*/
+                  ),
                   Positioned(
                     bottom: 5,
                     left: 15,
