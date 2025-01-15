@@ -110,12 +110,14 @@ void showDiplomatsByMonth(BuildContext context, int year) {
 
                           return DataRow(
                             cells: [
-                              DataCell(Text(nationality)),
+                              DataCell(
+                                  SelectableText(nationality, maxLines: 5)),
                               ...List.generate(12, (index) {
-                                return DataCell(
-                                    Text('${monthlyCounts[index]}'));
+                                return DataCell(SelectableText(
+                                    '${monthlyCounts[index]}',
+                                    maxLines: 5));
                               }),
-                              DataCell(Text('$total')),
+                              DataCell(SelectableText('$total', maxLines: 5)),
                             ],
                           );
                         }).toList(),

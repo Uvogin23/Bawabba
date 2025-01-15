@@ -293,17 +293,24 @@ class _DiplomatTable1 extends State<DiplomatTable1> {
                                       },
                                     ),
                                   ),
-                                  DataCell(
-                                      SelectableText(diplomat.id.toString())),
-                                  DataCell(SelectableText(diplomat.firstName)),
-                                  DataCell(SelectableText(diplomat.lastName)),
-                                  DataCell(
-                                      SelectableText(diplomat.nationality)),
                                   DataCell(SelectableText(
-                                      formatDate(diplomat.arrivalDate))),
-                                  DataCell(SelectableText(formatDate(
-                                      diplomat.expectedDepartureDate))),
-                                  DataCell(SelectableText(diplomat.msgRef)),
+                                      diplomat.id.toString(),
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(diplomat.firstName,
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(diplomat.lastName,
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(diplomat.nationality,
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(
+                                      formatDate(diplomat.arrivalDate),
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(
+                                      formatDate(
+                                          diplomat.expectedDepartureDate),
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(diplomat.msgRef,
+                                      maxLines: 5)),
                                   DataCell(
                                     Row(
                                       children: [

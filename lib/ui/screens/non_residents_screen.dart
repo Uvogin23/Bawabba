@@ -1,20 +1,12 @@
-import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
-import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
+import 'package:bawabba/ui/widgets/non_residents/add_nonResident_form.dart';
 import 'package:bawabba/ui/widgets/non_residents/nonResident_table1.dart';
+import 'package:bawabba/ui/widgets/non_residents/nonResident_table2.dart';
 import 'package:bawabba/ui/widgets/non_residents/nonResidents_actions.dart';
-import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:bawabba/ui/widgets/side_menu2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:window_manager/window_manager.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_tourist.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_diplomat.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_alg.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_acc.dart';
-import 'package:bawabba/ui/widgets/dashboard/chart_display.dart';
 
 class NonResidentsHome extends StatefulWidget {
   const NonResidentsHome({
@@ -103,7 +95,11 @@ class NonResidentsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          AddNonResidentForm(),
+                          SizedBox(height: 20),
                           NonResidentsActions(),
+                          SizedBox(height: 20),
+                          NonResidentsTable2(),
                           SizedBox(height: 20),
                           NonResidentTable1(),
                         ],

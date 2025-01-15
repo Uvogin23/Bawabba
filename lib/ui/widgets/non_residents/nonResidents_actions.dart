@@ -217,16 +217,24 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                         return DataRow(
                           color: WidgetStateProperty.all(Colors.transparent),
                           cells: [
-                            DataCell(SelectableText(nonResident.id.toString())),
-                            DataCell(SelectableText(nonResident.firstName)),
-                            DataCell(SelectableText(nonResident.lastName)),
-                            DataCell(SelectableText(nonResident.nationality)),
+                            DataCell(SelectableText(nonResident.id.toString(),
+                                maxLines: 5)),
+                            DataCell(SelectableText(nonResident.firstName,
+                                maxLines: 5)),
+                            DataCell(SelectableText(nonResident.lastName,
+                                maxLines: 5)),
+                            DataCell(SelectableText(nonResident.nationality,
+                                maxLines: 5)),
                             DataCell(SelectableText(
-                                formatDate(nonResident.arrivalDate))),
+                                formatDate(nonResident.arrivalDate),
+                                maxLines: 5)),
                             DataCell(SelectableText(
-                                formatDate(nonResident.expectedDepartureDate))),
-                            DataCell(SelectableText(nonResident.msgRef)),
-                            DataCell(SelectableText(nonResident.host)),
+                                formatDate(nonResident.expectedDepartureDate),
+                                maxLines: 5)),
+                            DataCell(SelectableText(nonResident.msgRef,
+                                maxLines: 5)),
+                            DataCell(
+                                SelectableText(nonResident.host, maxLines: 5)),
                             DataCell(
                               Row(
                                 children: [

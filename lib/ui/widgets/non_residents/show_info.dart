@@ -140,7 +140,7 @@ Widget _buildTouristInfoRow2(
     );
   }
   return const Text(
-    'الرعية لا يزال متواجدا بإقليم الإختصاص ',
+    'السائح لا يزال متواجدا بإقليم الإختصاص ',
     style:
         TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.red),
   );

@@ -584,16 +584,22 @@ class _EmployeeTable extends State<EmployeeTable> {
                                 255, 144, 151, 165)) // Highlight color
                             : WidgetStateProperty.all(Colors.transparent),
                         cells: [
+                          DataCell(SelectableText(
+                              employee.employeeId.toString(),
+                              maxLines: 5)),
                           DataCell(
-                              SelectableText(employee.employeeId.toString())),
-                          DataCell(SelectableText(employee.firstName)),
-                          DataCell(SelectableText(employee.lastName)),
-                          DataCell(SelectableText(employee.badgeNumber)),
-                          DataCell(SelectableText(employee.username)),
+                              SelectableText(employee.firstName, maxLines: 5)),
                           DataCell(
-                              SelectableText(_getGradeLabel(employee.grade))),
+                              SelectableText(employee.lastName, maxLines: 5)),
+                          DataCell(SelectableText(employee.badgeNumber,
+                              maxLines: 5)),
                           DataCell(
-                              SelectableText(_getRoleLabel(employee.role))),
+                              SelectableText(employee.username, maxLines: 5)),
+                          DataCell(SelectableText(
+                              _getGradeLabel(employee.grade),
+                              maxLines: 5)),
+                          DataCell(SelectableText(_getRoleLabel(employee.role),
+                              maxLines: 5)),
                           DataCell(
                             Row(
                               children: [

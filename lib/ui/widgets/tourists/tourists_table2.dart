@@ -334,15 +334,22 @@ class _TouristTable2 extends State<TouristTable2> {
                                 },
                               ),
                             ),
-                            DataCell(SelectableText(tourist.id.toString())),
-                            DataCell(SelectableText(tourist.firstName)),
-                            DataCell(SelectableText(tourist.lastName)),
-                            DataCell(SelectableText(tourist.nationality)),
+                            DataCell(SelectableText(tourist.id.toString(),
+                                maxLines: 5)),
+                            DataCell(
+                                SelectableText(tourist.firstName, maxLines: 5)),
+                            DataCell(
+                                SelectableText(tourist.lastName, maxLines: 5)),
+                            DataCell(SelectableText(tourist.nationality,
+                                maxLines: 5)),
                             DataCell(SelectableText(
-                                formatDate(tourist.arrivalDate))),
+                                formatDate(tourist.arrivalDate),
+                                maxLines: 5)),
                             DataCell(SelectableText(
-                                formatDate(tourist.expectedDepartureDate))),
-                            DataCell(SelectableText(tourist.msgRef)),
+                                formatDate(tourist.expectedDepartureDate),
+                                maxLines: 5)),
+                            DataCell(
+                                SelectableText(tourist.msgRef, maxLines: 5)),
                             DataCell(
                               Row(
                                 children: [

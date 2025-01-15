@@ -79,10 +79,12 @@ void showNonResidentsByNationality(BuildContext context) {
                     ],
                     rows: data.map((country) {
                       return DataRow(cells: [
-                        DataCell(Text(
+                        DataCell(SelectableText(
                           country['nationality'],
+                          maxLines: 5,
                         )),
-                        DataCell(Text('${country['count']}')),
+                        DataCell(
+                            SelectableText('${country['count']}', maxLines: 5)),
                       ]);
                     }).toList(),
                   ),

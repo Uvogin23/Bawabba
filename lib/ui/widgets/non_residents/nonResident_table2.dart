@@ -1,88 +1,55 @@
 import 'dart:convert';
-import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/models/non_resident.dart';
 import 'package:bawabba/core/services/config.dart';
-import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
-import 'package:bawabba/ui/widgets/tourists/show_info.dart';
+import 'package:bawabba/ui/widgets/non_residents/edit_dialogue.dart';
+import 'package:bawabba/ui/widgets/non_residents/nonResidents_actions.dart';
+import 'package:bawabba/ui/widgets/non_residents/show_info.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:printing/printing.dart';
-import 'package:window_manager/window_manager.dart';
-import 'package:bawabba/core/services/card_stats.dart';
-import 'package:bawabba/core/models/user.dart';
-import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/main.dart';
-import 'package:provider/provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-Future<List<Tourist>> fetchExpectedTourists() async {
+Future<List<NonResident>> fetchExpectedNonResidents() async {
   final response = await http
-      .get(Uri.parse('${Config.baseUrl}/api/tourists/supposed_to_leave'));
+      .get(Uri.parse('${Config.baseUrl}/api/non_residents/supposed_to_leave'));
 
   if (response.statusCode == 200) {
     try {
       List<dynamic> data = json.decode(response.body);
 
-      List<Tourist> list =
-          data.map<Tourist>((item) => Tourist.fromJson(item)).toList();
+      List<NonResident> list =
+          data.map<NonResident>((item) => NonResident.fromJson(item)).toList();
 
       return list;
     } catch (e) {
       rethrow; // Re-throw the exception for handling elsewhere
     }
   } else {
-    throw Exception('Failed to load diplomats: ${response.statusCode}');
+    throw Exception('Failed to load non_residents: ${response.statusCode}');
   }
 }
 
-class TouristTable2 extends StatefulWidget {
-  const TouristTable2({Key? key}) : super(key: key);
+class NonResidentsTable2 extends StatefulWidget {
+  const NonResidentsTable2({Key? key}) : super(key: key);
 
   @override
-  State<TouristTable2> createState() => _TouristTable2();
+  State<NonResidentsTable2> createState() => _NonResidentsTable2();
 }
 
-class _TouristTable2 extends State<TouristTable2> {
-  late Future<List<Tourist>> touristsFuture;
-  late List<Tourist> tourists;
+class _NonResidentsTable2 extends State<NonResidentsTable2> {
+  late Future<List<NonResident>> nonResidentsFuture;
+  late List<NonResident> nonResidents;
   bool isAscending = true;
   int? sortColumnIndex;
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _placeOfBirthController = TextEditingController();
-  final TextEditingController _passportNumberController =
-      TextEditingController();
-
-  final TextEditingController _receivingAgencyController =
-      TextEditingController();
-  final TextEditingController _circuitController = TextEditingController();
-  final TextEditingController _arrivalFlightInfoController =
-      TextEditingController();
-  final TextEditingController _departureFlightInfoController =
-      TextEditingController();
-  final TextEditingController _touristicGuideController =
-      TextEditingController();
-  final TextEditingController _msgRefController = TextEditingController();
   Map<int, bool> selectedItems = {};
-  List<int> selectedTouristIds = [];
-
+  List<int> selectednonResidentIds = [];
   void _clearForm() {
     _formKey.currentState?.reset(); // Reset the form state
-    _placeOfBirthController.clear(); // Clear the name field
-    _firstNameController.clear();
-    _lastNameController.clear();
-    _passportNumberController.clear();
-    _receivingAgencyController.clear();
-    _circuitController.clear();
-    _arrivalFlightInfoController.clear();
-    _departureFlightInfoController.clear();
-    _touristicGuideController.clear();
-    _msgRefController.clear();
-
     setState(() {
       // Clear the dropdown selection
     });
@@ -92,8 +59,8 @@ class _TouristTable2 extends State<TouristTable2> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    touristsFuture = fetchExpectedTourists();
-    tourists = [];
+    nonResidentsFuture = fetchExpectedNonResidents();
+    nonResidents = [];
   }
 
   void sortData(int columnIndex, bool ascending) {
@@ -101,28 +68,27 @@ class _TouristTable2 extends State<TouristTable2> {
       isAscending = ascending;
       sortColumnIndex = columnIndex;
       if (columnIndex == 1) {
-        tourists.sort(
+        nonResidents.sort(
             (a, b) => ascending ? a.id.compareTo(b.id) : b.id.compareTo(a.id));
       } else if (columnIndex == 2) {
-        tourists.sort((a, b) => ascending
+        nonResidents.sort((a, b) => ascending
             ? a.firstName.compareTo(b.firstName)
             : b.firstName.compareTo(a.firstName));
       } else if (columnIndex == 3) {
-        tourists.sort((a, b) => ascending
+        nonResidents.sort((a, b) => ascending
             ? a.lastName.compareTo(b.lastName)
             : b.lastName.compareTo(a.lastName));
       } else if (columnIndex == 4) {
-        tourists.sort((a, b) => ascending
+        nonResidents.sort((a, b) => ascending
             ? a.nationality.compareTo(b.nationality)
             : b.nationality.compareTo(a.nationality));
       } else if (columnIndex == 7) {
-        tourists.sort((a, b) => ascending
+        nonResidents.sort((a, b) => ascending
             ? a.msgRef.compareTo(b.msgRef)
             : b.msgRef.compareTo(a.msgRef));
       } else if (columnIndex == 8) {
-        tourists.sort((a, b) => ascending
-            ? a.receivingAgency.compareTo(b.receivingAgency)
-            : b.receivingAgency.compareTo(a.receivingAgency));
+        nonResidents.sort((a, b) =>
+            ascending ? a.host.compareTo(b.host) : b.host.compareTo(a.host));
       }
     });
   }
@@ -132,18 +98,18 @@ class _TouristTable2 extends State<TouristTable2> {
     //final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return FutureBuilder<List<Tourist>>(
-      future: touristsFuture,
+    return FutureBuilder<List<NonResident>>(
+      future: nonResidentsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text("Error: ${snapshot.error}"));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text("لا يوجد سياح بإقليم الولاية"));
+          return const Center(child: Text("لا يوجد رعايا بإقليم الولاية"));
         } else {
-          tourists = snapshot.data!;
-          final containerHeight = tourists.length < 7 ? 600.0 : 800.0;
+          nonResidents = snapshot.data!;
+          final containerHeight = nonResidents.length < 7 ? 600.0 : 700.0;
           return Container(
             width: screenWidth * 0.775,
             height: containerHeight,
@@ -180,33 +146,12 @@ class _TouristTable2 extends State<TouristTable2> {
                     Padding(
                       padding: EdgeInsets.only(top: 8),
                       child: Text(
-                        'قائمة السياح المغادرين ',
+                        'قائمة الرعايا المغادرين ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
                             fontFamily: 'Times New Roman',
                             fontSize: 16,
-                            letterSpacing:
-                                0 /*percentages not used in flutter. defaulting to zero*/,
-                            fontWeight: FontWeight.bold,
-                            height: 1),
-                      ),
-                    ),
-                  ],
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 10, right: 70),
-                      child: Text(
-                        'يغادرون بتاريخ اليوم أو تاريخ الأمس',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 79, 79, 82),
-                            fontFamily: 'Times New Roman',
-                            fontSize: 12,
                             letterSpacing:
                                 0 /*percentages not used in flutter. defaulting to zero*/,
                             fontWeight: FontWeight.bold,
@@ -301,29 +246,33 @@ class _TouristTable2 extends State<TouristTable2> {
                           ),
                         ),
                       ],
-                      rows: tourists.map((tourist) {
+                      rows: nonResidents.map((nonResident) {
                         return DataRow(
                           color: WidgetStateProperty.all(Colors.transparent),
                           cells: [
                             DataCell(
                               IconButton(
                                 icon: Icon(
-                                  selectedTouristIds.contains(tourist.id)
+                                  selectednonResidentIds
+                                          .contains(nonResident.id)
                                       ? Icons.check_box
                                       : Icons.check_box_outline_blank,
-                                  color: selectedTouristIds.contains(tourist.id)
+                                  color: selectednonResidentIds
+                                          .contains(nonResident.id)
                                       ? const Color.fromARGB(255, 144, 194, 230)
                                       : Colors.grey,
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    if (selectedTouristIds
-                                        .contains(tourist.id)) {
+                                    if (selectednonResidentIds
+                                        .contains(nonResident.id)) {
                                       // Deselect the tourist
-                                      selectedTouristIds.remove(tourist.id);
+                                      selectednonResidentIds
+                                          .remove(nonResident.id);
                                     } else {
                                       // Select the tourist
-                                      selectedTouristIds.add(tourist.id);
+                                      selectednonResidentIds
+                                          .add(nonResident.id);
                                     }
                                   });
                                   /*for (int i = 0;
@@ -334,15 +283,26 @@ class _TouristTable2 extends State<TouristTable2> {
                                 },
                               ),
                             ),
-                            DataCell(SelectableText(tourist.id.toString())),
-                            DataCell(SelectableText(tourist.firstName)),
-                            DataCell(SelectableText(tourist.lastName)),
-                            DataCell(SelectableText(tourist.nationality)),
                             DataCell(SelectableText(
-                                formatDate(tourist.arrivalDate))),
+                              nonResident.id.toString(),
+                              maxLines: 5,
+                            )),
                             DataCell(SelectableText(
-                                formatDate(tourist.expectedDepartureDate))),
-                            DataCell(SelectableText(tourist.msgRef)),
+                              nonResident.firstName,
+                              maxLines: 5,
+                            )),
+                            DataCell(SelectableText(nonResident.lastName,
+                                maxLines: 5)),
+                            DataCell(SelectableText(nonResident.nationality,
+                                maxLines: 5)),
+                            DataCell(SelectableText(
+                                formatDate(nonResident.arrivalDate),
+                                maxLines: 5)),
+                            DataCell(SelectableText(
+                                formatDate(nonResident.expectedDepartureDate),
+                                maxLines: 5)),
+                            DataCell(SelectableText(nonResident.msgRef,
+                                maxLines: 5)),
                             DataCell(
                               Row(
                                 children: [
@@ -350,12 +310,13 @@ class _TouristTable2 extends State<TouristTable2> {
                                     icon: const Icon(
                                         Icons.remove_red_eye_outlined),
                                     onPressed: () =>
-                                        viewTourist(tourist, context),
+                                        viewNonResident(nonResident, context),
                                   ),
                                   IconButton(
                                     icon: const Icon(Icons.edit),
-                                    onPressed: () => showUpdateTouristDialog(
-                                        context, tourist.id),
+                                    onPressed: () =>
+                                        showUpdateNonResidentDialog(
+                                            context, nonResident.id),
                                   ),
                                 ],
                               ),
@@ -378,7 +339,7 @@ class _TouristTable2 extends State<TouristTable2> {
                           elevation: 5,
                         ),
                         onPressed: () async {
-                          if (selectedTouristIds.isNotEmpty) {
+                          if (selectednonResidentIds.isNotEmpty) {
                             logDepDialog(
                               context,
                             ); // Pass employees list here
@@ -386,7 +347,7 @@ class _TouristTable2 extends State<TouristTable2> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content:
-                                      Text("يرجى إختيار السياح المغادرين")),
+                                      Text("يرجى إختيار الرعايا المغادرين")),
                             );
                           }
                         },
@@ -403,9 +364,9 @@ class _TouristTable2 extends State<TouristTable2> {
                             backgroundColor:
                                 WidgetStatePropertyAll(Config.colorPrimary)),
                         onPressed: () async {
-                          if (tourists.isNotEmpty) {
+                          if (nonResidents.isNotEmpty) {
                             await _printDataTable(
-                                tourists); // Pass employees list here
+                                nonResidents); // Pass employees list here
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -439,7 +400,7 @@ class _TouristTable2 extends State<TouristTable2> {
     final _formKey = GlobalKey<FormState>();
 
     final expectedDepartureDateController = TextEditingController();
-    final departureFlightInfoController = TextEditingController();
+    final observationController = TextEditingController();
     final msgRefController = TextEditingController();
 
     showDialog(
@@ -530,8 +491,8 @@ class _TouristTable2 extends State<TouristTable2> {
                     "تاريخ المغادرة",
                   ),
                   _buildTextField(
-                    departureFlightInfoController,
-                    "معلومات المغادرة",
+                    observationController,
+                    "ملاحظة",
                   ),
                   _buildTextField(
                     msgRefController,
@@ -555,35 +516,34 @@ class _TouristTable2 extends State<TouristTable2> {
                     if (expectedDepartureDateController.text.isNotEmpty)
                       'expected_departure_date':
                           expectedDepartureDateController.text,
-                    if (departureFlightInfoController.text.isNotEmpty)
-                      'departure_flight_info':
-                          departureFlightInfoController.text,
+                    if (observationController.text.isNotEmpty)
+                      'observations': observationController.text,
                   };
 
                   try {
                     //await updateTouristAPI(touristId, updatedData);
 
-                    for (int i = 0; i < selectedTouristIds.length; i++) {
+                    for (int i = 0; i < selectednonResidentIds.length; i++) {
                       final updatedData = {
-                        'tourist_id': selectedTouristIds.elementAt(i),
+                        'non_resident_id': selectednonResidentIds.elementAt(i),
                         if (expectedDepartureDateController.text.isNotEmpty)
                           'departure_time':
                               expectedDepartureDateController.text,
-                        if (departureFlightInfoController.text.isNotEmpty)
-                          'departure_method':
-                              departureFlightInfoController.text,
+                        if (observationController.text.isNotEmpty)
+                          'observations': observationController.text,
                         if (msgRefController.text.isNotEmpty)
                           'dep_msg_ref': msgRefController.text,
                       };
 
-                      addTouristLog(updatedData);
-                      updateTouristAPI(
-                          selectedTouristIds.elementAt(i), updatedData2);
+                      addNonResidentsLog(updatedData);
+
+                      updateNonResidentAPI(
+                          selectednonResidentIds.elementAt(i), updatedData2);
                     }
                     setState(() {
-                      tourists.removeWhere(
-                          (tourist) => selectedTouristIds.contains(tourist.id));
-                      selectedTouristIds = [];
+                      nonResidents.removeWhere((tourist) =>
+                          selectednonResidentIds.contains(tourist.id));
+                      selectednonResidentIds = [];
                     });
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -610,7 +570,7 @@ String formatDate(DateTime date) {
   return formatter.format(date);
 }
 
-Future<void> _printDataTable(List<Tourist> tourists) async {
+Future<void> _printDataTable(List<NonResident> nonResidents) async {
   final pdf = pw.Document();
   final arabicFont = await _loadFont('assets/fonts/Cairo-Regular.ttf');
 
@@ -628,18 +588,18 @@ Future<void> _printDataTable(List<Tourist> tourists) async {
   ];
 
   // Convert tourists data to rows
-  final dataRows = tourists.map((tourist) {
+  final dataRows = nonResidents.map((nonResident) {
     return [
-      tourist.msgRef,
-      formatDate(tourist.expectedDepartureDate),
-      tourist.receivingAgency,
-      tourist.passportNumber,
-      tourist.arrivalFlightInfo,
-      formatDate(tourist.arrivalDate),
-      tourist.nationality,
-      tourist.lastName,
-      tourist.firstName,
-      tourist.id.toString(),
+      nonResident.msgRef,
+      formatDate(nonResident.expectedDepartureDate),
+      nonResident.host,
+      nonResident.passportNumber,
+      nonResident.vehicleInformation,
+      formatDate(nonResident.arrivalDate),
+      nonResident.nationality,
+      nonResident.lastName,
+      nonResident.firstName,
+      nonResident.id.toString(),
     ];
   }).toList();
 
@@ -693,8 +653,9 @@ Future<pw.Font> _loadFont(String path) async {
   return pw.Font.ttf(fontData.buffer.asByteData());
 }
 
-Future<void> addTouristLog(Map<String, dynamic> updatedData) async {
-  final url = Uri.parse('${Config.baseUrl}/api/tourists/add_departure_log');
+Future<void> addNonResidentsLog(Map<String, dynamic> updatedData) async {
+  final url =
+      Uri.parse('${Config.baseUrl}/api/non_residents/add_departure_log');
   final response = await http.post(
     url,
     headers: {'Content-Type': 'application/json'},
@@ -702,6 +663,6 @@ Future<void> addTouristLog(Map<String, dynamic> updatedData) async {
   );
 
   if (response.statusCode != 201) {
-    throw Exception('Failed to update tourist: ${response.body}');
+    throw Exception('Failed to update non_residents: ${response.body}');
   }
 }

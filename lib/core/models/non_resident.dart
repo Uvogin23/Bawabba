@@ -60,6 +60,7 @@ class NonResident {
       observations: json[13],
       createdAt: rfc1123Format.parse(json[14]),
       msgRef: json[15],
+      depMsgReff: json[16],
     );
   }
 

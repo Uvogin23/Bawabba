@@ -30,7 +30,7 @@ Future<List<NonResident>> fetchHistoryNonResidents() async {
 
       List<NonResident> list =
           data.map<NonResident>((item) => NonResident.fromJson(item)).toList();
-
+      print(list.first.depMsgReff);
       return list;
     } catch (e) {
       rethrow; // Re-throw the exception for handling elsewhere
@@ -210,18 +210,26 @@ class _NRHistoryTable extends State<NRHistoryTable> {
                               color:
                                   WidgetStateProperty.all(Colors.transparent),
                               cells: [
-                                DataCell(
-                                    SelectableText(nonResident.id.toString())),
-                                DataCell(SelectableText(nonResident.firstName)),
-                                DataCell(SelectableText(nonResident.lastName)),
-                                DataCell(
-                                    SelectableText(nonResident.nationality)),
                                 DataCell(SelectableText(
-                                    formatDate(nonResident.arrivalDate))),
-                                DataCell(SelectableText(formatDate(
-                                    nonResident.expectedDepartureDate))),
-                                DataCell(SelectableText(nonResident.msgRef)),
-                                DataCell(SelectableText(nonResident.host)),
+                                    nonResident.id.toString(),
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.firstName,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.lastName,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.nationality,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(
+                                    formatDate(nonResident.arrivalDate),
+                                    maxLines: 5)),
+                                DataCell(SelectableText(
+                                    formatDate(
+                                        nonResident.expectedDepartureDate),
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.msgRef,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.host,
+                                    maxLines: 5)),
                                 DataCell(
                                   Row(
                                     children: [

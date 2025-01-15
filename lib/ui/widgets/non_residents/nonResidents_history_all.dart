@@ -128,7 +128,7 @@ class _NRHistoryTable2 extends State<NRHistoryTable2> {
                           columnSpacing: 40.0,
                           headingRowHeight: 40.0,
                           headingRowColor: WidgetStateProperty.resolveWith(
-                              (states) => Color.fromARGB(255, 7, 122, 26)
+                              (states) => Config.colorPrimary
                               //Color.fromARGB(255, 7, 122, 26)
                               ),
                           sortColumnIndex: sortColumnIndex,
@@ -212,19 +212,27 @@ class _NRHistoryTable2 extends State<NRHistoryTable2> {
                               color:
                                   WidgetStateProperty.all(Colors.transparent),
                               cells: [
-                                DataCell(
-                                    SelectableText(nonResident.id.toString())),
-                                DataCell(SelectableText(nonResident.firstName)),
-                                DataCell(SelectableText(nonResident.lastName)),
-                                DataCell(
-                                    SelectableText(nonResident.nationality)),
                                 DataCell(SelectableText(
-                                    formatDate(nonResident.arrivalDate))),
-                                DataCell(SelectableText(formatDate(
-                                    nonResident.expectedDepartureDate))),
-                                DataCell(SelectableText(nonResident.msgRef)),
-                                DataCell(
-                                    SelectableText(nonResident.purposeOfVisit)),
+                                    nonResident.id.toString(),
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.firstName,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.lastName,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.nationality,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(
+                                    formatDate(nonResident.arrivalDate),
+                                    maxLines: 5)),
+                                DataCell(SelectableText(
+                                    formatDate(
+                                        nonResident.expectedDepartureDate),
+                                    maxLines: 5)),
+                                DataCell(SelectableText(nonResident.msgRef,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(
+                                    nonResident.purposeOfVisit,
+                                    maxLines: 5)),
                                 DataCell(
                                   Row(
                                     children: [

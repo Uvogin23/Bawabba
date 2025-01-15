@@ -290,16 +290,22 @@ class _NonResidentTable1 extends State<NonResidentTable1> {
                                   },
                                 ),
                               ),
-                              DataCell(
-                                  SelectableText(nonResident.id.toString())),
-                              DataCell(SelectableText(nonResident.firstName)),
-                              DataCell(SelectableText(nonResident.lastName)),
-                              DataCell(SelectableText(nonResident.nationality)),
+                              DataCell(SelectableText(nonResident.id.toString(),
+                                  maxLines: 5)),
+                              DataCell(SelectableText(nonResident.firstName,
+                                  maxLines: 5)),
+                              DataCell(SelectableText(nonResident.lastName,
+                                  maxLines: 5)),
+                              DataCell(SelectableText(nonResident.nationality,
+                                  maxLines: 5)),
                               DataCell(SelectableText(
-                                  formatDate(nonResident.arrivalDate))),
-                              DataCell(SelectableText(formatDate(
-                                  nonResident.expectedDepartureDate))),
-                              DataCell(SelectableText(nonResident.msgRef)),
+                                  formatDate(nonResident.arrivalDate),
+                                  maxLines: 5)),
+                              DataCell(SelectableText(
+                                  formatDate(nonResident.expectedDepartureDate),
+                                  maxLines: 5)),
+                              DataCell(SelectableText(nonResident.msgRef,
+                                  maxLines: 5)),
                               DataCell(
                                 Row(
                                   children: [
@@ -454,7 +460,7 @@ class _NonResidentTable1 extends State<NonResidentTable1> {
     final _formKey = GlobalKey<FormState>();
 
     final expectedDepartureDateController = TextEditingController();
-    final departureFlightInfoController = TextEditingController();
+    final observationController = TextEditingController();
     final msgRefController = TextEditingController();
 
     showDialog(
@@ -545,8 +551,8 @@ class _NonResidentTable1 extends State<NonResidentTable1> {
                     "تاريخ المغادرة",
                   ),
                   _buildTextField(
-                    departureFlightInfoController,
-                    "معلومات المغادرة",
+                    observationController,
+                    "ملاحظة",
                   ),
                   _buildTextField(
                     msgRefController,
@@ -570,9 +576,8 @@ class _NonResidentTable1 extends State<NonResidentTable1> {
                     if (expectedDepartureDateController.text.isNotEmpty)
                       'expected_departure_date':
                           expectedDepartureDateController.text,
-                    if (departureFlightInfoController.text.isNotEmpty)
-                      'departure_flight_info':
-                          departureFlightInfoController.text,
+                    if (observationController.text.isNotEmpty)
+                      'observations': observationController.text,
                   };
 
                   try {
@@ -580,19 +585,19 @@ class _NonResidentTable1 extends State<NonResidentTable1> {
 
                     for (int i = 0; i < selectedNonResidentsIds.length; i++) {
                       final updatedData = {
-                        'tourist_id': selectedNonResidentsIds.elementAt(i),
+                        'non_resident_id': selectedNonResidentsIds.elementAt(i),
                         if (expectedDepartureDateController.text.isNotEmpty)
                           'departure_time':
                               expectedDepartureDateController.text,
-                        if (departureFlightInfoController.text.isNotEmpty)
-                          'departure_method':
-                              departureFlightInfoController.text,
+                        if (observationController.text.isNotEmpty)
+                          'observations': observationController.text,
                         if (msgRefController.text.isNotEmpty)
                           'dep_msg_ref': msgRefController.text,
                       };
 
                       addNonResidentsLog(updatedData);
-                      updateTouristAPI(
+
+                      updateNonResidentAPI(
                           selectedNonResidentsIds.elementAt(i), updatedData2);
                     }
                     setState(() {

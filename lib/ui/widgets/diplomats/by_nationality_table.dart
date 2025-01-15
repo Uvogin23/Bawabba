@@ -79,10 +79,10 @@ void showDiplomatsByNationality(BuildContext context) {
                     ],
                     rows: data.map((country) {
                       return DataRow(cells: [
-                        DataCell(Text(
-                          country['nationality'],
-                        )),
-                        DataCell(Text('${country['count']}')),
+                        DataCell(SelectableText(country['nationality'],
+                            maxLines: 5)),
+                        DataCell(
+                            SelectableText('${country['count']}', maxLines: 5)),
                       ]);
                     }).toList(),
                   ),

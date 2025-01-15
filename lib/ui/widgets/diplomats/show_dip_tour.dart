@@ -253,17 +253,23 @@ class _ViewDipTour extends State<ViewDipTour> {
                                       )
                                     : const Icon(
                                         Icons.playlist_add_check_sharp)),
-                                DataCell(SelectableText(tourist.id.toString())),
-                                DataCell(SelectableText(tourist.firstName)),
-                                DataCell(SelectableText(tourist.lastName)),
-                                DataCell(SelectableText(tourist.nationality)),
+                                DataCell(SelectableText(tourist.id.toString(),
+                                    maxLines: 5)),
+                                DataCell(SelectableText(tourist.firstName,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(tourist.lastName,
+                                    maxLines: 5)),
+                                DataCell(SelectableText(tourist.nationality,
+                                    maxLines: 5)),
                                 DataCell(SelectableText(
-                                    formatDate(tourist.arrivalDate))),
+                                    formatDate(tourist.arrivalDate),
+                                    maxLines: 5)),
                                 DataCell(SelectableText(
-                                    formatDate(tourist.expectedDepartureDate))),
+                                    formatDate(tourist.expectedDepartureDate),
+                                    maxLines: 5)),
                                 DataCell(SelectableText(tourist.msgRef)),
-                                DataCell(
-                                    SelectableText(tourist.receivingAgency)),
+                                DataCell(SelectableText(tourist.receivingAgency,
+                                    maxLines: 5)),
                                 DataCell(
                                   Row(
                                     children: [

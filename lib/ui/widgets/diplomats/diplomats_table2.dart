@@ -330,15 +330,22 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
                                   },
                                 ),
                               ),
-                              DataCell(SelectableText(diplomat.id.toString())),
-                              DataCell(SelectableText(diplomat.firstName)),
-                              DataCell(SelectableText(diplomat.lastName)),
-                              DataCell(SelectableText(diplomat.nationality)),
+                              DataCell(SelectableText(diplomat.id.toString(),
+                                  maxLines: 5)),
+                              DataCell(SelectableText(diplomat.firstName,
+                                  maxLines: 5)),
+                              DataCell(SelectableText(diplomat.lastName,
+                                  maxLines: 5)),
+                              DataCell(SelectableText(diplomat.nationality,
+                                  maxLines: 5)),
                               DataCell(SelectableText(
-                                  formatDate(diplomat.arrivalDate))),
+                                  formatDate(diplomat.arrivalDate),
+                                  maxLines: 5)),
                               DataCell(SelectableText(
-                                  formatDate(diplomat.expectedDepartureDate))),
-                              DataCell(SelectableText(diplomat.msgRef)),
+                                  formatDate(diplomat.expectedDepartureDate),
+                                  maxLines: 5)),
+                              DataCell(
+                                  SelectableText(diplomat.msgRef, maxLines: 5)),
                               DataCell(
                                 Row(
                                   children: [
