@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        title: 'Flutter Demo',
+        title: 'Bawabba',
         theme: ThemeData(
           fontFamily: 'Times New Roman',
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

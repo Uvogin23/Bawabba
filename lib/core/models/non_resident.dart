@@ -82,6 +82,7 @@ class NonResident {
       'observations': observations,
       'created_at': createdAt.toIso8601String(),
       'msg_ref': msgRef,
+      'depMsgReff': null
     };
   }
 }

@@ -335,7 +335,7 @@ class _LoginScreenState extends State<LoginScreenArmy> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 30,
+                                    height: 15,
                                   ),
                                   const Text(
                                     'تطبيقة متابعة الدخول و الخروج',
@@ -362,7 +362,7 @@ class _LoginScreenState extends State<LoginScreenArmy> {
                                         height: 1),
                                   ),
                                   SizedBox(
-                                    height: 10,
+                                    height: 5,
                                   )
                                 ],
                               ),
