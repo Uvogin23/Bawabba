@@ -150,298 +150,287 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+          Expanded(
+            child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Form(
+                    key: _formKey,
+                    child: Column(
                       children: [
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 350,
-                          child: TextFormField(
-                            controller: _firstNameController,
-                            maxLines: 1,
-                            maxLength: 12,
-                            decoration: const InputDecoration(
-                                hintText: 'الإسم ',
-                                prefixIcon: Icon(Icons.abc),
-                                fillColor: Color.fromARGB(255, 231, 231, 231),
-                                filled: true),
-                            // The validator receives the text that the user has entered.
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى إدخال الإسم  ';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 350,
-                          child: TextFormField(
-                            controller: _lastNameController,
-                            maxLines: 1,
-                            maxLength: 12,
-                            decoration: const InputDecoration(
-                                hintText: 'اللقب ',
-                                prefixIcon: Icon(Icons.abc_sharp),
-                                fillColor: Color.fromARGB(255, 231, 231, 231),
-                                filled: true),
-                            // The validator receives the text that the user has entered.
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى إدخال اللقب ';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 350,
-                          child: TextFormField(
-                            controller: _usernameController,
-                            maxLines: 1,
-                            maxLength: 12,
-                            decoration: const InputDecoration(
-                              hintText: 'إسم المستخدم',
-                              prefixIcon: Icon(Icons.person),
-                              fillColor: Color.fromARGB(255, 231, 231, 231),
-                              filled: true,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 20,
                             ),
-                            // The validator receives the text that the user has entered.
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى إدخال إسم المستخدم';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 300,
-                          child: TextFormField(
-                            controller: _badgeNumberController,
-                            maxLines: 1,
-                            maxLength: 12,
-                            decoration: const InputDecoration(
-                                hintText: 'رقم الذاتية',
-                                prefixIcon: Icon(Icons.numbers),
-                                fillColor: Color.fromARGB(255, 231, 231, 231),
-                                filled: true),
-                            // The validator receives the text that the user has entered.
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى إدخال رقم الذاتية';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 300,
-                          child: TextFormField(
-                            controller: _passwordController,
-                            maxLines: 1,
-                            maxLength: 20,
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                                hintText: ' كلمة المرور',
-                                prefixIcon: Icon(Icons.lock),
-                                fillColor: Color.fromARGB(255, 246, 249, 250),
-                                filled: true),
-                            // The validator receives the text that the user has entered.
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى إدخال كلمة المرور';
-                              }
-                              if (value.length < 6) {
-                                return 'كلمة المرور يجب أن تكون مكونة من 06 حروف على الأقل';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 300,
-                          child: TextFormField(
-                            controller: _confirmPasswordController,
-                            maxLines: 1,
-                            maxLength: 20,
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                                hintText: 'تأكيد كلمة المرور',
-                                prefixIcon: Icon(Icons.lock),
-                                fillColor: Color.fromARGB(255, 246, 249, 250),
-                                filled: true),
-                            // The validator receives the text that the user has entered.
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى تأكيد كلمة المرور';
-                              }
-                              if (value != _passwordController.text) {
-                                return 'كلمة المرور غير مطابقة';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 280,
-                          child: DropdownButtonFormField<Grade>(
-                            isExpanded: false,
-                            isDense: true,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.abc),
-                              fillColor: Color.fromARGB(255, 231, 231, 231),
-                              hintText: "الرتبة",
-                              filled: true,
+                            Expanded(
+                              child: TextFormField(
+                                controller: _firstNameController,
+                                maxLines: 1,
+                                maxLength: 12,
+                                decoration: const InputDecoration(
+                                    hintText: 'الإسم ',
+                                    prefixIcon: Icon(Icons.abc),
+                                    fillColor:
+                                        Color.fromARGB(255, 231, 231, 231),
+                                    filled: true),
+                                // The validator receives the text that the user has entered.
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'يرجى إدخال الإسم  ';
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
-                            value: selectedGrade,
-                            onChanged: (Grade? newValu) {
-                              setState(() {
-                                selectedGrade = newValu;
-                              });
-                            },
-                            items: Grade.values.map((Grade grade) {
-                              return DropdownMenuItem<Grade>(
-                                value: grade,
-                                child: (grade.name == 'ap')
-                                    ? const Text('عون شرطة')
-                                    : (grade.name == 'bp')
-                                        ? const Text('حافظ شرطة')
-                                        : (grade.name == 'bcp')
-                                            ? const Text('حافظ أول للشرطة')
-                                            : (grade.name == 'ip')
-                                                ? const Text('مفتش شرطة')
-                                                : (grade.name == 'ipp')
-                                                    ? const Text(
-                                                        'مفتش رئيسي للشرطة')
-                                                    : (grade.name == 'op')
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                controller: _lastNameController,
+                                maxLines: 1,
+                                maxLength: 12,
+                                decoration: const InputDecoration(
+                                    hintText: 'اللقب ',
+                                    prefixIcon: Icon(Icons.abc_sharp),
+                                    fillColor:
+                                        Color.fromARGB(255, 231, 231, 231),
+                                    filled: true),
+                                // The validator receives the text that the user has entered.
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'يرجى إدخال اللقب ';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                controller: _usernameController,
+                                maxLines: 1,
+                                maxLength: 12,
+                                decoration: const InputDecoration(
+                                  hintText: 'إسم المستخدم',
+                                  prefixIcon: Icon(Icons.person),
+                                  fillColor: Color.fromARGB(255, 231, 231, 231),
+                                  filled: true,
+                                ),
+                                // The validator receives the text that the user has entered.
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'يرجى إدخال إسم المستخدم';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                controller: _badgeNumberController,
+                                maxLines: 1,
+                                maxLength: 12,
+                                decoration: const InputDecoration(
+                                    hintText: 'رقم الذاتية',
+                                    prefixIcon: Icon(Icons.numbers),
+                                    fillColor:
+                                        Color.fromARGB(255, 231, 231, 231),
+                                    filled: true),
+                                // The validator receives the text that the user has entered.
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'يرجى إدخال رقم الذاتية';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                controller: _passwordController,
+                                maxLines: 1,
+                                maxLength: 20,
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                    hintText: ' كلمة المرور',
+                                    prefixIcon: Icon(Icons.lock),
+                                    fillColor:
+                                        Color.fromARGB(255, 246, 249, 250),
+                                    filled: true),
+                                // The validator receives the text that the user has entered.
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'يرجى إدخال كلمة المرور';
+                                  }
+                                  if (value.length < 6) {
+                                    return 'كلمة المرور يجب أن تكون مكونة من 06 حروف على الأقل';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                controller: _confirmPasswordController,
+                                maxLines: 1,
+                                maxLength: 20,
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                    hintText: 'تأكيد كلمة المرور',
+                                    prefixIcon: Icon(Icons.lock),
+                                    fillColor:
+                                        Color.fromARGB(255, 246, 249, 250),
+                                    filled: true),
+                                // The validator receives the text that the user has entered.
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'يرجى تأكيد كلمة المرور';
+                                  }
+                                  if (value != _passwordController.text) {
+                                    return 'كلمة المرور غير مطابقة';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: DropdownButtonFormField<Grade>(
+                                isExpanded: false,
+                                isDense: true,
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.abc),
+                                  fillColor: Color.fromARGB(255, 231, 231, 231),
+                                  hintText: "الرتبة",
+                                  filled: true,
+                                ),
+                                value: selectedGrade,
+                                onChanged: (Grade? newValu) {
+                                  setState(() {
+                                    selectedGrade = newValu;
+                                  });
+                                },
+                                items: Grade.values.map((Grade grade) {
+                                  return DropdownMenuItem<Grade>(
+                                    value: grade,
+                                    child: (grade.name == 'ap')
+                                        ? const Text('عون شرطة')
+                                        : (grade.name == 'bp')
+                                            ? const Text('حافظ شرطة')
+                                            : (grade.name == 'bcp')
+                                                ? const Text('حافظ أول للشرطة')
+                                                : (grade.name == 'ip')
+                                                    ? const Text('مفتش شرطة')
+                                                    : (grade.name == 'ipp')
                                                         ? const Text(
-                                                            'ضابط شرطة')
-                                                        : (grade.name == 'opp')
+                                                            'مفتش رئيسي للشرطة')
+                                                        : (grade.name == 'op')
                                                             ? const Text(
-                                                                'ضابط شرطة رئيسي')
+                                                                'ضابط شرطة')
                                                             : (grade.name ==
-                                                                    'cp')
+                                                                    'opp')
                                                                 ? const Text(
-                                                                    'محافظ شرطة')
+                                                                    'ضابط شرطة رئيسي')
                                                                 : (grade.name ==
-                                                                        'cpp')
+                                                                        'cp')
                                                                     ? const Text(
-                                                                        'عميد شرطة')
+                                                                        'محافظ شرطة')
                                                                     : (grade.name ==
-                                                                            'cdp')
+                                                                            'cpp')
                                                                         ? const Text(
-                                                                            'عميد أول للشرطة')
+                                                                            'عميد شرطة')
                                                                         : (grade.name ==
-                                                                                'cnp')
-                                                                            ? const Text('مراقب شرطة')
-                                                                            : const Text('مراقب أول للشرطة'),
-                              );
-                            }).toList(),
-                            validator: (value) {
-                              if (value == null) {
-                                return "يرجى إدخال الرتبة";
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 280,
-                          child: DropdownButtonFormField<Role>(
-                            isExpanded: false,
-                            isDense: true,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.folder_shared),
-                              fillColor: Color.fromARGB(255, 231, 231, 231),
-                              hintText: "الدور",
-                              filled: true,
+                                                                                'cdp')
+                                                                            ? const Text('عميد أول للشرطة')
+                                                                            : (grade.name == 'cnp')
+                                                                                ? const Text('مراقب شرطة')
+                                                                                : const Text('مراقب أول للشرطة'),
+                                  );
+                                }).toList(),
+                                validator: (value) {
+                                  if (value == null) {
+                                    return "يرجى إدخال الرتبة";
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
-                            value: selectedRole,
-                            onChanged: (Role? newValue) {
-                              setState(() {
-                                selectedRole = newValue;
-                              });
-                            },
-                            items: Role.values.map((Role role) {
-                              return DropdownMenuItem<Role>(
-                                value: role,
-                                child: role.name == 'admin'
-                                    ? const Text('مشرف')
-                                    : const Text('مستخدم'),
-                              );
-                            }).toList(),
-                            validator: (value) {
-                              if (value == null) {
-                                return "يرجى إدخال الدور";
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: DropdownButtonFormField<Role>(
+                                isExpanded: false,
+                                isDense: true,
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.folder_shared),
+                                  fillColor: Color.fromARGB(255, 231, 231, 231),
+                                  hintText: "الدور",
+                                  filled: true,
+                                ),
+                                value: selectedRole,
+                                onChanged: (Role? newValue) {
+                                  setState(() {
+                                    selectedRole = newValue;
+                                  });
+                                },
+                                items: Role.values.map((Role role) {
+                                  return DropdownMenuItem<Role>(
+                                    value: role,
+                                    child: role.name == 'admin'
+                                        ? const Text('مشرف')
+                                        : const Text('مستخدم'),
+                                  );
+                                }).toList(),
+                                validator: (value) {
+                                  if (value == null) {
+                                    return "يرجى إدخال الدور";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
-                )),
+                    ))),
           ),
           const SizedBox(height: 20),
           if (_errorMessage != null) ...[

@@ -130,7 +130,7 @@ class _ViewDipTour extends State<ViewDipTour> {
                           child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: DataTable(
-                          columnSpacing: 35.0,
+                          columnSpacing: 39.0,
                           headingRowHeight: 40.0,
                           headingRowColor: WidgetStateProperty.resolveWith(
                               (states) => Config.colorPrimary),
@@ -138,11 +138,15 @@ class _ViewDipTour extends State<ViewDipTour> {
                           sortAscending: isAscending,
                           columns: [
                             const DataColumn(
-                              label: Text(""),
+                              label: Text(
+                                "",
+                                maxLines: 5,
+                              ),
                             ),
                             DataColumn(
                               label: const Text(
                                 "الرقم",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                               onSort: (columnIndex, ascending) {
@@ -152,6 +156,7 @@ class _ViewDipTour extends State<ViewDipTour> {
                             DataColumn(
                               label: const Text(
                                 "الإسم",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                               onSort: (columnIndex, ascending) {
@@ -161,6 +166,7 @@ class _ViewDipTour extends State<ViewDipTour> {
                             DataColumn(
                               label: const Text(
                                 "اللقب",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                               onSort: (columnIndex, ascending) {
@@ -170,6 +176,7 @@ class _ViewDipTour extends State<ViewDipTour> {
                             DataColumn(
                               label: const Text(
                                 " الجنسية",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                               onSort: (columnIndex, ascending) {
@@ -179,18 +186,21 @@ class _ViewDipTour extends State<ViewDipTour> {
                             const DataColumn(
                               label: Text(
                                 "تاريخ الوصول",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
                             const DataColumn(
                               label: Text(
                                 "يغادر يوم",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
                             DataColumn(
                               label: const Text(
                                 "المرجع",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                               onSort: (columnIndex, ascending) {
@@ -200,6 +210,7 @@ class _ViewDipTour extends State<ViewDipTour> {
                             DataColumn(
                               label: const Text(
                                 "الوكالة السياحية",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                               onSort: (columnIndex, ascending) {
@@ -209,6 +220,7 @@ class _ViewDipTour extends State<ViewDipTour> {
                             const DataColumn(
                               label: Text(
                                 "",
+                                maxLines: 5,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

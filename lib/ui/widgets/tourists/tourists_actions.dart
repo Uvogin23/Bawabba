@@ -75,27 +75,25 @@ class _TouristsActions extends State<TouristsActions> {
   }
 
   Widget _buildTextField(TextEditingController controller, String label) {
-    return Padding(
+    return Expanded(
+        child: Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 10, 20, 16),
-      child: SizedBox(
-        height: 50,
-        width: 200,
-        child: TextFormField(
-          controller: controller,
-          decoration: InputDecoration(
-            labelText: label,
-            border: const OutlineInputBorder(),
-            filled: true,
-            fillColor: Colors.grey[200],
-          ),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          border: const OutlineInputBorder(),
+          filled: true,
+          fillColor: Colors.grey[200],
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildDatePickerField(TextEditingController controller, String label) {
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-    return Padding(
+    return Expanded(
+        child: Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 10, 20, 16),
       child: GestureDetector(
         onTap: () async {
@@ -111,9 +109,6 @@ class _TouristsActions extends State<TouristsActions> {
           }
         },
         child: AbsorbPointer(
-            child: SizedBox(
-          height: 50,
-          width: 200,
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(
@@ -124,9 +119,9 @@ class _TouristsActions extends State<TouristsActions> {
               suffixIcon: const Icon(Icons.calendar_today),
             ),
           ),
-        )),
+        ),
       ),
-    );
+    ));
   }
 
   Future<void> fetchFilteredTourists(
@@ -375,12 +370,10 @@ class _TouristsActions extends State<TouristsActions> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(16.0, 10, 20, 16),
-                                child: SizedBox(
-                                  height: 50,
-                                  width: 200,
+                              Expanded(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 5, 5, 16),
                                   child: DropdownButtonFormField<Nationality>(
                                     isExpanded: false,
                                     isDense: true,
@@ -592,8 +585,8 @@ class _TouristsActions extends State<TouristsActions> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 // Text field for year input
-                                SizedBox(
-                                  width: 200, // Restrict width for better UX
+                                Expanded(
+                                  // Restrict width for better UX
                                   child: TextFormField(
                                     controller: _yearController,
                                     keyboardType: TextInputType.number,
@@ -634,6 +627,7 @@ class _TouristsActions extends State<TouristsActions> {
                                   child: const Text("مسح "),
                                 ), // Space between input and button
                                 const SizedBox(width: 15),
+
                                 ElevatedButton(
                                   style: const ButtonStyle(
                                       elevation: WidgetStatePropertyAll(5),
@@ -687,18 +681,20 @@ class _TouristsActions extends State<TouristsActions> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(
-                                "عدد السياح الأجانب المسجلين بالتطبيقة حسب الجنسية",
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontFamily: 'Times New Roman',
-                                    fontSize: 18,
-                                    letterSpacing:
-                                        0 /*percentages not used in flutter. defaulting to zero*/,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
-                              ),
+                              Expanded(
+                                child: Text(
+                                  "عدد السياح الأجانب المسجلين بالتطبيقة حسب الجنسية",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                      fontFamily: 'Times New Roman',
+                                      fontSize: 18,
+                                      letterSpacing:
+                                          0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -765,7 +761,8 @@ class _TouristsActions extends State<TouristsActions> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(
+                              Expanded(
+                                  child: Text(
                                 "قائمة السياح الأجانب المسجلين بالتطبيقة",
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
@@ -776,7 +773,7 @@ class _TouristsActions extends State<TouristsActions> {
                                         0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1),
-                              ),
+                              )),
                             ],
                           ),
                         ),

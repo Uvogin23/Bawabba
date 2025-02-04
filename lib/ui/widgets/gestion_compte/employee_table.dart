@@ -534,104 +534,110 @@ class _EmployeeTable extends State<EmployeeTable> {
                 employees = snapshot.data!;
                 return Expanded(
                     child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: DataTable(
-                    columnSpacing: 80.0,
-                    headingRowHeight: 40.0,
-                    headingRowColor: WidgetStateProperty.resolveWith(
-                        (states) => const Color.fromARGB(255, 185, 222, 230)),
-                    sortColumnIndex: sortColumnIndex,
-                    sortAscending: isAscending,
-                    columns: [
-                      DataColumn(
-                        label: const Text("الرقم"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text("الإسم"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      DataColumn(
-                        label: const Text("اللقب"),
-                        onSort: (columnIndex, ascending) {
-                          sortData(columnIndex, ascending);
-                        },
-                      ),
-                      const DataColumn(
-                        label: Text("رقم الذاتية"),
-                      ),
-                      const DataColumn(
-                        label: Text("إسم المستخدم"),
-                      ),
-                      const DataColumn(
-                        label: Text("الرتبة"),
-                      ),
-                      const DataColumn(
-                        label: Text("الدور"),
-                      ),
-                      const DataColumn(
-                        label: Text(""),
-                      ),
-                    ],
-                    rows: employees.map((employee) {
-                      return DataRow(
-                        color: employee.username == user?.username
-                            ? WidgetStateProperty.all(const Color.fromARGB(
-                                255, 144, 151, 165)) // Highlight color
-                            : WidgetStateProperty.all(Colors.transparent),
-                        cells: [
-                          DataCell(SelectableText(
-                              employee.employeeId.toString(),
-                              maxLines: 5)),
-                          DataCell(
-                              SelectableText(employee.firstName, maxLines: 5)),
-                          DataCell(
-                              SelectableText(employee.lastName, maxLines: 5)),
-                          DataCell(SelectableText(employee.badgeNumber,
-                              maxLines: 5)),
-                          DataCell(
-                              SelectableText(employee.username, maxLines: 5)),
-                          DataCell(SelectableText(
-                              _getGradeLabel(employee.grade),
-                              maxLines: 5)),
-                          DataCell(SelectableText(_getRoleLabel(employee.role),
-                              maxLines: 5)),
-                          DataCell(
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  onPressed: () =>
-                                      editEmployee(employee.employeeId),
-                                ),
-                                employee.username == user?.username
-                                    ? IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                                content:
-                                                    const Text('عملية ممنوعة')),
-                                          );
-                                        })
-                                    : IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () =>
-                                            deleteEmployee(employee.id),
-                                      ),
-                              ],
-                            ),
+                        scrollDirection: Axis.vertical,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+                            columnSpacing: 50.0,
+                            headingRowHeight: 40.0,
+                            headingRowColor: WidgetStateProperty.resolveWith(
+                                (states) =>
+                                    const Color.fromARGB(255, 185, 222, 230)),
+                            sortColumnIndex: sortColumnIndex,
+                            sortAscending: isAscending,
+                            columns: [
+                              DataColumn(
+                                label: const Text("الرقم"),
+                                onSort: (columnIndex, ascending) {
+                                  sortData(columnIndex, ascending);
+                                },
+                              ),
+                              DataColumn(
+                                label: const Text("الإسم"),
+                                onSort: (columnIndex, ascending) {
+                                  sortData(columnIndex, ascending);
+                                },
+                              ),
+                              DataColumn(
+                                label: const Text("اللقب"),
+                                onSort: (columnIndex, ascending) {
+                                  sortData(columnIndex, ascending);
+                                },
+                              ),
+                              const DataColumn(
+                                label: Text("رقم الذاتية"),
+                              ),
+                              const DataColumn(
+                                label: Text("إسم المستخدم"),
+                              ),
+                              const DataColumn(
+                                label: Text("الرتبة"),
+                              ),
+                              const DataColumn(
+                                label: Text("الدور"),
+                              ),
+                              const DataColumn(
+                                label: Text(""),
+                              ),
+                            ],
+                            rows: employees.map((employee) {
+                              return DataRow(
+                                color: employee.username == user?.username
+                                    ? WidgetStateProperty.all(
+                                        const Color.fromARGB(255, 144, 151,
+                                            165)) // Highlight color
+                                    : WidgetStateProperty.all(
+                                        Colors.transparent),
+                                cells: [
+                                  DataCell(SelectableText(
+                                      employee.employeeId.toString(),
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(employee.firstName,
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(employee.lastName,
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(employee.badgeNumber,
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(employee.username,
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(
+                                      _getGradeLabel(employee.grade),
+                                      maxLines: 5)),
+                                  DataCell(SelectableText(
+                                      _getRoleLabel(employee.role),
+                                      maxLines: 5)),
+                                  DataCell(
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(Icons.edit),
+                                          onPressed: () =>
+                                              editEmployee(employee.employeeId),
+                                        ),
+                                        employee.username == user?.username
+                                            ? IconButton(
+                                                icon: const Icon(Icons.delete),
+                                                onPressed: () {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                        content: const Text(
+                                                            'عملية ممنوعة')),
+                                                  );
+                                                })
+                                            : IconButton(
+                                                icon: const Icon(Icons.delete),
+                                                onPressed: () =>
+                                                    deleteEmployee(employee.id),
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
                           ),
-                        ],
-                      );
-                    }).toList(),
-                  ),
-                ));
+                        )));
               }
             },
           ),

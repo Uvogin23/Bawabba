@@ -72,27 +72,25 @@ class _NonResidentsActions extends State<NonResidentsActions> {
   }
 
   Widget _buildTextField(TextEditingController controller, String label) {
-    return Padding(
+    return Expanded(
+        child: Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 10, 20, 16),
-      child: SizedBox(
-        height: 50,
-        width: 200,
-        child: TextFormField(
-          controller: controller,
-          decoration: InputDecoration(
-            labelText: label,
-            border: const OutlineInputBorder(),
-            filled: true,
-            fillColor: Colors.grey[200],
-          ),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          border: const OutlineInputBorder(),
+          filled: true,
+          fillColor: Colors.grey[200],
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildDatePickerField(TextEditingController controller, String label) {
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-    return Padding(
+    return Expanded(
+        child: Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 10, 20, 16),
       child: GestureDetector(
         onTap: () async {
@@ -108,9 +106,6 @@ class _NonResidentsActions extends State<NonResidentsActions> {
           }
         },
         child: AbsorbPointer(
-            child: SizedBox(
-          height: 50,
-          width: 200,
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(
@@ -121,9 +116,9 @@ class _NonResidentsActions extends State<NonResidentsActions> {
               suffixIcon: const Icon(Icons.calendar_today),
             ),
           ),
-        )),
+        ),
       ),
-    );
+    ));
   }
 
   Future<void> fetchFilterednonResidents(
@@ -375,35 +370,31 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(16.0, 10, 20, 16),
-                                child: SizedBox(
-                                  height: 50,
-                                  width: 200,
-                                  child: DropdownButtonFormField<Nationality>(
-                                    isExpanded: false,
-                                    isDense: true,
-                                    decoration: InputDecoration(
-                                      labelText: 'الجنسية',
-                                      border: const OutlineInputBorder(),
-                                      filled: true,
-                                      fillColor: Colors.grey[200],
-                                    ),
-                                    value: selectedNationality,
-                                    onChanged: (Nationality? newValue) {
-                                      setState(() {
-                                        selectedNationality = newValue;
-                                      });
-                                    },
-                                    items: Nationality.values
-                                        .map((Nationality role) {
-                                      return DropdownMenuItem<Nationality>(
-                                          value: role, child: Text(role.name));
-                                    }).toList(),
+                              Expanded(
+                                  child: Padding(
+                                padding: const EdgeInsets.fromLTRB(5, 5, 5, 16),
+                                child: DropdownButtonFormField<Nationality>(
+                                  isExpanded: false,
+                                  isDense: true,
+                                  decoration: InputDecoration(
+                                    labelText: 'الجنسية',
+                                    border: const OutlineInputBorder(),
+                                    filled: true,
+                                    fillColor: Colors.grey[200],
                                   ),
+                                  value: selectedNationality,
+                                  onChanged: (Nationality? newValue) {
+                                    setState(() {
+                                      selectedNationality = newValue;
+                                    });
+                                  },
+                                  items: Nationality.values
+                                      .map((Nationality role) {
+                                    return DropdownMenuItem<Nationality>(
+                                        value: role, child: Text(role.name));
+                                  }).toList(),
                                 ),
-                              ),
+                              )),
                               _buildTextField(
                                 _filterPurposeOfVisitController,
                                 "الغرض من الزيارة",
@@ -589,8 +580,8 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 // Text field for year input
-                                SizedBox(
-                                  width: 200, // Restrict width for better UX
+                                Expanded(
+                                  // Restrict width for better UX
                                   child: TextFormField(
                                     controller: _yearController,
                                     keyboardType: TextInputType.number,
@@ -684,7 +675,8 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(
+                              Expanded(
+                                  child: Text(
                                 "عدد السياح الأجانب المسجلين بالتطبيقة حسب الجنسية",
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
@@ -695,7 +687,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                                         0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1),
-                              ),
+                              )),
                             ],
                           ),
                         ),
@@ -762,7 +754,8 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(
+                              Expanded(
+                                  child: Text(
                                 "قائمة الرعايا المسجلين بالتطبيقة",
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
@@ -773,7 +766,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                                         0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1),
-                              ),
+                              )),
                             ],
                           ),
                         ),
