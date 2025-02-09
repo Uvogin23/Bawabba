@@ -33,9 +33,7 @@ class DashboardCardEntre extends StatelessWidget {
           return Center(child: Text("Error: ${snapshot.error}"));
         } else if (snapshot.hasData) {
           CardStatistics stats = snapshot.data!;
-          return Positioned(
-              top: 160,
-              right: 200,
+          return Expanded(
               child: Container(
                   width: 370,
                   height: 127,
@@ -58,10 +56,9 @@ class DashboardCardEntre extends StatelessWidget {
                     ),
                     color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
-                  child: Stack(children: <Widget>[
-                    const Positioned(
-                        top: 14,
-                        right: 25,
+                  child: Column(children: [
+                    const Padding(
+                        padding: EdgeInsets.fromLTRB(0, 14, 25, 0),
                         child: Text(
                           'الدخول عبر الحدود البرية',
                           textAlign: TextAlign.right,
@@ -74,108 +71,136 @@ class DashboardCardEntre extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               height: 1),
                         )),
-                    const Positioned(
-                        top: 44,
-                        left: 283,
-                        child: Text(
-                          'العدد الإجمالي',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color: Color.fromRGBO(0, 104, 173, 1),
-                              fontFamily: 'Times New Roman',
-                              fontSize: 12,
-                              letterSpacing:
-                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.bold,
-                              height: 1),
-                        )),
-                    Positioned(
-                        top: 39,
-                        left: 233,
-                        child: Text(
-                          '${stats.total}',
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontFamily: 'Times New Roman',
-                              fontSize: 18,
-                              letterSpacing:
-                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.bold,
-                              height: 1),
-                        )),
-                    Positioned(
-                        top: 93,
-                        left: 299,
-                        child: Text(
-                          '${stats.currentYear}',
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontFamily: 'Times New Roman',
-                              fontSize: 18,
-                              letterSpacing:
-                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.bold,
-                              height: 1),
-                        )),
-                    Positioned(
-                        top: 93,
-                        left: 184,
-                        child: Text(
-                          '${stats.lastYear}',
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontFamily: 'Times New Roman',
-                              fontSize: 18,
-                              letterSpacing:
-                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.bold,
-                              height: 1),
-                        )),
-                    const Positioned(
-                        top: 77,
-                        left: 268,
-                        child: Text(
-                          'خلال العام الحالي',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color: Color.fromRGBO(17, 149, 37, 1),
-                              fontFamily: 'Times New Roman',
-                              fontSize: 12,
-                              letterSpacing:
-                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.bold,
-                              height: 1),
-                        )),
-                    const Positioned(
-                        top: 77,
-                        left: 151,
-                        child: Text(
-                          'خلال العام الماضي',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color: Color.fromRGBO(224, 19, 19, 1),
-                              fontFamily: 'Times New Roman',
-                              fontSize: 12,
-                              letterSpacing:
-                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.bold,
-                              height: 1),
-                        )),
-                    Positioned(
-                        top: 25,
-                        left: 15,
-                        child: Container(
-                            width: 70,
-                            height: 71.75,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/Non_residents1.png'),
-                                  fit: BoxFit.fitWidth),
-                            ))),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                    child: Text(
+                                      'العدد الإجمالي',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(0, 104, 173, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 12,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                    child: Text(
+                                      '${stats.total}',
+                                      textAlign: TextAlign.right,
+                                      style: const TextStyle(
+                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 18,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    )),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                    child: Text(
+                                      'خلال العام الحالي',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(17, 149, 37, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 12,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    )),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                    child: Text(
+                                      '${stats.currentYear}',
+                                      textAlign: TextAlign.right,
+                                      style: const TextStyle(
+                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 18,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    )),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                const Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                    child: Text(
+                                      'خلال العام الماضي',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(224, 19, 19, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 12,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    )),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                    child: Text(
+                                      '${stats.lastYear}',
+                                      textAlign: TextAlign.right,
+                                      style: const TextStyle(
+                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          fontFamily: 'Times New Roman',
+                                          fontSize: 18,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1),
+                                    )),
+                              ],
+                            )
+                          ],
+                        ),
+                        Padding(
+                            padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+                            child: Container(
+                                width: 70,
+                                height: 71.75,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/Non_residents1.png'),
+                                      fit: BoxFit.fitWidth),
+                                ))),
+                      ],
+                    ),
                   ])));
         } else {
           return const Center(child: Text("No data available"));

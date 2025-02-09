@@ -1,5 +1,8 @@
 import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/ui/widgets/citizens/add_citizens_form.dart';
+import 'package:bawabba/ui/widgets/citizens/citizen_table2.dart';
+import 'package:bawabba/ui/widgets/citizens/citizens_actions.dart';
+import 'package:bawabba/ui/widgets/citizens/citizens_table1.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
 import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
@@ -112,11 +115,11 @@ class _CitizenScreenState extends State<CitizenScreen> {
                     children: [
                       AddCitizensForm(),
                       SizedBox(height: 20),
-                      // CitizensActions(),
+                      CitizensActions(),
                       SizedBox(height: 20),
-                      //CitizensTable2(),
+                      CitizensTable2(),
                       SizedBox(height: 20),
-                      //CitizensTable1(),
+                      CitizenTable1(),
                     ],
                   ),
                 ),

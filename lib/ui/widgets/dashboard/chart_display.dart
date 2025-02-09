@@ -195,15 +195,10 @@ Widget ChartDisplayPie() {
             ),
           ],
         ),
-        child: Stack(
+        child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 90, 50, 50),
-              child: futurePiechart(),
-            ),
-            const Positioned(
-              top: 10,
-              right: 30,
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
               child: Text(
                 'نسبة السياح حسب النوع:',
                 textAlign: TextAlign.right,
@@ -216,9 +211,8 @@ Widget ChartDisplayPie() {
                 ),
               ),
             ),
-            const Positioned(
-              top: 40,
-              right: 30,
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
               child: Text(
                 'خلال 12 شهر الماضية',
                 textAlign: TextAlign.right,
@@ -230,6 +224,10 @@ Widget ChartDisplayPie() {
                   height: 1.5,
                 ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 50, 50),
+              child: futurePiechart(),
             ),
           ],
         )),

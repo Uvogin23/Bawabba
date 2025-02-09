@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bawabba/core/models/citizen.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -20,19 +21,18 @@ class _AddCitizensForm extends State<AddCitizensForm> {
   final TextEditingController _passportNumberController =
       TextEditingController();
 
-  final TextEditingController _purposeOfVisitController =
-      TextEditingController();
-  final TextEditingController _hostController = TextEditingController();
+  final TextEditingController _fonctionController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
 
   final TextEditingController _vehiculeInformationController =
       TextEditingController();
   final TextEditingController _observationsController = TextEditingController();
   final TextEditingController _msgRefController = TextEditingController();
+  final TextEditingController _plateNmberController = TextEditingController();
 
   DateTime? _dateOfBirth;
   DateTime? _passportExpiry;
-  DateTime? _arrivalDate;
-  DateTime? _expectedDepartureDate;
+  DateTime? _exitDate;
 
   bool _isLoading = false;
 
@@ -42,29 +42,29 @@ class _AddCitizensForm extends State<AddCitizensForm> {
     _firstNameController.clear();
     _lastNameController.clear();
     _passportNumberController.clear();
-    _purposeOfVisitController.clear();
-    _hostController.clear();
+    _fonctionController.clear();
+    _addressController.clear();
     _observationsController.clear();
     _vehiculeInformationController.clear();
     _msgRefController.clear();
+    _plateNmberController.clear();
 
     setState(() {
       _dateOfBirth = null;
       _passportExpiry = null;
-      _arrivalDate = null;
-      _expectedDepartureDate = null;
+      _exitDate = null;
 
       // Clear the dropdown selection
     });
   }
 
-  Future<void> _addNonResident() async {
+  Future<void> _addCitizen() async {
     setState(() {
       _isLoading = true;
     });
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-    final url = Uri.parse(
-        '${Config.baseUrl}/api/non_residents/Add'); // Your API endpoint
+    final url =
+        Uri.parse('${Config.baseUrl}/api/citizens/add'); // Your API endpoint
     try {
       final response = await http.post(
         url,
@@ -76,11 +76,11 @@ class _AddCitizensForm extends State<AddCitizensForm> {
           "place_of_birth": _placeOfBirthController.text,
           "passport_number": _passportNumberController.text,
           "passport_expiry": dateFormat.format(_passportExpiry!),
-          "host": _hostController.text,
-          "purpose_of_visit": _purposeOfVisitController.text,
-          "arrival_date": dateFormat.format(_arrivalDate!),
-          "expected_departure_date": dateFormat.format(_expectedDepartureDate!),
-          "vehicle_information": _vehiculeInformationController.text,
+          "address": _addressController.text,
+          "fonction": _fonctionController.text,
+          "exit_date": dateFormat.format(_exitDate!),
+          "plate_number": _plateNmberController.text,
+          "vehicle_type": _vehiculeInformationController.text,
           "observations": _observationsController.text,
           "msg_ref": _msgRefController.text,
         }),
@@ -88,13 +88,13 @@ class _AddCitizensForm extends State<AddCitizensForm> {
 
       if (response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('تمت إضافة الرعية بنجاح')),
+          const SnackBar(content: Text('تمت إضافة الحركة بنجاح')),
         );
       } else {
         setState(() {});
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(' خلل أثناء إضافة الرعية')),
+          const SnackBar(content: Text(' خلل أثناء إضافة الحركة')),
         );
       }
     } catch (e) {
@@ -138,7 +138,7 @@ class _AddCitizensForm extends State<AddCitizensForm> {
             height: 20,
           ),
           const Text(
-            'إضـــافة حركة عبر الحدود البرية ',
+            'إضـــافة حركة خروج عبر الحدود البرية ',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Color.fromARGB(255, 0, 0, 0),
@@ -155,183 +155,165 @@ class _AddCitizensForm extends State<AddCitizensForm> {
           Expanded(
             child: Form(
               key: _formKey,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 15,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      _buildTextField(_firstNameController, "الإسم"),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildTextField(_lastNameController, "اللقب"),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildDatePickerField("تاريخ الميلاد", _dateOfBirth,
+                          (date) {
+                        setState(() {
+                          _dateOfBirth = date;
+                        });
+                      }),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildTextField(_placeOfBirthController, "مكان الميلاد"),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      _buildTextField(_addressController, "عنوان الإقامة"),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildTextField(
+                          _passportNumberController, "رقم جواز السفر"),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildDatePickerField("تاريخ الإنتهاء", _passportExpiry,
+                          (date) {
+                        setState(() {
+                          _passportExpiry = date;
+                        });
+                      },
+                          rangeStart:
+                              DateTime.now().subtract(const Duration(days: 0))),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      _buildTextField(_fonctionController, "الوظيفة"),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildDatePickerField(" تاريخ الخروج", _exitDate, (date) {
+                        setState(() {
+                          _exitDate = date;
+                        });
+                      },
+                          rangeStart:
+                              DateTime.now().subtract(const Duration(days: 3))),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildTextField(_msgRefController, "المرجع"),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      _buildTextField(
+                          _vehiculeInformationController, "معلومات المركبة"),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildTextField(_plateNmberController, "رقم التسجيل"),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      _buildTextField(_observationsController, "ملاحظات"),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      ElevatedButton(
+                        onPressed: _clearForm, // Call the clear function
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 224, 232, 235),
+                          elevation: 5,
                         ),
-                        _buildTextField(_firstNameController, "الإسم"),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildTextField(_lastNameController, "اللقب"),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildDatePickerField("تاريخ الميلاد", _dateOfBirth,
-                            (date) {
-                          setState(() {
-                            _dateOfBirth = date;
-                          });
-                        }),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildTextField(
-                            _placeOfBirthController, "مكان الميلاد"),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        _buildTextField(
-                            _passportNumberController, "رقم جواز السفر"),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildDatePickerField("تاريخ الإنتهاء", _passportExpiry,
-                            (date) {
-                          setState(() {
-                            _passportExpiry = date;
-                          });
-                        },
-                            rangeStart: DateTime.now()
-                                .subtract(const Duration(days: 0))),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildDatePickerField(" تاريخ الوصول", _arrivalDate,
-                            (date) {
-                          setState(() {
-                            _arrivalDate = date;
-                          });
-                        },
-                            rangeStart: DateTime.now()
-                                .subtract(const Duration(days: 3))),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        _buildTextField(_hostController, "المضيف"),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildDatePickerField(
-                            "التاريخ المتوقع للمغادرة", _expectedDepartureDate,
-                            (date) {
-                          setState(() {
-                            _expectedDepartureDate = date;
-                          });
-                        },
-                            rangeStart: DateTime.now()
-                                .subtract(const Duration(days: 1))),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildTextField(
-                            _purposeOfVisitController, "الغرض من الزيارة"),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildTextField(_msgRefController, "المرجع"),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        _buildTextField(
-                            _vehiculeInformationController, "معلومات المركبة"),
-                        const SizedBox(
-                          width: 05,
-                        ),
-                        _buildTextField(_observationsController, "ملاحظات"),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        ElevatedButton(
-                          onPressed: _clearForm, // Call the clear function
-                          style: ElevatedButton.styleFrom(
+                        child: const Text("مسح الإستمارة"),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        style: const ButtonStyle(
+                            elevation: WidgetStatePropertyAll(5),
                             backgroundColor:
-                                const Color.fromARGB(255, 224, 232, 235),
-                            elevation: 5,
-                          ),
-                          child: const Text("مسح الإستمارة"),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        ElevatedButton(
-                          style: const ButtonStyle(
-                              elevation: WidgetStatePropertyAll(5),
-                              backgroundColor:
-                                  WidgetStatePropertyAll(Config.colorPrimary)),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // All validations passed
-                              _isLoading ? null : _addNonResident();
-                            }
-                          },
-                          child: _isLoading
-                              ? const CircularProgressIndicator(
-                                  color: Color.fromARGB(255, 233, 191, 24))
-                              : const Text(
-                                  'إضافة الرعية',
-                                  style: TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255)),
-                                ),
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                                WidgetStatePropertyAll(Config.colorPrimary)),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // All validations passed
+                            _isLoading ? null : _addCitizen();
+                          }
+                        },
+                        child: _isLoading
+                            ? const CircularProgressIndicator(
+                                color: Color.fromARGB(255, 233, 191, 24))
+                            : const Text(
+                                'إضافة الرعية',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255)),
+                              ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
@@ -341,30 +323,31 @@ class _AddCitizensForm extends State<AddCitizensForm> {
   }
 
   Widget _buildTextField(TextEditingController controller, String label) {
-    return Padding(
-        padding: const EdgeInsets.only(bottom: 16.0),
-        child: SizedBox(
-          height: 70,
-          width: 250,
-          child: TextFormField(
-            controller: controller,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.abc),
-              fillColor: const Color.fromARGB(255, 255, 255, 255),
-              filled: true,
-              labelText: label,
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+    return Expanded(
+        child: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: SizedBox(
+              height: 70,
+              width: 250,
+              child: TextFormField(
+                controller: controller,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.abc),
+                  fillColor: const Color.fromARGB(255, 255, 255, 255),
+                  filled: true,
+                  labelText: label,
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "يرجى إدخال $label";
+                  }
+                  return null;
+                },
               ),
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "يرجى إدخال $label";
-              }
-              return null;
-            },
-          ),
-        ));
+            )));
   }
 
   Widget _buildDatePickerField(
@@ -374,7 +357,8 @@ class _AddCitizensForm extends State<AddCitizensForm> {
     final DateFormat rfc1123Format =
         DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'');
 
-    return Padding(
+    return Expanded(
+        child: Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: GestureDetector(
         onTap: () async {
@@ -415,6 +399,6 @@ class _AddCitizensForm extends State<AddCitizensForm> {
               )),
         ),
       ),
-    );
+    ));
   }
 }

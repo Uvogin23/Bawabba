@@ -53,7 +53,7 @@ Future<List<Tourist>> fetchTourists() async {
 
 Future<List<Citizen>> fetchCitizens() async {
   final response =
-      await http.get(Uri.parse('${Config.baseUrl}/api/stats/last-two/sortie'));
+      await http.get(Uri.parse('${Config.baseUrl}/api/citizens/last-two'));
 
   if (response.statusCode == 200) {
     try {
@@ -61,7 +61,7 @@ Future<List<Citizen>> fetchCitizens() async {
 
       List<Citizen> list =
           data.map<Citizen>((item) => Citizen.fromJson(item)).toList();
-
+      print(list.first.address);
       return list;
     } catch (e) {
       print('Error parsing Citizens: $e');

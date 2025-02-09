@@ -84,14 +84,32 @@ class _MainContentState extends State<MainContent> {
                             Radius.circular(15),
                           ),
                         ),
-                        child: const Stack(
-                          children: <Widget>[
-                            DashboardCardDiplomat(),
-                            DashboardCardTourist(),
-                            DashboardCardAlg(),
-                            //DashboardCardAcc(),
-                            DashboardCardEntre(),
-                            DashboardCardSortie(),
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                DashboardCardDiplomat(),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                DashboardCardTourist(),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                DashboardCardEntre(),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                DashboardCardSortie(),
+                              ],
+                            ),
                           ],
                         ),
                       ),
