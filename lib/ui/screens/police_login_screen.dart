@@ -234,7 +234,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                               decoration: const BoxDecoration(
                                   color: Config.colorPrimary),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(

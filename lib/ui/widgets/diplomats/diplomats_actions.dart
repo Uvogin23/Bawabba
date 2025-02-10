@@ -312,7 +312,7 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                   Radius.circular(5),
                 ),
                 border: Border.all(
-                    color: Color.fromARGB(255, 76, 77, 78), width: 1),
+                    color: const Color.fromARGB(255, 76, 77, 78), width: 1),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -542,7 +542,8 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                         Radius.circular(5),
                       ),
                       border: Border.all(
-                          color: Color.fromARGB(255, 76, 77, 78), width: 1),
+                          color: const Color.fromARGB(255, 76, 77, 78),
+                          width: 1),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -583,7 +584,8 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                               children: [
                                 // Text field for year input
                                 Expanded(
-                                  // Restrict width for better UX
+                                    child: Padding(
+                                  padding: const EdgeInsets.only(right: 5),
                                   child: TextFormField(
                                     controller: _yearController,
                                     keyboardType: TextInputType.number,
@@ -609,7 +611,7 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                                       return null;
                                     },
                                   ),
-                                ),
+                                )),
                                 const SizedBox(width: 30),
                                 ElevatedButton(
                                   onPressed: () {
@@ -624,26 +626,30 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                                   child: const Text("مسح "),
                                 ), // Space between input and button
                                 const SizedBox(width: 15),
-                                ElevatedButton(
-                                  style: const ButtonStyle(
-                                      elevation: WidgetStatePropertyAll(5),
-                                      backgroundColor: WidgetStatePropertyAll(
-                                          Config.colorPrimary)),
-                                  onPressed: () {
-                                    if (_formKey2.currentState!.validate()) {
-                                      // All validations passed
-                                      final year =
-                                          int.tryParse(_yearController.text);
-                                      showDiplomatsByMonth(context, year!);
-                                    }
-                                  },
-                                  child: const Text(
-                                    'بحث',
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255)),
-                                  ),
-                                ),
+                                Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: ElevatedButton(
+                                      style: const ButtonStyle(
+                                          elevation: WidgetStatePropertyAll(5),
+                                          backgroundColor:
+                                              WidgetStatePropertyAll(
+                                                  Config.colorPrimary)),
+                                      onPressed: () {
+                                        if (_formKey2.currentState!
+                                            .validate()) {
+                                          // All validations passed
+                                          final year = int.tryParse(
+                                              _yearController.text);
+                                          showDiplomatsByMonth(context, year!);
+                                        }
+                                      },
+                                      child: const Text(
+                                        'بحث',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 255, 255, 255)),
+                                      ),
+                                    )),
                               ],
                             ),
                           ),
@@ -661,7 +667,8 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                         Radius.circular(5),
                       ),
                       border: Border.all(
-                          color: Color.fromARGB(255, 76, 77, 78), width: 1),
+                          color: const Color.fromARGB(255, 76, 77, 78),
+                          width: 1),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -725,23 +732,9 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                         Radius.circular(5),
                       ),
                       border: Border.all(
-                          color: Color.fromARGB(255, 76, 77, 78), width: 1),
+                          color: const Color.fromARGB(255, 76, 77, 78),
+                          width: 1),
                     ),
-                    /*BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 144, 140, 140)
-                                .withOpacity(0.5),
-                            offset: const Offset(4,
-                                4), // Horizontal and vertical shadow displacement
-                            blurRadius: 8.0, // Soft edges of the shadow
-                            spreadRadius: 2.0, // Expands the shadow
-                          ),
-                        ]),*/
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -775,59 +768,61 @@ class _DiplomatsActions extends State<DiplomatsActions> {
                         const SizedBox(
                           height: 25,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: ElevatedButton(
-                                style: const ButtonStyle(
-                                    elevation: WidgetStatePropertyAll(5),
-                                    backgroundColor: WidgetStatePropertyAll(
-                                        Color.fromARGB(255, 166, 149, 24))),
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return DiplomatHistoryTable2();
+                        Padding(
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    style: const ButtonStyle(
+                                        elevation: WidgetStatePropertyAll(5),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            Color.fromARGB(255, 166, 149, 24))),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return const DiplomatHistoryTable2();
+                                        },
+                                      );
                                     },
-                                  );
-                                },
-                                child: const Text(
-                                  '  القائمة الكاملة  ',
-                                  style: TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255)),
+                                    child: const Text(
+                                      '  القائمة الكاملة  ',
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255)),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 50,
-                            ),
-                            Expanded(
-                              child: ElevatedButton(
-                                style: const ButtonStyle(
-                                    elevation: WidgetStatePropertyAll(5),
-                                    backgroundColor: WidgetStatePropertyAll(
-                                        Config.colorPrimary)),
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return const DiplomatHistory();
+                                const SizedBox(
+                                  width: 50,
+                                ),
+                                Expanded(
+                                  child: ElevatedButton(
+                                    style: const ButtonStyle(
+                                        elevation: WidgetStatePropertyAll(5),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            Config.colorPrimary)),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return const DiplomatHistory();
+                                        },
+                                      );
                                     },
-                                  );
-                                },
-                                child: const Text(
-                                  'السياح المغادرين',
-                                  style: TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255)),
+                                    child: const Text(
+                                      'السياح المغادرين',
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255)),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
+                              ],
+                            )),
                       ],
                     ),
                   ),
