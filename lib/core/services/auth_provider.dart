@@ -1,5 +1,4 @@
 import 'package:bawabba/core/models/user.dart';
-import 'package:bawabba/ui/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider with ChangeNotifier {

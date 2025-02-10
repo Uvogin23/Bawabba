@@ -519,17 +519,19 @@ class _CitizensActions extends State<CitizensActions> {
                               Icon(Icons.calendar_month,
                                   size: 30,
                                   color: Color.fromARGB(255, 225, 180, 32)),
-                              Text(
-                                " توزيع عدد الرعايا حسب أشهر السنة  ",
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontFamily: 'Times New Roman',
-                                    fontSize: 18,
-                                    letterSpacing:
-                                        0 /*percentages not used in flutter. defaulting to zero*/,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
+                              Expanded(
+                                child: Text(
+                                  " توزيع عدد الرعايا حسب أشهر السنة  ",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                      fontFamily: 'Times New Roman',
+                                      fontSize: 18,
+                                      letterSpacing:
+                                          0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1),
+                                ),
                               ),
                             ],
                           ),
@@ -625,21 +627,6 @@ class _CitizensActions extends State<CitizensActions> {
                       border: Border.all(
                           color: Color.fromARGB(255, 76, 77, 78), width: 1),
                     ),
-                    /*BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 144, 140, 140)
-                                .withOpacity(0.5),
-                            offset: const Offset(4,
-                                4), // Horizontal and vertical shadow displacement
-                            blurRadius: 8.0, // Soft edges of the shadow
-                            spreadRadius: 2.0, // Expands the shadow
-                          ),
-                        ]),*/
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -677,47 +664,53 @@ class _CitizensActions extends State<CitizensActions> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ElevatedButton(
-                              style: const ButtonStyle(
-                                  elevation: WidgetStatePropertyAll(5),
-                                  backgroundColor: WidgetStatePropertyAll(
-                                      Color.fromARGB(255, 166, 149, 24))),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const CHistoryTable2();
-                                  },
-                                );
-                              },
-                              child: const Text(
-                                '  القائمة الكاملة  ',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255)),
+                            Expanded(
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    elevation: WidgetStatePropertyAll(5),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        Color.fromARGB(255, 166, 149, 24))),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const CHistoryTable2();
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  '  القائمة الكاملة  ',
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                ),
                               ),
                             ),
                             const SizedBox(
                               width: 50,
                             ),
-                            ElevatedButton(
-                              style: const ButtonStyle(
-                                  elevation: WidgetStatePropertyAll(5),
-                                  backgroundColor: WidgetStatePropertyAll(
-                                      Config.colorPrimary)),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const CHistoryTable();
-                                  },
-                                );
-                              },
-                              child: const Text(
-                                'الرعايا المغادرين',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255)),
+                            Expanded(
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    elevation: WidgetStatePropertyAll(5),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        Config.colorPrimary)),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const CHistoryTable();
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  'الرعايا المغادرين',
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ],

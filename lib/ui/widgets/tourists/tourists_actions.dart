@@ -4,7 +4,6 @@ import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
 import 'package:bawabba/ui/widgets/tourists/by_month_table.dart';
 import 'package:bawabba/ui/widgets/tourists/by_nationality_table.dart';
-import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
 import 'package:bawabba/ui/widgets/tourists/tourist_history.dart';
 import 'package:bawabba/ui/widgets/tourists/tourist_history_all.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:bawabba/main.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -375,7 +373,7 @@ class _TouristsActions extends State<TouristsActions> {
                                   padding:
                                       const EdgeInsets.fromLTRB(5, 5, 5, 16),
                                   child: DropdownButtonFormField<Nationality>(
-                                    isExpanded: false,
+                                    isExpanded: true,
                                     isDense: true,
                                     decoration: InputDecoration(
                                       labelText: 'الجنسية',
@@ -560,17 +558,19 @@ class _TouristsActions extends State<TouristsActions> {
                               Icon(Icons.calendar_month,
                                   size: 30,
                                   color: Color.fromARGB(255, 225, 180, 32)),
-                              Text(
-                                " توزيع عدد السياح حسب أشهر السنة  ",
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontFamily: 'Times New Roman',
-                                    fontSize: 18,
-                                    letterSpacing:
-                                        0 /*percentages not used in flutter. defaulting to zero*/,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
+                              Expanded(
+                                child: Text(
+                                  " توزيع عدد السياح حسب أشهر السنة  ",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                      fontFamily: 'Times New Roman',
+                                      fontSize: 18,
+                                      letterSpacing:
+                                          0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1),
+                                ),
                               ),
                             ],
                           ),
@@ -784,45 +784,51 @@ class _TouristsActions extends State<TouristsActions> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ElevatedButton(
-                              style: const ButtonStyle(
-                                  elevation: WidgetStatePropertyAll(5),
-                                  backgroundColor: WidgetStatePropertyAll(
-                                      Color.fromARGB(255, 166, 149, 24))),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return HistoryTable2();
-                                  },
-                                );
-                              },
-                              child: const Text(
-                                '  القائمة الكاملة  ',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255)),
+                            Expanded(
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    elevation: WidgetStatePropertyAll(5),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        Color.fromARGB(255, 166, 149, 24))),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return HistoryTable2();
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  '  القائمة الكاملة  ',
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                ),
                               ),
                             ),
                             const SizedBox(
                               width: 50,
                             ),
-                            ElevatedButton(
-                              style: const ButtonStyle(
-                                  elevation: WidgetStatePropertyAll(5),
-                                  backgroundColor: WidgetStatePropertyAll(
-                                      Config.colorPrimary)),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return HistoryTable();
-                                  },
-                                );
-                              },
-                              child: const Text(
-                                'السياح المغادرين',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255)),
+                            Expanded(
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    elevation: WidgetStatePropertyAll(5),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        Config.colorPrimary)),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return HistoryTable();
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  'السياح المغادرين',
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                ),
                               ),
                             ),
                           ],

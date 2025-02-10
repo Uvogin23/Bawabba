@@ -1,18 +1,13 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/citizen.dart';
-import 'package:bawabba/core/models/non_resident.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/citizens/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/citizens/show_info.dart';
-import 'package:bawabba/ui/widgets/non_residents/edit_dialogue.dart';
-import 'package:bawabba/ui/widgets/non_residents/nonResidents_actions.dart';
-import 'package:bawabba/ui/widgets/non_residents/show_info.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:printing/printing.dart';
-import 'package:bawabba/main.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -177,34 +172,52 @@ class _CitizensTable2 extends State<CitizensTable2> {
                           label: const Text(""),
                         ),
                         DataColumn(
-                          label: const Text("الرقم"),
+                          label: const Text(
+                            "الرقم",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onSort: (columnIndex, ascending) {
                             sortData(columnIndex, ascending);
                           },
                         ),
                         DataColumn(
-                          label: const Text("الإسم"),
+                          label: const Text(
+                            "الإسم",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onSort: (columnIndex, ascending) {
                             sortData(columnIndex, ascending);
                           },
                         ),
                         DataColumn(
-                          label: const Text("اللقب"),
+                          label: const Text(
+                            "اللقب",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onSort: (columnIndex, ascending) {
                             sortData(columnIndex, ascending);
                           },
                         ),
                         DataColumn(
-                          label: const Text(" الوظيفة"),
+                          label: const Text(
+                            " الوظيفة",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onSort: (columnIndex, ascending) {
                             sortData(columnIndex, ascending);
                           },
                         ),
                         const DataColumn(
-                          label: Text("تاريخ المغادرة"),
+                          label: Text(
+                            "تاريخ المغادرة",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                         DataColumn(
-                          label: const Text("المرجع"),
+                          label: const Text(
+                            "المرجع",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onSort: (columnIndex, ascending) {
                             sortData(columnIndex, ascending);
                           },

@@ -1,24 +1,13 @@
 import 'package:bawabba/core/services/auth_provider.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_table_display.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_entre.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_sortie.dart';
-import 'package:bawabba/ui/widgets/dashboard/line_chart.dart';
-import 'package:bawabba/ui/widgets/side_menu.dart';
+
 import 'package:bawabba/ui/widgets/side_menu2.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
 import 'package:bawabba/ui/widgets/tourists/tourists_actions.dart';
 import 'package:bawabba/ui/widgets/tourists/tourists_table1.dart';
 import 'package:bawabba/ui/widgets/tourists/tourists_table2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:window_manager/window_manager.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_tourist.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_diplomat.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_alg.dart';
-import 'package:bawabba/ui/widgets/dashboard/dashboard_card_acc.dart';
-import 'package:bawabba/ui/widgets/dashboard/chart_display.dart';
 
 class TouristsHome extends StatefulWidget {
   const TouristsHome({

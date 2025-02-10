@@ -5,11 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:window_manager/window_manager.dart';
-import 'package:bawabba/core/services/card_stats.dart';
 import 'package:bawabba/core/models/user.dart';
 import 'package:bawabba/core/services/auth_provider.dart';
-import 'package:bawabba/main.dart';
 import 'package:provider/provider.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
@@ -329,7 +326,7 @@ class _EmployeeTable extends State<EmployeeTable> {
           content: Container(
               height: 50,
               width: 200,
-              child: Text('إضغط على تأكيد لحذف المستخدم')),
+              child: const Text('إضغط على تأكيد لحذف المستخدم')),
           actions: [
             TextButton(
               onPressed: () {
@@ -366,12 +363,12 @@ class _EmployeeTable extends State<EmployeeTable> {
           employees.removeWhere((employee) => employee.id == id);
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('تم حذف المستخدم بنجاح')),
+          const SnackBar(content: Text('تم حذف المستخدم بنجاح')),
         );
       } else if (response.statusCode == 404) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('مستخدم غير موجود')),
+          const SnackBar(content: Text('مستخدم غير موجود')),
         );
         throw Exception("مستخدم غير موجود");
       } else {
@@ -479,11 +476,12 @@ class _EmployeeTable extends State<EmployeeTable> {
       width: screenWidth * 0.775,
       height: 450,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 252, 251, 251),
-        borderRadius: BorderRadius.all(
+        color: const Color.fromARGB(255, 252, 251, 251),
+        borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
-        border: Border.all(color: Color.fromARGB(255, 76, 77, 78), width: 1),
+        border:
+            Border.all(color: const Color.fromARGB(255, 76, 77, 78), width: 1),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -509,7 +507,7 @@ class _EmployeeTable extends State<EmployeeTable> {
               'تسيير المستخدمين',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color.fromARGB(255, 13, 63, 89),
+                  color: Config.colorPrimary,
                   fontFamily: 'Times New Roman',
                   fontSize: 16,
                   letterSpacing:
@@ -541,40 +539,60 @@ class _EmployeeTable extends State<EmployeeTable> {
                             columnSpacing: 50.0,
                             headingRowHeight: 40.0,
                             headingRowColor: WidgetStateProperty.resolveWith(
-                                (states) =>
-                                    const Color.fromARGB(255, 185, 222, 230)),
+                                (states) => Config.colorPrimary),
                             sortColumnIndex: sortColumnIndex,
                             sortAscending: isAscending,
                             columns: [
                               DataColumn(
-                                label: const Text("الرقم"),
+                                label: const Text(
+                                  "الرقم",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 onSort: (columnIndex, ascending) {
                                   sortData(columnIndex, ascending);
                                 },
                               ),
                               DataColumn(
-                                label: const Text("الإسم"),
+                                label: const Text(
+                                  "الإسم",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 onSort: (columnIndex, ascending) {
                                   sortData(columnIndex, ascending);
                                 },
                               ),
                               DataColumn(
-                                label: const Text("اللقب"),
+                                label: const Text(
+                                  "اللقب",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 onSort: (columnIndex, ascending) {
                                   sortData(columnIndex, ascending);
                                 },
                               ),
                               const DataColumn(
-                                label: Text("رقم الذاتية"),
+                                label: Text(
+                                  "رقم الذاتية",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               const DataColumn(
-                                label: Text("إسم المستخدم"),
+                                label: Text(
+                                  "إسم المستخدم",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               const DataColumn(
-                                label: Text("الرتبة"),
+                                label: Text(
+                                  "الرتبة",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               const DataColumn(
-                                label: Text("الدور"),
+                                label: Text(
+                                  "الدور",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               const DataColumn(
                                 label: Text(""),
@@ -620,8 +638,8 @@ class _EmployeeTable extends State<EmployeeTable> {
                                                 onPressed: () {
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
-                                                    SnackBar(
-                                                        content: const Text(
+                                                    const SnackBar(
+                                                        content: Text(
                                                             'عملية ممنوعة')),
                                                   );
                                                 })

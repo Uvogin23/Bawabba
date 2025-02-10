@@ -275,11 +275,6 @@ class _NonResidentsTable2 extends State<NonResidentsTable2> {
                                           .add(nonResident.id);
                                     }
                                   });
-                                  /*for (int i = 0;
-                                    i < selectedTouristIds.length;
-                                    i++) {
-                                  print(selectedTouristIds);
-                                }*/
                                 },
                               ),
                             ),

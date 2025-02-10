@@ -374,7 +374,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                                   child: Padding(
                                 padding: const EdgeInsets.fromLTRB(5, 5, 5, 16),
                                 child: DropdownButtonFormField<Nationality>(
-                                  isExpanded: false,
+                                  isExpanded: true,
                                   isDense: true,
                                   decoration: InputDecoration(
                                     labelText: 'الجنسية',
@@ -555,17 +555,19 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                               Icon(Icons.calendar_month,
                                   size: 30,
                                   color: Color.fromARGB(255, 225, 180, 32)),
-                              Text(
-                                " توزيع عدد الرعايا حسب أشهر السنة  ",
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontFamily: 'Times New Roman',
-                                    fontSize: 18,
-                                    letterSpacing:
-                                        0 /*percentages not used in flutter. defaulting to zero*/,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
+                              Expanded(
+                                child: Text(
+                                  " توزيع عدد الرعايا حسب أشهر السنة  ",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                      fontFamily: 'Times New Roman',
+                                      fontSize: 18,
+                                      letterSpacing:
+                                          0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1),
+                                ),
                               ),
                             ],
                           ),
@@ -777,45 +779,51 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ElevatedButton(
-                              style: const ButtonStyle(
-                                  elevation: WidgetStatePropertyAll(5),
-                                  backgroundColor: WidgetStatePropertyAll(
-                                      Color.fromARGB(255, 166, 149, 24))),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const NRHistoryTable2();
-                                  },
-                                );
-                              },
-                              child: const Text(
-                                '  القائمة الكاملة  ',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255)),
+                            Expanded(
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    elevation: WidgetStatePropertyAll(5),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        Color.fromARGB(255, 166, 149, 24))),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const NRHistoryTable2();
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  '  القائمة الكاملة  ',
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                ),
                               ),
                             ),
                             const SizedBox(
                               width: 50,
                             ),
-                            ElevatedButton(
-                              style: const ButtonStyle(
-                                  elevation: WidgetStatePropertyAll(5),
-                                  backgroundColor: WidgetStatePropertyAll(
-                                      Config.colorPrimary)),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return NRHistoryTable();
-                                  },
-                                );
-                              },
-                              child: const Text(
-                                'الرعايا المغادرين',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255)),
+                            Expanded(
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    elevation: WidgetStatePropertyAll(5),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        Config.colorPrimary)),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return NRHistoryTable();
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  'الرعايا المغادرين',
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                ),
                               ),
                             ),
                           ],

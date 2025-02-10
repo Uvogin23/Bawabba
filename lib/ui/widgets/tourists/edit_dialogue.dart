@@ -5,8 +5,6 @@ import 'package:bawabba/ui/screens/tourists_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:bawabba/main.dart';
-import 'package:provider/provider.dart';
 
 void showUpdateTouristDialog(
   BuildContext context,

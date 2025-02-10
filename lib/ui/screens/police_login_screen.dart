@@ -3,10 +3,8 @@ import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -74,21 +72,21 @@ class _LoginScreenState extends State<LoginScreenPolice> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 225, 227, 228),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(3.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(110, 10, 110, 10),
+                padding: const EdgeInsets.fromLTRB(50, 1, 50, 1),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                         child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 50, 120, 50),
+                      margin: const EdgeInsets.fromLTRB(0, 10, 50, 10),
                       padding: const EdgeInsets.all(16),
                       decoration: const BoxDecoration(
                           boxShadow: [
@@ -102,7 +100,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                               topRight: Radius.circular(20)),
                           color: Color.fromARGB(255, 255, 255, 255)),
                       child: Container(
-                          height: 600,
+                          height: 700,
                           decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 255, 255, 255)),
                           child: Column(
@@ -111,7 +109,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                               const Icon(
                                 Icons.account_circle_rounded,
                                 size: 100,
-                                color: Color.fromARGB(255, 13, 63, 89),
+                                color: Config.colorPrimary,
                               ),
                               const SizedBox(
                                 height: 20,
@@ -120,7 +118,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                 'تسجيــــــل الدخــــول',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 13, 63, 89),
+                                    color: Config.colorPrimary,
                                     fontFamily: 'Times New Roman',
                                     fontSize: 24,
                                     letterSpacing:
@@ -185,26 +183,30 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      windowManager.close();
-                                    },
-                                    child: const Text('خروج'),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        windowManager.close();
+                                      },
+                                      child: const Text('خروج'),
+                                    ),
                                   ),
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      // Validate returns true if the form is valid, or false otherwise.
-                                      if (_formKey.currentState!.validate()) {
-                                        _isLoading ? null : _login();
-                                      }
-                                    },
-                                    child: _isLoading
-                                        ? const CircularProgressIndicator(
-                                            color: Colors.white)
-                                        : const Text('تسجيل الدخول'),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Validate returns true if the form is valid, or false otherwise.
+                                        if (_formKey.currentState!.validate()) {
+                                          _isLoading ? null : _login();
+                                        }
+                                      },
+                                      child: _isLoading
+                                          ? const CircularProgressIndicator(
+                                              color: Colors.white)
+                                          : const Text('تسجيل الدخول'),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -214,7 +216,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                     Expanded(
                         flex: 1,
                         child: Container(
-                            margin: const EdgeInsets.fromLTRB(120, 50, 0, 50),
+                            margin: const EdgeInsets.fromLTRB(50, 10, 0, 10),
                             padding: const EdgeInsets.all(16),
                             decoration: const BoxDecoration(
                                 boxShadow: [
@@ -226,141 +228,166 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(20),
                                     topLeft: Radius.circular(20)),
-                                color: Color.fromARGB(255, 13, 63, 89)),
+                                color: Config.colorPrimary),
                             child: Container(
-                              height: 600,
+                              height: 700,
                               decoration: const BoxDecoration(
-                                  color: Color.fromARGB(255, 13, 63, 89)),
+                                  color: Config.colorPrimary),
                               child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Column(children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          width: 60,
-                                          height: 80.0,
-                                          decoration: const BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/images/logodgsn.png'),
-                                              fit: BoxFit.fitWidth,
+                                  Container(
+                                    height: 230,
+                                    decoration: const BoxDecoration(
+                                        color: Config.colorPrimary),
+                                    child: Column(children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: 60,
+                                            height: 80.0,
+                                            decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/logodgsn.png'),
+                                                fit: BoxFit.fitWidth,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        Container(
-                                          width: 90,
-                                          height: 95.0,
-                                          decoration: const BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/images/algerieLogo.png'),
-                                              fit: BoxFit.fitWidth,
+                                          const SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            width: 90,
+                                            height: 95.0,
+                                            decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/algerieLogo.png'),
+                                                fit: BoxFit.fitWidth,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    const Text(
-                                      ' الجمـهـوريـة الجزائـرية الديمقراطيــة الشعــبـية',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Times New Roman',
-                                          fontSize: 22,
-                                          letterSpacing:
-                                              0 /*percentages not used in flutter. defaulting to zero*/,
-                                          fontWeight: FontWeight.bold,
-                                          height: 1),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    const Text(
-                                      ' وزارة الداخلية و الجماعــات المحلـية ',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Times New Roman',
-                                          fontSize: 22,
-                                          letterSpacing:
-                                              0 /*percentages not used in flutter. defaulting to zero*/,
-                                          fontWeight: FontWeight.bold,
-                                          height: 1),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    const Text(
-                                      'المديرية العـامة للأمــن الوطنـي ',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Times New Roman',
-                                          fontSize: 22,
-                                          letterSpacing:
-                                              0 /*percentages not used in flutter. defaulting to zero*/,
-                                          fontWeight: FontWeight.bold,
-                                          height: 1),
-                                    ),
-                                  ]),
-                                  SizedBox(
-                                    height: 15,
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 13,
+                                      ),
+                                      const Text(
+                                        ' الجمـهـوريـة الجزائـرية الديمقراطيــة الشعــبـية',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                255, 255, 255, 1),
+                                            fontFamily: 'Times New Roman',
+                                            fontSize: 26,
+                                            letterSpacing:
+                                                0 /*percentages not used in flutter. defaulting to zero*/,
+                                            fontWeight: FontWeight.bold,
+                                            height: 1),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Text(
+                                        ' وزارة الداخليـــة و الجماعــــات المحلـية ',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                255, 255, 255, 1),
+                                            fontFamily: 'Times New Roman',
+                                            fontSize: 26,
+                                            letterSpacing:
+                                                0 /*percentages not used in flutter. defaulting to zero*/,
+                                            fontWeight: FontWeight.bold,
+                                            height: 1),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Text(
+                                        'المديرية العـامة للأمــن الوطنـي ',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                255, 255, 255, 1),
+                                            fontFamily: 'Times New Roman',
+                                            fontSize: 26,
+                                            letterSpacing:
+                                                0 /*percentages not used in flutter. defaulting to zero*/,
+                                            fontWeight: FontWeight.bold,
+                                            height: 1),
+                                      ),
+                                    ]),
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.only(top: 0),
-                                    width: 160,
-                                    height: 160.0,
+                                    height: 230,
                                     decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/logo.png'),
-                                        fit: BoxFit.fitWidth,
+                                        color: Config.colorPrimary),
+                                    child: Center(
+                                        child: Container(
+                                      margin: const EdgeInsets.only(top: 0),
+                                      width: 180,
+                                      height: 180.0,
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/logo.png'),
+                                          fit: BoxFit.fitWidth,
+                                        ),
                                       ),
+                                    )),
+                                  ),
+                                  Container(
+                                    height: 110,
+                                    decoration: const BoxDecoration(
+                                        color: Config.colorPrimary),
+                                    child: const Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          height: 25,
+                                        ),
+                                        Text(
+                                          'تطبيقــة متــابعة الدخــول و الخــروج',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  255, 255, 255, 1),
+                                              fontFamily: 'Times New Roman',
+                                              fontSize: 26,
+                                              letterSpacing:
+                                                  0 /*percentages not used in flutter. defaulting to zero*/,
+                                              fontWeight: FontWeight.bold,
+                                              height: 1),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Text(
+                                          'عبــر حــدود ولايــــة جـــــانت',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  255, 255, 255, 1),
+                                              fontFamily: 'Times New Roman',
+                                              fontSize: 26,
+                                              letterSpacing:
+                                                  0 /*percentages not used in flutter. defaulting to zero*/,
+                                              fontWeight: FontWeight.bold,
+                                              height: 1),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        )
+                                      ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  const Text(
-                                    'تطبيقة متابعة الدخول و الخروج',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Times New Roman',
-                                        fontSize: 22,
-                                        letterSpacing:
-                                            0 /*percentages not used in flutter. defaulting to zero*/,
-                                        fontWeight: FontWeight.bold,
-                                        height: 1),
-                                  ),
-                                  const Text(
-                                    'عبر حدود ولاية جانت',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Times New Roman',
-                                        fontSize: 22,
-                                        letterSpacing:
-                                            0 /*percentages not used in flutter. defaulting to zero*/,
-                                        fontWeight: FontWeight.bold,
-                                        height: 1),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
                                   )
                                 ],
                               ),
@@ -375,114 +402,3 @@ class _LoginScreenState extends State<LoginScreenPolice> {
     );
   }
 }
-
-
-/*class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Container(
-        width: screenWidth * 1,
-        height: screenHeight * 1,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(1),
-            topRight: Radius.circular(1),
-            bottomLeft: Radius.circular(1),
-            bottomRight: Radius.circular(1),
-          ),
-          boxShadow: [
-            BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.25),
-                offset: Offset(0, 4),
-                blurRadius: 34)
-          ],
-          color: Color.fromRGBO(255, 255, 255, 1),
-        ),
-        child: Stack(children: <Widget>[
-          Positioned(
-              top: 150,
-              left: 200,
-              right: 200,
-              bottom: 150,
-              child: Container(
-                  width: screenWidth * 0.8,
-                  height: screenHeight * 0.8,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                    color: Color.fromRGBO(25, 83, 153, 1),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(255, 82, 83, 99), // Shadow color
-                        blurRadius: 10, // Blur radius
-                        offset: Offset(0, 0), // Offset in x and y directions
-                      ),
-                    ],
-                  ))),
-          Positioned(
-              top: 270,
-              left: 1000,
-              right: 300,
-              bottom: 270,
-              child: //Mask holder Template
-                  Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                        ),
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        boxShadow: [
-                          BoxShadow(
-                            color:
-                                Color.fromARGB(255, 82, 83, 99), // Shadow color
-                            blurRadius: 10, // Blur radius
-                            offset:
-                                Offset(0, 0), // Offset in x and y directions
-                          ),
-                        ],
-                      ),
-                      child: null)),
-          Positioned(
-            top: 330,
-            left: 490,
-            child: Container(
-              width: 200,
-              height: 200.0,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/change.png'),
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-            ),
-          ),
-          const Positioned(
-            top: 570,
-            left: 450,
-            child: Text(
-              'تطبيقة متابعة الدخول و الخروج\nعبر حدود ولاية جانت',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color.fromRGBO(255, 255, 255, 1),
-                fontFamily: 'Times New Roman',
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                height: 1,
-              ),
-            ),
-          ),
-        ]));
-  }
-}*/

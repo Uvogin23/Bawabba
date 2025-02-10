@@ -215,37 +215,58 @@ class _DiplomatTable1 extends State<DiplomatTable1> {
                                 label: Text(""),
                               ),
                               DataColumn(
-                                label: const Text("الرقم"),
+                                label: const Text(
+                                  "الرقم",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 onSort: (columnIndex, ascending) {
                                   sortData(columnIndex, ascending);
                                 },
                               ),
                               DataColumn(
-                                label: const Text("الإسم"),
+                                label: const Text(
+                                  "الإسم",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 onSort: (columnIndex, ascending) {
                                   sortData(columnIndex, ascending);
                                 },
                               ),
                               DataColumn(
-                                label: const Text("اللقب"),
+                                label: const Text(
+                                  "اللقب",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 onSort: (columnIndex, ascending) {
                                   sortData(columnIndex, ascending);
                                 },
                               ),
                               DataColumn(
-                                label: const Text(" الجنسية"),
+                                label: const Text(
+                                  " الجنسية",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 onSort: (columnIndex, ascending) {
                                   sortData(columnIndex, ascending);
                                 },
                               ),
                               const DataColumn(
-                                label: Text("تاريخ الوصول"),
+                                label: Text(
+                                  "تاريخ الوصول",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               const DataColumn(
-                                label: Text("يغادر يوم"),
+                                label: Text(
+                                  "يغادر يوم",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               DataColumn(
-                                label: const Text("المرجع"),
+                                label: const Text(
+                                  "المرجع",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 onSort: (columnIndex, ascending) {
                                   sortData(columnIndex, ascending);
                                 },
@@ -285,11 +306,6 @@ class _DiplomatTable1 extends State<DiplomatTable1> {
                                                 .add(diplomat.id);
                                           }
                                         });
-                                        /*for (int i = 0;
-                                    i < selectedTouristIds.length;
-                                    i++) {
-                                  print(selectedTouristIds);
-                                }*/
                                       },
                                     ),
                                   ),

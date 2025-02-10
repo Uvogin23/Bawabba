@@ -6,14 +6,10 @@ import 'package:bawabba/ui/widgets/tourists/show_info.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:printing/printing.dart';
-import 'package:window_manager/window_manager.dart';
-import 'package:bawabba/core/services/card_stats.dart';
-import 'package:bawabba/core/models/user.dart';
 import 'package:bawabba/core/services/auth_provider.dart';
-import 'package:bawabba/main.dart';
+
 import 'package:provider/provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -236,37 +232,58 @@ class _TouristTable1 extends State<TouristTable1> {
                             label: const Text(""),
                           ),
                           DataColumn(
-                            label: const Text("الرقم"),
+                            label: const Text(
+                              "الرقم",
+                              style: TextStyle(color: Colors.white),
+                            ),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
                           ),
                           DataColumn(
-                            label: const Text("الإسم"),
+                            label: const Text(
+                              "الإسم",
+                              style: TextStyle(color: Colors.white),
+                            ),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
                           ),
                           DataColumn(
-                            label: const Text("اللقب"),
+                            label: const Text(
+                              "اللقب",
+                              style: TextStyle(color: Colors.white),
+                            ),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
                           ),
                           DataColumn(
-                            label: const Text(" الجنسية"),
+                            label: const Text(
+                              " الجنسية",
+                              style: TextStyle(color: Colors.white),
+                            ),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
                           ),
                           const DataColumn(
-                            label: Text("تاريخ الوصول"),
+                            label: Text(
+                              "تاريخ الوصول",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                           const DataColumn(
-                            label: Text("يغادر يوم"),
+                            label: Text(
+                              "يغادر يوم",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                           DataColumn(
-                            label: const Text("المرجع"),
+                            label: const Text(
+                              "المرجع",
+                              style: TextStyle(color: Colors.white),
+                            ),
                             onSort: (columnIndex, ascending) {
                               sortData(columnIndex, ascending);
                             },
@@ -302,11 +319,6 @@ class _TouristTable1 extends State<TouristTable1> {
                                         selectedTouristIds.add(tourist.id);
                                       }
                                     });
-                                    /*for (int i = 0;
-                                    i < selectedTouristIds.length;
-                                    i++) {
-                                  print(selectedTouristIds);
-                                }*/
                                   },
                                 ),
                               ),

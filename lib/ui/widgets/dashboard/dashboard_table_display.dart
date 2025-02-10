@@ -61,7 +61,7 @@ Future<List<Citizen>> fetchCitizens() async {
 
       List<Citizen> list =
           data.map<Citizen>((item) => Citizen.fromJson(item)).toList();
-      print(list.first.address);
+
       return list;
     } catch (e) {
       print('Error parsing Citizens: $e');

@@ -2,14 +2,7 @@ import 'dart:convert';
 import 'package:bawabba/core/services/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:window_manager/window_manager.dart';
-import 'package:bawabba/core/services/card_stats.dart';
-import 'package:bawabba/core/models/user.dart';
-import 'package:bawabba/core/services/auth_provider.dart';
-import 'package:bawabba/main.dart';
-import 'package:provider/provider.dart';
 
 enum Nationality {
   // ignore: constant_identifier_names

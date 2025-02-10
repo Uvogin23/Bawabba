@@ -62,7 +62,6 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
     final url =
         Uri.parse('${Config.baseUrl}/add_employee'); // Your API endpoint
     try {
-      print(selectedRole?.name);
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -152,7 +151,7 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
           ),
           Expanded(
             child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(5),
                 child: Form(
                     key: _formKey,
                     child: Column(
@@ -429,47 +428,53 @@ class _AddEmployeeForm extends State<AddEmployeeForm> {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 10),
+                        if (_errorMessage != null) ...[
+                          Text(
+                            _errorMessage!,
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                          const SizedBox(height: 5),
+                        ],
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 224, 232, 235),
+                                elevation: 5,
+                              ),
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  // All validations passed
+                                  _isLoading ? null : _addemployee();
+                                }
+                              },
+                              child: _isLoading
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white)
+                                  : const Text('إضافة حساب'),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            ElevatedButton(
+                              onPressed: _clearForm, // Call the clear function
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 224, 232, 235),
+                                elevation: 5,
+                              ),
+                              child: const Text("مسح الإستمارة"),
+                            ),
+                          ],
+                        ),
                       ],
                     ))),
-          ),
-          const SizedBox(height: 20),
-          if (_errorMessage != null) ...[
-            Text(
-              _errorMessage!,
-              style: const TextStyle(color: Colors.red),
-            ),
-            const SizedBox(height: 10),
-          ],
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 224, 232, 235),
-                  elevation: 5,
-                ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // All validations passed
-                    _isLoading ? null : _addemployee();
-                  }
-                },
-                child: _isLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text('إضافة حساب'),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              ElevatedButton(
-                onPressed: _clearForm, // Call the clear function
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 224, 232, 235),
-                  elevation: 5,
-                ),
-                child: const Text("مسح الإستمارة"),
-              ),
-            ],
           ),
         ],
       ),
