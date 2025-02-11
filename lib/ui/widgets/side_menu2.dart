@@ -76,7 +76,7 @@ class _SideMenu2 extends State<SideMenu2> {
                   ),
                   const Center(
                     child: Text(
-                      'تطبيقة متابعة الدخول و الخروج\nعبر حدود ولاية جانت',
+                      'تطبيقة متابعة الدخول و الخروج\nعبر الحدود  ',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1),

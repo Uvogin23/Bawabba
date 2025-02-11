@@ -200,7 +200,7 @@ Widget ChartDisplayPie() {
             const Padding(
               padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
               child: Text(
-                'نسبة السياح حسب النوع:',
+                'نسب حركات الأجانب عبر الحدود البرية و الجوية',
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   color: Color.fromRGBO(0, 0, 0, 1),
@@ -321,7 +321,7 @@ Widget BarChartDisplay() {
               top: 40,
               right: 30,
               child: Text(
-                'خلال االسنة الحالية',
+                'خلال السنة الحالية',
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   color: Color.fromRGBO(110, 109, 109, 1),

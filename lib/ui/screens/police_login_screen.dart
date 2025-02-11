@@ -355,7 +355,7 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                           height: 25,
                                         ),
                                         Text(
-                                          'تطبيقــة متــابعة الدخــول و الخــروج',
+                                          'تطبيقــة متــابعة الدخــول و الخــروج عبــر الحدود ',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Color.fromRGBO(
@@ -369,19 +369,6 @@ class _LoginScreenState extends State<LoginScreenPolice> {
                                         ),
                                         SizedBox(
                                           height: 15,
-                                        ),
-                                        Text(
-                                          'عبــر حــدود ولايــــة جـــــانت',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  255, 255, 255, 1),
-                                              fontFamily: 'Times New Roman',
-                                              fontSize: 26,
-                                              letterSpacing:
-                                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                                              fontWeight: FontWeight.bold,
-                                              height: 1),
                                         ),
                                         SizedBox(
                                           height: 10,

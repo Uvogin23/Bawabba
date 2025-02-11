@@ -20,17 +20,6 @@ class LineChartScreen2 extends StatelessWidget {
   }
 
   // Fetch Algerians data
-  Future<List<int>> fetchAlgeriansData() async {
-    final url =
-        Uri.parse('${Config.baseUrl}/api/stats/last-12-months-algerian');
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      return List<int>.from(data);
-    } else {
-      throw Exception('Failed to load Algerians data');
-    }
-  }
 
   // Fetch Tourists data
   Future<List<int>> fetchTouristsData() async {
@@ -61,12 +50,10 @@ class LineChartScreen2 extends StatelessWidget {
   // Combine all data into one future
   Future<Map<String, dynamic>> fetchAllData() async {
     final months = await fetchMonthsData();
-    final algerians = await fetchAlgeriansData();
     final tourists = await fetchTouristsData();
     final diplomats = await fetchDiplomatsData();
     return {
       "months": months,
-      "algerians": algerians,
       "tourists": tourists,
       "diplomats": diplomats,
     };
@@ -84,7 +71,6 @@ class LineChartScreen2 extends StatelessWidget {
         } else {
           final data = snapshot.data!;
           final months = data['months'] as List<String>;
-          final algerians = data['algerians'] as List<int>;
           final tourists = data['tourists'] as List<int>;
           final diplomats = data['diplomats'] as List<int>;
 
@@ -130,23 +116,7 @@ class LineChartScreen2 extends StatelessWidget {
                 ),
                 lineBarsData: [
                   // Line for Algerians
-                  LineChartBarData(
-                    spots: algerians
-                        .asMap()
-                        .entries
-                        .map((entry) => FlSpot(
-                            entry.key.toDouble(), entry.value.toDouble()))
-                        .toList(),
-                    isCurved: false,
-                    gradient: const LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 145, 17, 17),
-                        Color.fromARGB(255, 145, 17, 17)
-                      ],
-                    ),
-                    barWidth: 4,
-                    belowBarData: BarAreaData(show: false),
-                  ),
+
                   // Line for Tourists
                   LineChartBarData(
                     spots: tourists
@@ -176,8 +146,8 @@ class LineChartScreen2 extends StatelessWidget {
                     isCurved: false,
                     gradient: const LinearGradient(
                       colors: [
-                        Color.fromARGB(255, 14, 114, 17),
-                        Color.fromARGB(255, 14, 114, 17)
+                        Color.fromARGB(255, 36, 188, 41),
+                        Color.fromARGB(255, 36, 188, 41),
                       ],
                     ),
                     barWidth: 4,
