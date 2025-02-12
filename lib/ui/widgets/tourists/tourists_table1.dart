@@ -148,6 +148,7 @@ class _TouristTable1 extends State<TouristTable1> {
   Widget build(BuildContext context) {
     final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
 
     return FutureBuilder<List<Tourist>>(
       future: touristsFuture,
@@ -162,7 +163,7 @@ class _TouristTable1 extends State<TouristTable1> {
           tourists = snapshot.data!;
           final containerHeight = tourists.length < 7 ? 500.0 : 800.0;
           return Container(
-            width: screenWidth * 0.775,
+            width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
             height: containerHeight,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),

@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 enum Nationality {
   // ignore: constant_identifier_names
@@ -287,9 +289,10 @@ class _AddTouristForm extends State<AddTouristForm> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
 
     return Container(
-      width: screenWidth * 0.775,
+      width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
       height: 600,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),

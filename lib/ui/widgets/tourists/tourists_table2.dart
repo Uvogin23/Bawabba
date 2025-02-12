@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/tourists/show_info.dart';
@@ -10,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:provider/provider.dart';
 
 Future<List<Tourist>> fetchExpectedTourists() async {
   final response = await http
@@ -124,7 +126,7 @@ class _TouristTable2 extends State<TouristTable2> {
   Widget build(BuildContext context) {
     //final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return FutureBuilder<List<Tourist>>(
       future: touristsFuture,
       builder: (context, snapshot) {
@@ -138,7 +140,7 @@ class _TouristTable2 extends State<TouristTable2> {
           tourists = snapshot.data!;
           final containerHeight = tourists.length < 7 ? 600.0 : 800.0;
           return Container(
-            width: screenWidth * 0.775,
+            width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
             height: containerHeight,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),
