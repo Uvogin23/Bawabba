@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/tourist.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
 import 'package:bawabba/ui/widgets/tourists/by_month_table.dart';
@@ -14,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:provider/provider.dart';
 
 class TouristsActions extends StatefulWidget {
   const TouristsActions({Key? key}) : super(key: key);
@@ -294,9 +296,9 @@ class _TouristsActions extends State<TouristsActions> {
   Widget build(BuildContext context) {
     //final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return Container(
-      width: screenWidth * 0.775,
+      width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
       height: 460,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -305,7 +307,7 @@ class _TouristsActions extends State<TouristsActions> {
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
-              width: screenWidth * 0.385,
+              width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
               height: 450,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
@@ -371,7 +373,7 @@ class _TouristsActions extends State<TouristsActions> {
                               Expanded(
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(5, 5, 5, 16),
+                                      const EdgeInsets.fromLTRB(15, 7, 17, 14),
                                   child: DropdownButtonFormField<Nationality>(
                                     isExpanded: true,
                                     isDense: true,
@@ -529,7 +531,7 @@ class _TouristsActions extends State<TouristsActions> {
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
-              width: screenWidth * 0.385,
+              width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
               height: 450,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -537,7 +539,7 @@ class _TouristsActions extends State<TouristsActions> {
                 children: [
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
-                    width: screenWidth * 0.385,
+                    width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
                     height: 130,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
@@ -662,7 +664,7 @@ class _TouristsActions extends State<TouristsActions> {
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
-                    width: screenWidth * 0.385,
+                    width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
                     height: 130,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
@@ -728,7 +730,7 @@ class _TouristsActions extends State<TouristsActions> {
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
-                    width: screenWidth * 0.385,
+                    width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
                     height: 130,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),

@@ -122,7 +122,7 @@ class _NonResidentTable1 extends State<NonResidentTable1> {
   Widget build(BuildContext context) {
     final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return FutureBuilder<List<NonResident>>(
       future: nonResidentsFuture,
       builder: (context, snapshot) {
@@ -136,7 +136,7 @@ class _NonResidentTable1 extends State<NonResidentTable1> {
           nonResidents = snapshot.data!;
           final containerHeight = nonResidents.length < 7 ? 500.0 : 800.0;
           return Container(
-            width: screenWidth * 0.775,
+            width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
             height: containerHeight,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),

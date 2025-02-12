@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/non_resident.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/non_residents/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/non_residents/nonResidents_actions.dart';
@@ -12,6 +13,7 @@ import 'package:printing/printing.dart';
 import 'package:bawabba/main.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:provider/provider.dart';
 
 Future<List<NonResident>> fetchExpectedNonResidents() async {
   final response = await http
@@ -97,7 +99,7 @@ class _NonResidentsTable2 extends State<NonResidentsTable2> {
   Widget build(BuildContext context) {
     //final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return FutureBuilder<List<NonResident>>(
       future: nonResidentsFuture,
       builder: (context, snapshot) {
@@ -111,7 +113,7 @@ class _NonResidentsTable2 extends State<NonResidentsTable2> {
           nonResidents = snapshot.data!;
           final containerHeight = nonResidents.length < 7 ? 600.0 : 700.0;
           return Container(
-            width: screenWidth * 0.775,
+            width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
             height: containerHeight,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),

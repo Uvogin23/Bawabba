@@ -1,178 +1,16 @@
 import 'dart:convert';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 enum Nationality {
-  // ignore: constant_identifier_names
-  Afghanistan,
-  Afrique_du_Sud, // South Africa
-  Albanie, // Albania
   Algerie, // Algeria
-  Allemagne, // Germany
-  Andorre, // Andorra
-  Angola,
-  Antigua_et_Barbuda, // Antigua and Barbuda
-  Argentine, // Argentina
-  Armenie, // Armenia
-  Australie, // Australia
-  Autriche, // Austria
-  Azerbaidjan, // Azerbaijan
-  Bahamas, // Bahamas
-  Bahrein, // Bahrain
-  Bangladesh, // Bangladesh
-  Barbade, // Barbados
-  Bielorussie, // Belarus
-  Belgique, // Belgium
-  Belize, // Belize
-  Benin, // Benin
-  Bhoutan, // Bhutan
-  Bolivie, // Bolivia
-  Bosnie_Herzegovine, // Bosnia and Herzegovina
-  Botswana, // Botswana
-  Bresil, // Brazil
-  Brunei, // Brunei
-  Bulgarie, // Bulgaria
-  Burkina_Faso, // Burkina Faso
-  Burundi, // Burundi
-  Cabo_Verde, // Cabo Verde
-  Cambodge, // Cambodia
-  Cameroun, // Cameroon
-  Canada, // Canada
-  Cap_Verde, // Cape Verde
-  Chili, // Chile
-  Chine, // China
-  Chypre, // Cyprus
-  Colombie, // Colombia
-  Comores, // Comoros
-  Congo, // Congo
-  Coree_du_Nord, // North Korea
-  Coree_du_Sud, // South Korea
-  Costa_Rica, // Costa Rica
-  Croatie, // Croatia
-  Cuba, // Cuba
-  Danemark, // Denmark
-  Djibouti, // Djibouti
-  Dominique, // Dominica
-  Egypte, // Egypt
-  Equateur, // Ecuador
-  Erythree, // Eritrea
-  Estonie, // Estonia
-  Eswatini, // Eswatini
-  Espagne, // Spain
-  Etats_Unis, // United States
-  Fidji, // Fiji
-  Finlande, // Finland
-  France, // France
-  Gabon, // Gabon
-  Gambie, // Gambia
-  Georgie, // Georgia
-  Ghana, // Ghana
-  Grece, // Greece
-  Grenade, // Grenada
-  Guatemala, // Guatemala
-  Guinee, // Guinea
-  Guinee_Bissau, // Guinea-Bissau
-  Guyane, // Guyana
-  Haiti, // Haiti
-  Honduras, // Honduras
-  Hongrie, // Hungary
-  Inde, // India
-  Indonesie,
-  Iraq, // Indonesia
-  Irlande, // Ireland
-  Italie, // Italy
-  Jamaique, // Jamaica
-  Japon, // Japan
-  Jordanie, // Jordan
-  Kazakhstan, // Kazakhstan
-  Kenya, // Kenya
-  Kiribati, // Kiribati
-  Koweit, // Kuwait
-  Laos, // Laos
-  Lettonie, // Latvia
-  Liban, // Lebanon
-  Liberie, // Liberia
+
   Libye, // Libya
-  Lituanie, // Lithuania
-  Luxembourg, // Luxembourg
-  Macedoine, // Macedonia
-  Madagascar, // Madagascar
-  Malaisie, // Malaysia
-  Malawi, // Malawi
-  Maldives, // Maldives
-  Mali, // Mali
-  Malte, // Malta
-  Maroc, // Morocco
-  Maurice, // Mauritius
-  Mexique, // Mexico
-  Micronesie, // Micronesia
-  Moldavie, // Moldova
-  Monaco, // Monaco
-  Mongolie, // Mongolia
-  Mozambique, // Mozambique
-  Myanmar, // Myanmar
-  Namibie, // Namibia
-  Nauru, // Nauru
-  Nepal, // Nepal
-  Nicaragua, // Nicaragua
-  Niger, // Niger
-  Nigeria, // Nigeria
-  Norvege, // Norway
-  Nouvelle_Zelande, // New Zealand
-  Oman, // Oman
-  Ouganda, // Uganda
-  Ouzbekistan, // Uzbekistan
-  Pakistan, // Pakistan
-  Panama, // Panama
-  Paraguay, // Paraguay
-  Palestine,
-  Peru, // Peru
-  Philippines, // Philippines
-  Pologne, // Poland
-  Portugal, // Portugal
-  Qatar, // Qatar
-  Republique_Tcheque, // Czech Republic
-  Roumanie, // Romania
-  Russie, // Russia
-  Rwanda, // Rwanda
-  Saint_Kitts_et_Nevis, // Saint Kitts and Nevis
-  Saint_Marin, // San Marino
-  Saint_Siege, // Vatican City
-  Salvador, // El Salvador
-  Senegal, // Senegal
-  Serbie, // Serbia
-  Seychelles, // Seychelles
-  Sierra_Leone, // Sierra Leone
-  Singapour, // Singapore
-  Slovaquie, // Slovakia
-  Slovenie, // Slovenia
-  Somalie, // Somalia
-  Soudan, // Sudan
-  Sri_Lanka, // Sri Lanka
-  Suede, // Sweden
-  Suisse, // Switzerland
-  Syrie, // Syria
-  Tadjikistan, // Tajikistan
-  Tanzanie, // Tanzania
-  Thailande, // Thailand
-  Togo, // Togo
-  Tonga, // Tonga
-  Trinidad_et_Tobago, // Trinidad and Tobago
-  Tunisie, // Tunisia
-  Turquie, // Turkey
-  Turkmenistan, // Turkmenistan
-  Tuvalu, // Tuvalu
-  Ukraine, // Ukraine
-  Uruguay, // Uruguay
-  Vanuatu, // Vanuatu
-  Venezuela, // Venezuela
-  Vietnam, // Vietnam
-  Yemen, // Yemen
-  Zambie, // Zambia
-  Zimbabwe, // Zimbabwe
 }
 
 class AddNonResidentForm extends StatefulWidget {
@@ -284,9 +122,9 @@ class _AddNonResidentForm extends State<AddNonResidentForm> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return Container(
-      width: screenWidth * 0.775,
+      width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
       height: 600,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),

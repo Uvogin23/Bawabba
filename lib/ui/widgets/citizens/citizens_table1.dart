@@ -12,6 +12,7 @@ import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:bawabba/ui/widgets/side_menu2.dart';
 
 Future<List<Citizen>> fetchCurrentCitizens() async {
   final response =
@@ -113,6 +114,7 @@ class _CitizenTable1 extends State<CitizenTable1> {
   Widget build(BuildContext context) {
     final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
 
     return FutureBuilder<List<Citizen>>(
       future: citizensFuture,
@@ -128,7 +130,7 @@ class _CitizenTable1 extends State<CitizenTable1> {
           citizens = snapshot.data!;
           final containerHeight = citizens.length < 7 ? 500.0 : 800.0;
           return Container(
-            width: screenWidth * 0.775,
+            width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
             height: containerHeight,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),

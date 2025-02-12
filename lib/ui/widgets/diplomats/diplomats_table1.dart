@@ -131,7 +131,7 @@ class _DiplomatTable1 extends State<DiplomatTable1> {
   Widget build(BuildContext context) {
     final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return FutureBuilder<List<Diplomat>>(
       future: diplomatsFuture,
       builder: (context, snapshot) {
@@ -145,7 +145,7 @@ class _DiplomatTable1 extends State<DiplomatTable1> {
           diplomats = snapshot.data!;
           final containerHeight = diplomats.length < 4 ? 500.0 : 800.0;
           return Container(
-            width: screenWidth * 0.775,
+            width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
             height: containerHeight,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),

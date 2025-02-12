@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/non_resident.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
+import 'package:bawabba/ui/widgets/non_residents/add_nonResident_form.dart';
 import 'package:bawabba/ui/widgets/non_residents/by_month_table.dart';
 import 'package:bawabba/ui/widgets/non_residents/by_nationality_table.dart';
 import 'package:bawabba/ui/widgets/non_residents/nonResidents_history.dart';
 import 'package:bawabba/ui/widgets/non_residents/nonResidents_history_all.dart';
 import 'package:bawabba/ui/widgets/non_residents/show_info.dart';
-import 'package:bawabba/ui/widgets/tourists/add_tourist_form.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:bawabba/main.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:provider/provider.dart';
 
 class NonResidentsActions extends StatefulWidget {
   const NonResidentsActions({Key? key}) : super(key: key);
@@ -296,9 +298,9 @@ class _NonResidentsActions extends State<NonResidentsActions> {
   Widget build(BuildContext context) {
     //final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return Container(
-      width: screenWidth * 0.775,
+      width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
       height: 460,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -307,7 +309,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
-              width: screenWidth * 0.385,
+              width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
               height: 450,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
@@ -372,7 +374,8 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                             children: [
                               Expanded(
                                   child: Padding(
-                                padding: const EdgeInsets.fromLTRB(5, 5, 5, 16),
+                                padding:
+                                    const EdgeInsets.fromLTRB(15, 7, 17, 14),
                                 child: DropdownButtonFormField<Nationality>(
                                   isExpanded: true,
                                   isDense: true,
@@ -534,7 +537,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                 children: [
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
-                    width: screenWidth * 0.385,
+                    width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
                     height: 130,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
@@ -659,7 +662,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
-                    width: screenWidth * 0.385,
+                    width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
                     height: 130,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
@@ -723,7 +726,7 @@ class _NonResidentsActions extends State<NonResidentsActions> {
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
-                    width: screenWidth * 0.385,
+                    width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
                     height: 130,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),

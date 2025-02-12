@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/diplomat.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/diplomats/edit_dialogue.dart';
 import 'package:bawabba/ui/widgets/diplomats/show_dip_tour.dart';
@@ -11,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:provider/provider.dart';
 
 Future<List<Diplomat>> fetchCurrentDiplomats() async {
   final response = await http
@@ -120,7 +122,7 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return FutureBuilder<List<Diplomat>>(
       future: diplomatsFuture,
       builder: (context, snapshot) {
@@ -134,7 +136,7 @@ class _DiplomatTable2 extends State<DiplomatTable2> {
           diplomats = snapshot.data!;
           final containerHeight = diplomats.length < 4 ? 500.0 : 800.0;
           return Container(
-            width: screenWidth * 0.775,
+            width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
             height: containerHeight,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/citizen.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:bawabba/ui/widgets/citizens/by_month_table.dart';
 import 'package:bawabba/ui/widgets/citizens/citizens_history.dart';
@@ -12,6 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:provider/provider.dart';
 
 class CitizensActions extends StatefulWidget {
   const CitizensActions({Key? key}) : super(key: key);
@@ -283,9 +285,9 @@ class _CitizensActions extends State<CitizensActions> {
   Widget build(BuildContext context) {
     //final user = Provider.of<AuthProvider>(context, listen: false).user;
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return Container(
-      width: screenWidth * 0.775,
+      width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
       height: 460,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -294,7 +296,7 @@ class _CitizensActions extends State<CitizensActions> {
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
-              width: screenWidth * 0.385,
+              width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
               height: 450,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
@@ -490,7 +492,7 @@ class _CitizensActions extends State<CitizensActions> {
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
-              width: screenWidth * 0.385,
+              width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
               height: 450,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -498,7 +500,7 @@ class _CitizensActions extends State<CitizensActions> {
                 children: [
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
-                    width: screenWidth * 0.385,
+                    width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
                     height: 190,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
@@ -622,7 +624,7 @@ class _CitizensActions extends State<CitizensActions> {
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 2, 5, 2),
-                    width: screenWidth * 0.385,
+                    width: sideMenu ? screenWidth * 0.385 : screenWidth * 0.46,
                     height: 190,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),

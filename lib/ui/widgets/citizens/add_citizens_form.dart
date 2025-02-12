@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:bawabba/core/models/citizen.dart';
+import 'package:bawabba/core/services/auth_provider.dart';
 import 'package:bawabba/core/services/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AddCitizensForm extends StatefulWidget {
   const AddCitizensForm({Key? key}) : super(key: key);
@@ -112,9 +114,9 @@ class _AddCitizensForm extends State<AddCitizensForm> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return Container(
-      width: screenWidth * 0.775,
+      width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
       height: 600,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),

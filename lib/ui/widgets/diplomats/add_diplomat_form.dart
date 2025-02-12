@@ -383,9 +383,9 @@ class _AddDiplomatForm extends State<AddDiplomatForm> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final sideMenu = Provider.of<AuthProvider>(context, listen: true).sideMenu;
     return Container(
-      width: screenWidth * 0.775,
+      width: sideMenu ? screenWidth * 0.775 : screenWidth * 0.93,
       height: 700,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),
