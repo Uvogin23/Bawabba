@@ -59,8 +59,8 @@ class MyApp extends StatelessWidget {
         home: Consumer<AuthProvider>(
           builder: (context, authProvider, child) {
             return authProvider.token == null
-                //? const LoginScreenPolice()
-                ? const LoginScreenArmy()
+                ? const LoginScreenPolice()
+                //? const LoginScreenArmy()
                 : const MyHomePage(); // Show login or home based on token
           },
         ),

@@ -81,16 +81,6 @@ Widget ChartDisplay() {
               right: 163,
               child: legendKey(210, 145, 7),
             ),
-            Positioned(
-              bottom: 15,
-              right: 308,
-              child: lineType('السواح الجزائريون'),
-            ),
-            Positioned(
-              bottom: 20,
-              right: 291,
-              child: legendKey(45, 17, 17),
-            ),
           ],
         )),
   );
