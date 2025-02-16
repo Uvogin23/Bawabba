@@ -152,91 +152,53 @@ void _printTable(Map<String, dynamic> data, int year) async {
   final arabicFont = await _loadFont('assets/fonts/Cairo-Regular.ttf');
 
   final pdf = pw.Document();
+  const int entriesPerPage = 11;
+  final int pageCount = (countries.length / entriesPerPage).ceil();
 
-  pdf.addPage(
-    pw.Page(
-      orientation: pw.PageOrientation.landscape,
-      build: (pw.Context context) {
-        return pw.Directionality(
-          textDirection: pw.TextDirection.rtl,
-          child: pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.center,
-            children: [
-              pw.Text(
-                "عدد السياح حسب الجنسية لسنة $year",
-                style: pw.TextStyle(
-                  font: arabicFont,
-                  fontSize: 20,
-                  fontWeight: pw.FontWeight.bold,
-                ),
-              ),
-              pw.SizedBox(height: 10),
-              pw.Table(
-                border: pw.TableBorder.all(),
-                columnWidths: {
-                  0: const pw.FlexColumnWidth(1), // Nationality column
-                  for (int i = 1; i <= 12; i++)
-                    i: const pw.FlexColumnWidth(1), // Monthly columns
-                  13: const pw.FlexColumnWidth(1), // Total column
-                },
-                children: [
-                  // Header Row
-                  pw.TableRow(
-                    decoration: const pw.BoxDecoration(
-                      color: PdfColors.grey200, // Optional for styling
-                    ),
-                    children: [
-                      pw.Container(
-                        alignment: pw.Alignment.center,
-                        child: pw.Text(
-                          'Nation',
-                          style: pw.TextStyle(
-                            font: arabicFont,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                          textAlign: pw.TextAlign.center,
-                        ),
-                      ),
-                      ...List.generate(12, (index) {
-                        return pw.Container(
-                          alignment: pw.Alignment.center,
-                          child: pw.Text(
-                            _monthName(index + 1),
-                            style: pw.TextStyle(
-                              font: arabicFont,
-                              fontWeight: pw.FontWeight.bold,
-                            ),
-                            textAlign: pw.TextAlign.center,
-                          ),
-                        );
-                      }),
-                      pw.Container(
-                        alignment: pw.Alignment.center,
-                        child: pw.Text(
-                          'المجموع',
-                          style: pw.TextStyle(
-                            font: arabicFont,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                          textAlign: pw.TextAlign.center,
-                        ),
-                      ),
-                    ],
+  for (int page = 0; page < pageCount; page++) {
+    final List<dynamic> pageCountries =
+        countries.skip(page * entriesPerPage).take(entriesPerPage).toList();
+
+    pdf.addPage(
+      pw.Page(
+        orientation: pw.PageOrientation.landscape,
+        build: (pw.Context context) {
+          return pw.Directionality(
+            textDirection: pw.TextDirection.rtl,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.center,
+              children: [
+                pw.Text(
+                  "عدد السياح حسب الجنسية لسنة $year - صفحة ${page + 1} من $pageCount",
+                  style: pw.TextStyle(
+                    font: arabicFont,
+                    fontSize: 20,
+                    fontWeight: pw.FontWeight.bold,
                   ),
-                  // Data Rows
-                  ...countries.map((country) {
-                    final String nationality = country['nationality'];
-                    final List<dynamic> monthlyCounts =
-                        country['monthly_counts'];
-                    final int total = country['total'];
-
-                    return pw.TableRow(
+                ),
+                pw.SizedBox(height: 10),
+                pw.Table(
+                  border: pw.TableBorder.all(),
+                  columnWidths: {
+                    0: const pw.FlexColumnWidth(1), // Nationality column
+                    for (int i = 1; i <= 12; i++)
+                      i: const pw.FlexColumnWidth(1), // Monthly columns
+                    13: const pw.FlexColumnWidth(1), // Total column
+                  },
+                  children: [
+                    pw.TableRow(
+                      decoration: const pw.BoxDecoration(
+                        color: PdfColors.grey200,
+                      ),
                       children: [
                         pw.Container(
                           alignment: pw.Alignment.center,
                           child: pw.Text(
-                            nationality,
-                            style: pw.TextStyle(font: arabicFont),
+                            'Nation',
+                            style: pw.TextStyle(
+                              font: arabicFont,
+                              fontWeight: pw.FontWeight.bold,
+                            ),
                             textAlign: pw.TextAlign.center,
                           ),
                         ),
@@ -244,7 +206,11 @@ void _printTable(Map<String, dynamic> data, int year) async {
                           return pw.Container(
                             alignment: pw.Alignment.center,
                             child: pw.Text(
-                              '${monthlyCounts[index]}',
+                              _monthName(index + 1),
+                              style: pw.TextStyle(
+                                font: arabicFont,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
                               textAlign: pw.TextAlign.center,
                             ),
                           );
@@ -252,32 +218,72 @@ void _printTable(Map<String, dynamic> data, int year) async {
                         pw.Container(
                           alignment: pw.Alignment.center,
                           child: pw.Text(
-                            '$total',
+                            'المجموع',
+                            style: pw.TextStyle(
+                              font: arabicFont,
+                              fontWeight: pw.FontWeight.bold,
+                            ),
                             textAlign: pw.TextAlign.center,
                           ),
                         ),
                       ],
-                    );
-                  }).toList(),
-                ],
-              ),
-              pw.SizedBox(height: 10),
-              pw.Text(
-                'العدد الإجمالي: $grandTotal',
-                style: pw.TextStyle(
-                  font: arabicFont,
-                  fontSize: 16,
-                  fontWeight: pw.FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    ),
-  );
+                    ),
+                    ...pageCountries.map((country) {
+                      final String nationality = country['nationality'];
+                      final List<dynamic> monthlyCounts = List.generate(
+                          12, (i) => country['monthly_counts'][i] ?? 0);
+                      final int total = country['total'];
 
-  // Show the print preview
+                      return pw.TableRow(
+                        children: [
+                          pw.Container(
+                            alignment: pw.Alignment.center,
+                            child: pw.Text(
+                              nationality,
+                              style: pw.TextStyle(font: arabicFont),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          ...List.generate(12, (index) {
+                            return pw.Container(
+                              alignment: pw.Alignment.center,
+                              child: pw.Text(
+                                '${monthlyCounts[index]}',
+                                textAlign: pw.TextAlign.center,
+                              ),
+                            );
+                          }),
+                          pw.Container(
+                            alignment: pw.Alignment.center,
+                            child: pw.Text(
+                              '$total',
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      );
+                    }).toList(),
+                  ],
+                ),
+                if (page == pageCount - 1) ...[
+                  pw.SizedBox(height: 10),
+                  pw.Text(
+                    'العدد الإجمالي: $grandTotal',
+                    style: pw.TextStyle(
+                      font: arabicFont,
+                      fontSize: 16,
+                      fontWeight: pw.FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   await Printing.layoutPdf(
     onLayout: (PdfPageFormat format) async => pdf.save(),
   );
